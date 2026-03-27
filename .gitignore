@@ -1,0 +1,10 @@
+.dotnet/
+.npm-cache/
+.nuget/
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+*.user
+*.suo
+*.db

@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{196ED1DD-7B68-4DAE-BAF8-94617852666F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetCareJordan.Api", "backend\PetCareJordan.Api\PetCareJordan.Api.csproj", "{AA77DE29-0A32-414C-81C6-4498A56E429F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA77DE29-0A32-414C-81C6-4498A56E429F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA77DE29-0A32-414C-81C6-4498A56E429F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA77DE29-0A32-414C-81C6-4498A56E429F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA77DE29-0A32-414C-81C6-4498A56E429F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AA77DE29-0A32-414C-81C6-4498A56E429F} = {196ED1DD-7B68-4DAE-BAF8-94617852666F}
+	EndGlobalSection
+EndGlobal

@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetCareJordan.Api.Data;
@@ -17,7 +19,7 @@ public class MedicalController(PetCareJordanContext context) : ControllerBase
         var vaccines = await context.VaccinationRecords
             .Include(vaccine => vaccine.Pet)
                 .ThenInclude(pet => pet!.Owner)
-            .Where(vaccine => !vaccine.IsCompleted && vaccine.DueDateUtc <= cutoff)
+            .Where(vaccine => !vaccine.IsCompleted && vaccine.DueDateUtc <= cutoff && vaccine.Pet != null && vaccine.Pet.ModerationStatus == ModerationStatus.Approved)
             .OrderBy(vaccine => vaccine.DueDateUtc)
             .Select(vaccine => new
             {
@@ -34,9 +36,15 @@ public class MedicalController(PetCareJordanContext context) : ControllerBase
     }
 
     [HttpPost("records")]
+    [Authorize(Roles = "Vet,Admin")]
     public async Task<ActionResult<MedicalRecordDto>> CreateMedicalRecord(CreateMedicalRecordRequest request)
     {
-        var vet = await context.Users.FirstOrDefaultAsync(item => item.Id == request.VetId && item.Role == UserRole.Vet);
+        if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var currentUserId))
+        {
+            return Unauthorized("Invalid user session.");
+        }
+
+        var vet = await context.Users.FirstOrDefaultAsync(item => item.Id == currentUserId && (item.Role == UserRole.Vet || item.Role == UserRole.Admin));
         var pet = await context.Pets.FindAsync(request.PetId);
 
         if (vet is null || pet is null)
@@ -47,7 +55,7 @@ public class MedicalController(PetCareJordanContext context) : ControllerBase
         var record = new MedicalRecord
         {
             PetId = request.PetId,
-            VetId = request.VetId,
+            VetId = currentUserId,
             VisitReason = request.VisitReason,
             Diagnosis = request.Diagnosis,
             Treatment = request.Treatment,
@@ -61,6 +69,7 @@ public class MedicalController(PetCareJordanContext context) : ControllerBase
     }
 
     [HttpPut("records/{recordId:int}")]
+    [Authorize(Roles = "Vet,Admin")]
     public async Task<ActionResult<MedicalRecordDto>> UpdateMedicalRecord(int recordId, UpdateMedicalRecordRequest request)
     {
         var record = await context.MedicalRecords

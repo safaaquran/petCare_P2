@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetCareJordan.Api.Data;
@@ -14,6 +16,7 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
     public async Task<ActionResult<IEnumerable<PetSummaryDto>>> GetPets([FromQuery] string? search, [FromQuery] PetType? type)
     {
         var query = context.Pets
+            .Where(pet => pet.ModerationStatus == ModerationStatus.Approved)
             .Include(pet => pet.Owner)
             .Include(pet => pet.AdoptionListing)
             .AsQueryable();
@@ -43,7 +46,8 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
                 pet.CollarId,
                 pet.PhotoUrl,
                 pet.Owner!.FullName,
-                pet.AdoptionListing != null ? pet.AdoptionListing.Status : null))
+                pet.AdoptionListing != null ? pet.AdoptionListing.Status : null,
+                pet.ModerationStatus))
             .ToListAsync();
 
         return Ok(pets);
@@ -81,6 +85,7 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
             pet.PhotoUrl,
             pet.Owner.FullName,
             pet.Owner.PhoneNumber,
+            pet.ModerationStatus,
             pet.MedicalRecords.OrderByDescending(item => item.VisitDateUtc).Select(item => new MedicalRecordDto(item.Id, item.Vet!.FullName, item.VisitReason, item.Diagnosis, item.Treatment, item.VisitDateUtc)),
             pet.Vaccinations.OrderBy(item => item.DueDateUtc).Select(item => new VaccinationDto(item.Id, item.Vet!.FullName, item.VaccineName, item.GivenOnUtc, item.DueDateUtc, item.IsCompleted))));
     }
@@ -89,6 +94,7 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
     public async Task<ActionResult<PetSummaryDto>> GetByCollarId(string collarId)
     {
         var pet = await context.Pets
+            .Where(item => item.ModerationStatus == ModerationStatus.Approved)
             .Include(item => item.Owner)
             .Include(item => item.AdoptionListing)
             .FirstOrDefaultAsync(item => item.CollarId == collarId);
@@ -98,13 +104,19 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
             return NotFound();
         }
 
-        return Ok(new PetSummaryDto(pet.Id, pet.Name, pet.Type, pet.Breed, pet.City, pet.CollarId, pet.PhotoUrl, pet.Owner.FullName, pet.AdoptionListing?.Status));
+        return Ok(new PetSummaryDto(pet.Id, pet.Name, pet.Type, pet.Breed, pet.City, pet.CollarId, pet.PhotoUrl, pet.Owner.FullName, pet.AdoptionListing?.Status, pet.ModerationStatus));
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult<PetDetailsDto>> CreatePet(CreatePetRequest request)
     {
-        var owner = await context.Users.FirstOrDefaultAsync(user => user.Id == request.OwnerId);
+        if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var ownerId))
+        {
+            return Unauthorized("Invalid user session.");
+        }
+
+        var owner = await context.Users.FirstOrDefaultAsync(user => user.Id == ownerId);
         if (owner is null)
         {
             return BadRequest("Owner not found.");
@@ -124,7 +136,9 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
             IsNeutered = request.IsNeutered,
             Description = request.Description,
             PhotoUrl = request.PhotoUrl,
-            OwnerId = request.OwnerId
+            OwnerId = ownerId,
+            ModerationStatus = ModerationStatus.Pending,
+            CreatedAtUtc = DateTime.UtcNow
         };
 
         context.Pets.Add(pet);
@@ -139,7 +153,8 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
                 ContactMethod = request.ContactMethod ?? "Phone",
                 ContactDetails = request.ContactDetails ?? owner.PhoneNumber,
                 Status = AdoptionStatus.Available,
-                PostedAtUtc = DateTime.UtcNow
+                PostedAtUtc = DateTime.UtcNow,
+                ModerationStatus = ModerationStatus.Pending
             });
             await context.SaveChangesAsync();
         }

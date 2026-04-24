@@ -12,7 +12,7 @@ namespace PetCareJordan.Api.Controllers;
 public class AuthController(PetCareJordanContext context, PasswordService passwordService, JwtTokenService jwtTokenService) : ControllerBase
 {
     [HttpPost("login")]
-    public async Task<ActionResult<AuthResponse>> Login(LoginRequest request)
+    public async Task<ActionResult<AuthResponse>> Login([FromBody] LoginRequest request)
     {
         var user = await context.Users
             .FirstOrDefaultAsync(item => item.Email == request.Email);
@@ -26,9 +26,14 @@ public class AuthController(PetCareJordanContext context, PasswordService passwo
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<AuthResponse>> Register(RegisterRequest request)
+    public async Task<ActionResult<AuthResponse>> Register([FromBody] RegisterRequest request)
     {
-        if (request.Role == UserRole.Admin)
+        if (!Enum.TryParse<UserRole>(request.Role, true, out var parsedRole))
+        {
+            return BadRequest("Role must be User or Vet.");
+        }
+
+        if (parsedRole == UserRole.Admin)
         {
             return BadRequest("Admin accounts cannot be created from public registration.");
         }
@@ -46,7 +51,7 @@ public class AuthController(PetCareJordanContext context, PasswordService passwo
             PasswordHash = passwordService.HashPassword(request.Password),
             PhoneNumber = request.PhoneNumber,
             City = request.City,
-            Role = request.Role
+            Role = parsedRole
         };
 
         context.Users.Add(user);

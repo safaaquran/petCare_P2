@@ -68,6 +68,7 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<PetCareJordanContext>();
     await context.Database.EnsureCreatedAsync();
+    await SchemaBootstrap.ApplyCompatibilityUpdatesAsync(context);
     await SeedData.InitializeAsync(context);
 }
 

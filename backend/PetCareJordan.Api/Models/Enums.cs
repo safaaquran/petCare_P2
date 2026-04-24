@@ -40,3 +40,10 @@ public enum NotificationType
     VaccineReminder = 1,
     General = 2
 }
+
+public enum ModerationStatus
+{
+    Pending = 1,
+    Approved = 2,
+    Rejected = 3
+}

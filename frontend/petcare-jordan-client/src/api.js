@@ -47,6 +47,30 @@ export const api = {
       body: formData
     });
   },
+  getChatVets: (token) =>
+    request("/chat/vets", {
+      headers: buildHeaders({}, token)
+    }),
+  getMyChatConversations: (token) =>
+    request("/chat/conversations", {
+      headers: buildHeaders({}, token)
+    }),
+  createChatConversation: (vetId, token) =>
+    request("/chat/conversations", {
+      method: "POST",
+      headers: buildHeaders({ "Content-Type": "application/json" }, token),
+      body: JSON.stringify({ vetId })
+    }),
+  getChatMessages: (conversationId, token) =>
+    request(`/chat/conversations/${conversationId}/messages`, {
+      headers: buildHeaders({}, token)
+    }),
+  sendChatMessage: (conversationId, message, token) =>
+    request(`/chat/conversations/${conversationId}/messages`, {
+      method: "POST",
+      headers: buildHeaders({ "Content-Type": "application/json" }, token),
+      body: JSON.stringify({ message })
+    }),
   getUpcomingVaccines: (token) =>
     request("/medical/upcoming-vaccines", {
       headers: buildHeaders({}, token)

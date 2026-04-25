@@ -8,12 +8,14 @@ public static class SeedData
 {
     public static async Task InitializeAsync(PetCareJordanContext context)
     {
+        await EnsureChatTablesAsync(context);
         var passwordService = new PasswordService();
 
         if (context.Users.Any())
         {
             await NormalizeExistingUserEmailsAsync(context);
             await EnsureRequiredDemoAccountsAsync(context, passwordService);
+            await RemoveDemoChatArtifactsAsync(context);
             return;
         }
 
@@ -130,6 +132,93 @@ public static class SeedData
         await context.MedicalRecords.AddRangeAsync(medicalRecords);
         await context.VaccinationRecords.AddRangeAsync(vaccinations);
         await context.Notifications.AddRangeAsync(notifications);
+        await context.SaveChangesAsync();
+        await RemoveDemoChatArtifactsAsync(context);
+    }
+
+    private static async Task EnsureChatTablesAsync(PetCareJordanContext context)
+    {
+        const string createConversations = """
+            IF OBJECT_ID(N'[ChatConversations]', N'U') IS NULL
+            BEGIN
+                CREATE TABLE [ChatConversations] (
+                    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                    [UserId] INT NOT NULL,
+                    [VetId] INT NOT NULL,
+                    [CreatedAtUtc] DATETIME2 NOT NULL,
+                    [UpdatedAtUtc] DATETIME2 NULL,
+                    CONSTRAINT [FK_ChatConversations_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION,
+                    CONSTRAINT [FK_ChatConversations_Users_VetId] FOREIGN KEY ([VetId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+                );
+                CREATE UNIQUE INDEX [IX_ChatConversations_UserId_VetId] ON [ChatConversations] ([UserId], [VetId]);
+                CREATE INDEX [IX_ChatConversations_UserId] ON [ChatConversations] ([UserId]);
+                CREATE INDEX [IX_ChatConversations_VetId] ON [ChatConversations] ([VetId]);
+            END
+            """;
+
+        const string createMessages = """
+            IF OBJECT_ID(N'[ChatMessages]', N'U') IS NULL
+            BEGIN
+                CREATE TABLE [ChatMessages] (
+                    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+                    [ConversationId] INT NOT NULL,
+                    [SenderId] INT NOT NULL,
+                    [Message] NVARCHAR(MAX) NOT NULL,
+                    [SentAtUtc] DATETIME2 NOT NULL,
+                    [IsReadByRecipient] BIT NOT NULL CONSTRAINT [DF_ChatMessages_IsReadByRecipient] DEFAULT(0),
+                    [ReadAtUtc] DATETIME2 NULL,
+                    CONSTRAINT [FK_ChatMessages_ChatConversations_ConversationId] FOREIGN KEY ([ConversationId]) REFERENCES [ChatConversations] ([Id]) ON DELETE CASCADE,
+                    CONSTRAINT [FK_ChatMessages_Users_SenderId] FOREIGN KEY ([SenderId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+                );
+                CREATE INDEX [IX_ChatMessages_ConversationId] ON [ChatMessages] ([ConversationId]);
+                CREATE INDEX [IX_ChatMessages_SenderId] ON [ChatMessages] ([SenderId]);
+            END
+            """;
+
+        const string ensureMessageReadColumns = """
+            IF COL_LENGTH(N'[ChatMessages]', N'IsReadByRecipient') IS NULL
+            BEGIN
+                ALTER TABLE [ChatMessages]
+                ADD [IsReadByRecipient] BIT NOT NULL CONSTRAINT [DF_ChatMessages_IsReadByRecipient] DEFAULT(1);
+
+                UPDATE [ChatMessages]
+                SET [IsReadByRecipient] = 1
+                WHERE [IsReadByRecipient] = 0;
+            END
+
+            IF COL_LENGTH(N'[ChatMessages]', N'ReadAtUtc') IS NULL
+            BEGIN
+                ALTER TABLE [ChatMessages]
+                ADD [ReadAtUtc] DATETIME2 NULL;
+            END
+            """;
+
+        await context.Database.ExecuteSqlRawAsync(createConversations);
+        await context.Database.ExecuteSqlRawAsync(createMessages);
+        await context.Database.ExecuteSqlRawAsync(ensureMessageReadColumns);
+    }
+
+    private static async Task RemoveDemoChatArtifactsAsync(PetCareJordanContext context)
+    {
+        var messagesToDelete = await context.ChatMessages
+            .Where(item =>
+                item.Message == "Hello, I can reply as vet." ||
+                item.Message == "Hello doctor from user test" ||
+                item.Message == "Vet notification check 131843" ||
+                item.Message == "User notification check 131843" ||
+                item.Message.StartsWith("Hello from user ") ||
+                item.Message.StartsWith("Hello user, this is the vet ") ||
+                item.Message.StartsWith("Validation ping ") ||
+                item.Message == "Hi doctor, my dog is not eating well today. What should I do?" ||
+                item.Message == "Please check temperature and water intake first. If appetite stays low by tomorrow, book a check-up.")
+            .ToListAsync();
+
+        if (messagesToDelete.Count == 0)
+        {
+            return;
+        }
+
+        context.ChatMessages.RemoveRange(messagesToDelete);
         await context.SaveChangesAsync();
     }
 

@@ -5,6 +5,7 @@ const tabs = [
   { id: "overview", label: "Overview" },
   { id: "adoption", label: "Adoption" },
   { id: "lostfound", label: "Lost & Found" },
+  { id: "chat", label: "Chat" },
   { id: "medical", label: "Medical" }
 ];
 
@@ -301,6 +302,13 @@ function App() {
   const [foundPets, setFoundPets] = useState([]);
   const [vaccines, setVaccines] = useState([]);
   const [userMedicalPets, setUserMedicalPets] = useState([]);
+  const [chatVets, setChatVets] = useState([]);
+  const [chatConversations, setChatConversations] = useState([]);
+  const [selectedConversationId, setSelectedConversationId] = useState(null);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [chatMessageDraft, setChatMessageDraft] = useState("");
+  const [chatNotice, setChatNotice] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(() => {
     const stored = localStorage.getItem("petcareCurrentUser");
     return stored ? JSON.parse(stored) : null;
@@ -367,6 +375,12 @@ function App() {
       setFoundPets([]);
       setVaccines([]);
       setUserMedicalPets([]);
+      setChatVets([]);
+      setChatConversations([]);
+      setSelectedConversationId(null);
+      setChatMessages([]);
+      setChatMessageDraft("");
+      setChatNotice("");
       return;
     }
 
@@ -379,12 +393,18 @@ function App() {
           currentUser.role === "User"
             ? api.getMyMedicalPets(currentUser.token)
             : api.getUpcomingVaccines(currentUser.token);
+        const chatConversationsRequest = api.getMyChatConversations(currentUser.token);
+        const chatVetsRequest = currentUser.role === "User"
+          ? api.getChatVets(currentUser.token)
+          : Promise.resolve([]);
 
-        const [adoptionData, lostData, foundData, medicalData] = await Promise.all([
+        const [adoptionData, lostData, foundData, medicalData, conversationData, vetsData] = await Promise.all([
           api.getAdoptions(),
           api.getLostPets(),
           api.getFoundPets(),
-          medicalRequest
+          medicalRequest,
+          chatConversationsRequest,
+          chatVetsRequest
         ]);
 
         if (isCancelled) {
@@ -394,6 +414,19 @@ function App() {
         setAdoptions(adoptionData);
         setLostPets(lostData);
         setFoundPets(foundData);
+        setChatConversations(conversationData);
+        setChatVets(vetsData);
+        setSelectedConversationId((current) => {
+          if (!current && conversationData.length > 0) {
+            return conversationData[0].id;
+          }
+
+          if (current && !conversationData.some((item) => item.id === current)) {
+            return conversationData[0]?.id ?? null;
+          }
+
+          return current;
+        });
         if (currentUser.role === "User") {
           setUserMedicalPets(medicalData);
           setVaccines([]);
@@ -432,7 +465,119 @@ function App() {
     setLostFoundNotice("");
   }, [currentUser]);
 
+  useEffect(() => {
+    const isChatRole = currentUser?.role === "User" || currentUser?.role === "Vet";
+    if (!currentUser?.token || !isChatRole) {
+      return;
+    }
+
+    let isCancelled = false;
+
+    async function syncConversations() {
+      try {
+        const conversations = await api.getMyChatConversations(currentUser.token);
+        if (isCancelled) {
+          return;
+        }
+
+        setChatConversations(conversations);
+        setSelectedConversationId((current) => {
+          if (current && conversations.some((item) => item.id === current)) {
+            return current;
+          }
+          return conversations[0]?.id ?? null;
+        });
+
+        if (currentUser.role === "User") {
+          const vets = await api.getChatVets(currentUser.token);
+          if (!isCancelled) {
+            setChatVets(vets);
+          }
+        }
+      } catch {
+        if (!isCancelled) {
+          setError("Could not refresh chat list.");
+        }
+      }
+    }
+
+    syncConversations();
+    const timerId = window.setInterval(syncConversations, 5000);
+
+    return () => {
+      isCancelled = true;
+      window.clearInterval(timerId);
+    };
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (!currentUser?.token || !selectedConversationId || activeTab !== "chat") {
+      setChatMessages([]);
+      return;
+    }
+
+    let isCancelled = false;
+
+    async function syncMessages() {
+      try {
+        setChatLoading(true);
+        const messages = await api.getChatMessages(selectedConversationId, currentUser.token);
+        if (!isCancelled) {
+          setChatMessages(messages);
+        }
+      } catch {
+        if (!isCancelled) {
+          setError("Could not load chat messages.");
+        }
+      } finally {
+        if (!isCancelled) {
+          setChatLoading(false);
+        }
+      }
+    }
+
+    syncMessages();
+    const timerId = window.setInterval(syncMessages, 3000);
+
+    return () => {
+      isCancelled = true;
+      window.clearInterval(timerId);
+    };
+  }, [activeTab, currentUser, selectedConversationId]);
+
+  useEffect(() => {
+    if (activeTab !== "chat" || !selectedConversationId) {
+      return;
+    }
+
+    setChatConversations((current) =>
+      current.map((conversation) =>
+        conversation.id === selectedConversationId
+          ? { ...conversation, unreadIncomingCount: 0 }
+          : conversation
+      )
+    );
+  }, [activeTab, selectedConversationId]);
+
   const visibleDemoRoles = isRoleLocked ? [selectedRole] : roleOrder;
+  const selectedConversation = chatConversations.find((item) => item.id === selectedConversationId) ?? null;
+  const vetsWithoutConversation = chatVets.filter(
+    (vet) => !chatConversations.some((conversation) => conversation.vetId === vet.id)
+  );
+  const isChatRole = currentUser?.role === "User" || currentUser?.role === "Vet";
+  const chatUnreadCount = chatConversations.reduce(
+    (total, conversation) => total + (conversation.unreadIncomingCount ?? 0),
+    0
+  );
+  const visibleTabs = currentUser?.role === "Admin"
+    ? tabs.filter((tab) => tab.id !== "chat")
+    : tabs;
+
+  useEffect(() => {
+    if (!visibleTabs.some((tab) => tab.id === activeTab)) {
+      setActiveTab("overview");
+    }
+  }, [activeTab, visibleTabs]);
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -551,6 +696,73 @@ function App() {
     }
   }
 
+  async function refreshChatLists(preferredConversationId = null) {
+    if (!currentUser?.token) {
+      return;
+    }
+
+    const [conversations, vets] = await Promise.all([
+      api.getMyChatConversations(currentUser.token),
+      currentUser.role === "User" ? api.getChatVets(currentUser.token) : Promise.resolve([])
+    ]);
+
+    setChatConversations(conversations);
+    setChatVets(vets);
+    setSelectedConversationId((current) => {
+      if (preferredConversationId && conversations.some((item) => item.id === preferredConversationId)) {
+        return preferredConversationId;
+      }
+
+      if (current && conversations.some((item) => item.id === current)) {
+        return current;
+      }
+
+      return conversations[0]?.id ?? null;
+    });
+  }
+
+  async function handleStartChatWithVet(vetId) {
+    if (!currentUser?.token) {
+      setError("Please sign in first.");
+      return;
+    }
+
+    try {
+      const conversation = await api.createChatConversation(vetId, currentUser.token);
+      await refreshChatLists(conversation.id);
+      setChatNotice("Chat opened successfully.");
+      setError("");
+      setActiveTab("chat");
+    } catch (requestError) {
+      setError(requestError.message || "Could not start chat with this vet.");
+    }
+  }
+
+  async function handleSendChatMessage(event) {
+    event.preventDefault();
+
+    if (!currentUser?.token || !selectedConversationId) {
+      setError("Choose a chat first.");
+      return;
+    }
+
+    const text = chatMessageDraft.trim();
+    if (!text) {
+      return;
+    }
+
+    try {
+      const message = await api.sendChatMessage(selectedConversationId, text, currentUser.token);
+      setChatMessages((current) => [...current, message]);
+      setChatMessageDraft("");
+      setChatNotice("");
+      await refreshChatLists(selectedConversationId);
+      setError("");
+    } catch (requestError) {
+      setError(requestError.message || "Could not send message.");
+    }
+  }
+
   function handleSignOut() {
     setCurrentUser(null);
     setActiveTab("overview");
@@ -561,14 +773,22 @@ function App() {
       <aside className="sidebar">
         <div>
           <p className="eyebrow">Graduation Project</p>
-          <h1>PetCare Jordan</h1>
+          <div className="sidebar-title-row">
+            <h1>PetCare Jordan</h1>
+            {currentUser && isChatRole ? (
+              <button type="button" className="chat-bell-icon-button" onClick={() => setActiveTab("chat")}>
+                <span className="chat-bell-emoji" aria-hidden="true">🔔</span>
+                <strong className="chat-bell-badge">{chatUnreadCount}</strong>
+              </button>
+            ) : null}
+          </div>
           <p className="sidebar-copy">
             A pet adoption, recovery, and veterinary care platform built with ASP.NET Core and React.
           </p>
         </div>
 
         <nav className="tab-list">
-          {tabs.map((tab) => (
+          {visibleTabs.map((tab) => (
             <button
               key={tab.id}
               type="button"
@@ -938,6 +1158,110 @@ function App() {
                   {lostFoundNotice ? <p className="form-success">{lostFoundNotice}</p> : null}
                 </SectionCard>
               </div>
+            ) : null}
+
+            {activeTab === "chat" && currentUser && !privateLoading ? (
+              <SectionCard
+                title="Vet Chat"
+                subtitle="Choose a vet and start a real conversation. Vets can reply from their own accounts."
+              >
+                {currentUser.role === "User" || currentUser.role === "Vet" ? (
+                  <div className="chat-layout">
+                    <aside className="chat-sidebar">
+                      {currentUser.role === "User" ? (
+                        <div className="chat-start-card">
+                          <strong>Start new chat</strong>
+                          {vetsWithoutConversation.length > 0 ? (
+                            <div className="chat-vet-list">
+                              {vetsWithoutConversation.map((vet) => (
+                                <button key={vet.id} type="button" onClick={() => handleStartChatWithVet(vet.id)}>
+                                  <span>{vet.fullName}</span>
+                                  <small>{vet.city}</small>
+                                </button>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="empty-state">You already started chats with all available vets.</p>
+                          )}
+                        </div>
+                      ) : null}
+
+                      <div className="chat-start-card">
+                        <strong>{currentUser.role === "User" ? "My chats" : "User chats"}</strong>
+                        {chatConversations.length > 0 ? (
+                          <div className="chat-vet-list">
+                            {chatConversations.map((conversation) => (
+                              <button
+                                key={conversation.id}
+                                type="button"
+                                className={selectedConversationId === conversation.id ? "active" : ""}
+                                onClick={() => setSelectedConversationId(conversation.id)}
+                              >
+                                <div className="chat-conversation-head">
+                                  <span>{conversation.counterpartName}</span>
+                                  {conversation.unreadIncomingCount > 0 ? (
+                                    <strong className="chat-unread-pill">{conversation.unreadIncomingCount}</strong>
+                                  ) : null}
+                                </div>
+                                <small>{conversation.lastMessage || "No messages yet."}</small>
+                              </button>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="empty-state">No chats yet.</p>
+                        )}
+                      </div>
+                    </aside>
+
+                    <section className="chat-thread">
+                      {selectedConversation ? (
+                        <>
+                          <div className="chat-thread-head">
+                            <strong>{selectedConversation.counterpartName}</strong>
+                            <span>
+                              {selectedConversation.counterpartRole === "Vet" ? "Veterinarian" : "Pet Owner"}
+                            </span>
+                          </div>
+
+                          <div className="chat-messages-list">
+                            {chatLoading ? <p className="empty-state">Loading messages...</p> : null}
+                            {!chatLoading && chatMessages.length === 0 ? (
+                              <p className="empty-state">No messages yet. Start the conversation now.</p>
+                            ) : null}
+                            {chatMessages.map((message) => (
+                              <article
+                                key={message.id}
+                                className={message.senderId === currentUser.id ? "chat-message own" : "chat-message"}
+                              >
+                                <div className="chat-message-meta">
+                                  <strong>{message.senderName}</strong>
+                                  <span>{new Date(message.sentAtUtc).toLocaleString()}</span>
+                                </div>
+                                <p>{message.message}</p>
+                              </article>
+                            ))}
+                          </div>
+
+                          <form className="chat-compose" onSubmit={handleSendChatMessage}>
+                            <textarea
+                              placeholder="Write your message..."
+                              value={chatMessageDraft}
+                              onChange={(event) => setChatMessageDraft(event.target.value)}
+                            />
+                            <button type="submit">Send</button>
+                          </form>
+                        </>
+                      ) : (
+                        <p className="empty-state">Choose a chat from the left side to start messaging.</p>
+                      )}
+                    </section>
+                  </div>
+                ) : (
+                  <p className="empty-state">Chat is available for User and Vet accounts only.</p>
+                )}
+
+                {chatNotice ? <p className="form-success">{chatNotice}</p> : null}
+              </SectionCard>
             ) : null}
 
             {activeTab === "medical" && currentUser && !privateLoading ? (

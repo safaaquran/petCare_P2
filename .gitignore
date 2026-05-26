@@ -8,3 +8,8 @@
 *.user
 *.suo
 *.db
+backend/PetCareJordan.Api/uploads/
+.build-check/
+.run-logs/
+run-backend-local.ps1
+run-frontend-local.ps1

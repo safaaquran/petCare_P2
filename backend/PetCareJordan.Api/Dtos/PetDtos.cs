@@ -8,6 +8,7 @@ public record PetSummaryDto(
     PetType Type,
     string Breed,
     string City,
+    string LocationDetails,
     string CollarId,
     string PhotoUrl,
     string OwnerName,
@@ -23,6 +24,7 @@ public record PetDetailsDto(
     string CollarId,
     string Color,
     string City,
+    string LocationDetails,
     decimal WeightKg,
     bool IsNeutered,
     string Description,
@@ -41,6 +43,7 @@ public record CreatePetRequest(
     string CollarId,
     string Color,
     string City,
+    string? LocationDetails,
     decimal WeightKg,
     bool IsNeutered,
     string Description,
@@ -58,3 +61,26 @@ public record UpdateMedicalRecordRequest(string VisitReason, string Diagnosis, s
 public record MedicalRecordDto(int Id, string VetName, string VisitReason, string Diagnosis, string Treatment, DateTime VisitDateUtc);
 
 public record VaccinationDto(int Id, string VetName, string VaccineName, DateTime? GivenOnUtc, DateTime DueDateUtc, bool IsCompleted);
+
+public record CreateVaccinationRequest(int PetId, string VaccineName, DateTime DueDateUtc, DateTime? GivenOnUtc, bool IsCompleted);
+
+public record UserPetVaccinePlanDto(
+    int Id,
+    string VaccineName,
+    DateTime? GivenOnUtc,
+    DateTime DueDateUtc,
+    bool IsCompleted,
+    string Status);
+
+public record UserPetMedicalSnapshotDto(
+    int PetId,
+    string CollarId,
+    string PetName,
+    PetType PetType,
+    string Breed,
+    string PhotoUrl,
+    string HealthSummary,
+    bool IsVaccinesUpToDate,
+    int PendingVaccinesCount,
+    IEnumerable<MedicalRecordDto> MedicalHistory,
+    IEnumerable<UserPetVaccinePlanDto> VaccinePlan);

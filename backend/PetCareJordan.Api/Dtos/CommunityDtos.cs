@@ -8,15 +8,33 @@ public record AdoptionListingDto(
     string PetName,
     PetType PetType,
     string Breed,
+    int AgeInMonths,
+    decimal WeightKg,
+    bool IsNeutered,
     string PhotoUrl,
     string City,
+    string LocationDetails,
     string Story,
     string ContactMethod,
     string ContactDetails,
+    int OwnerId,
+    string OwnerName,
     AdoptionStatus Status,
     DateTime PostedAtUtc);
 
 public record CreateAdoptionListingRequest(int PetId, string Story, string ContactMethod, string ContactDetails);
+
+public record CreateAdoptionPostRequest(
+    string PetName,
+    PetType PetType,
+    int AgeInMonths,
+    decimal WeightKg,
+    bool IsNeutered,
+    string City,
+    string? LocationDetails,
+    string PhotoUrl,
+    string Description,
+    string ContactPhone);
 
 public record LostPetReportDto(
     int Id,
@@ -30,7 +48,9 @@ public record LostPetReportDto(
     string PhotoUrl,
     string ContactName,
     string ContactPhone,
-    ReportStatus Status);
+    ReportStatus Status,
+    int? ReporterId,
+    string? ReporterName);
 
 public record CreateLostPetReportRequest(
     string PetName,
@@ -53,7 +73,9 @@ public record FoundPetReportDto(
     string PhotoUrl,
     string ContactName,
     string ContactPhone,
-    ReportStatus Status);
+    ReportStatus Status,
+    int? ReporterId,
+    string? ReporterName);
 
 public record CreateFoundPetReportRequest(
     PetType PetType,
@@ -64,4 +86,14 @@ public record CreateFoundPetReportRequest(
     string ContactName,
     string ContactPhone);
 
+public record PendingCommunityReportsDto(
+    IEnumerable<LostPetReportDto> LostReports,
+    IEnumerable<FoundPetReportDto> FoundReports);
+
+public record MyCommunityReportsDto(
+    IEnumerable<LostPetReportDto> LostReports,
+    IEnumerable<FoundPetReportDto> FoundReports);
+
 public record NotificationDto(int Id, string Title, string Message, DateTime TriggerDateUtc, bool IsRead);
+
+public record UploadedImageDto(string Url, string FileName);

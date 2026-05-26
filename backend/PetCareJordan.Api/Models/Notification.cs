@@ -9,5 +9,7 @@ public class Notification
     public string Title { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
     public DateTime TriggerDateUtc { get; set; }
+    public DateTime? ExpiresAtUtc { get; set; }
+    public int? VaccinationRecordId { get; set; }
     public bool IsRead { get; set; }
 }

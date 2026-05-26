@@ -26,13 +26,16 @@ public enum AdoptionStatus
 {
     Available = 1,
     Pending = 2,
-    Adopted = 3
+    Adopted = 3,
+    Rejected = 4
 }
 
 public enum ReportStatus
 {
     Active = 1,
-    Resolved = 2
+    Resolved = 2,
+    Pending = 3,
+    Rejected = 4
 }
 
 public enum NotificationType

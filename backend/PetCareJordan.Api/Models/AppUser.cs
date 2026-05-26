@@ -13,4 +13,7 @@ public class AppUser
     public ICollection<Pet> OwnedPets { get; set; } = new List<Pet>();
     public ICollection<MedicalRecord> MedicalRecordsAuthored { get; set; } = new List<MedicalRecord>();
     public ICollection<VaccinationRecord> VaccinationsAuthored { get; set; } = new List<VaccinationRecord>();
+    public ICollection<ChatConversation> UserConversations { get; set; } = new List<ChatConversation>();
+    public ICollection<ChatConversation> VetConversations { get; set; } = new List<ChatConversation>();
+    public ICollection<ChatMessage> ChatMessagesSent { get; set; } = new List<ChatMessage>();
 }

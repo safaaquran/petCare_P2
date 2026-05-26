@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using PetCareJordan.Api.Data;
 using PetCareJordan.Api.Dtos;
 using PetCareJordan.Api.Models;
+using PetCareJordan.Api.Services;
 
 namespace PetCareJordan.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PetsController(PetCareJordanContext context) : ControllerBase
+public class PetsController(PetCareJordanContext context, IWebHostEnvironment environment) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PetSummaryDto>>> GetPets([FromQuery] string? search, [FromQuery] PetType? type)
@@ -34,19 +35,19 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
 
         var pets = await query
             .OrderBy(pet => pet.Name)
-            .Select(pet => new PetSummaryDto(
+            .ToListAsync();
+
+        return Ok(pets.Select(pet => new PetSummaryDto(
                 pet.Id,
                 pet.Name,
                 pet.Type,
                 pet.Breed,
                 pet.City,
+                pet.LocationDetails,
                 pet.CollarId,
-                pet.PhotoUrl,
+                PhotoUrlResolver.Resolve(pet.PhotoUrl, pet.Type, pet.Breed, environment),
                 pet.Owner!.FullName,
-                pet.AdoptionListing != null ? pet.AdoptionListing.Status : null))
-            .ToListAsync();
-
-        return Ok(pets);
+                pet.AdoptionListing != null ? pet.AdoptionListing.Status : null)));
     }
 
     [HttpGet("{id:int}")]
@@ -75,10 +76,11 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
             pet.CollarId,
             pet.Color,
             pet.City,
+            pet.LocationDetails,
             pet.WeightKg,
             pet.IsNeutered,
             pet.Description,
-            pet.PhotoUrl,
+            PhotoUrlResolver.Resolve(pet.PhotoUrl, pet.Type, pet.Breed, environment),
             pet.Owner.FullName,
             pet.Owner.PhoneNumber,
             pet.MedicalRecords.OrderByDescending(item => item.VisitDateUtc).Select(item => new MedicalRecordDto(item.Id, item.Vet!.FullName, item.VisitReason, item.Diagnosis, item.Treatment, item.VisitDateUtc)),
@@ -98,7 +100,17 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
             return NotFound();
         }
 
-        return Ok(new PetSummaryDto(pet.Id, pet.Name, pet.Type, pet.Breed, pet.City, pet.CollarId, pet.PhotoUrl, pet.Owner.FullName, pet.AdoptionListing?.Status));
+        return Ok(new PetSummaryDto(
+            pet.Id,
+            pet.Name,
+            pet.Type,
+            pet.Breed,
+            pet.City,
+            pet.LocationDetails,
+            pet.CollarId,
+            PhotoUrlResolver.Resolve(pet.PhotoUrl, pet.Type, pet.Breed, environment),
+            pet.Owner.FullName,
+            pet.AdoptionListing?.Status));
     }
 
     [HttpPost]
@@ -120,6 +132,7 @@ public class PetsController(PetCareJordanContext context) : ControllerBase
             CollarId = request.CollarId,
             Color = request.Color,
             City = request.City,
+            LocationDetails = request.LocationDetails?.Trim() ?? string.Empty,
             WeightKg = request.WeightKg,
             IsNeutered = request.IsNeutered,
             Description = request.Description,

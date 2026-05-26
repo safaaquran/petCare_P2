@@ -54,6 +54,11 @@ export const api = {
       method: "DELETE",
       headers: buildHeaders({}, token)
     }),
+  deleteOwnAdoptionPost: (id, token) =>
+    request(`/adoptions/${id}`, {
+      method: "DELETE",
+      headers: buildHeaders({}, token)
+    }),
   getLostPets: () => request("/community/lost"),
   getFoundPets: () => request("/community/found"),
   getPendingCommunityReports: (token) =>

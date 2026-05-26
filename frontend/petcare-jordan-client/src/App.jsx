@@ -426,6 +426,15 @@ function PostPhoto({ src, alt, petType = "Other" }) {
   return <img className="post-photo" src={src} alt={alt} onError={(event) => { event.currentTarget.src = fallbackPetPhotos[petType] ?? fallbackPetPhotos.Other; }} />;
 }
 
+function TrashIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M9 3h6l1 3h4v2H4V6h4l1-3Z" />
+      <path d="M6 10h12l-1 10H7L6 10Zm4 2v6h2v-6h-2Zm4 0v6h2v-6h-2Z" />
+    </svg>
+  );
+}
+
 function AuthPanel({
   t,
   language,
@@ -1324,14 +1333,24 @@ function App() {
     }
   }
 
-  async function handleDeleteAdoptionPost(id) {
-    if (!currentUser?.token || currentUser.role !== "Admin") {
-      setError("Only Admin accounts can delete adoption posts.");
+  async function handleDeleteAdoptionPost(id, ownerId = null) {
+    if (!currentUser?.token) {
+      setError("Please sign in first.");
+      return;
+    }
+
+    const canDeletePost = currentUser.role === "Admin" || ownerId === currentUser.id;
+    if (!canDeletePost) {
+      setError("Only the post owner can delete this adoption post.");
       return;
     }
 
     try {
-      await api.deleteAdoptionPost(id, currentUser.token);
+      if (currentUser.role === "Admin") {
+        await api.deleteAdoptionPost(id, currentUser.token);
+      } else {
+        await api.deleteOwnAdoptionPost(id, currentUser.token);
+      }
       setAdminAdoptions((current) => current.filter((item) => item.id !== id));
       setAdoptions((current) => current.filter((item) => item.id !== id));
       setAdoptionNotice("Adoption post deleted.");
@@ -2022,7 +2041,18 @@ function App() {
                                 Adopt {item.petName}
                               </button>
                             ) : (
-                              <span className="owner-note">This is your adoption post.</span>
+                              <div className="owner-post-actions">
+                                <span className="owner-note">This is your adoption post.</span>
+                                <button
+                                  type="button"
+                                  className="icon-button danger"
+                                  onClick={() => handleDeleteAdoptionPost(item.id, item.ownerId)}
+                                  aria-label={`Delete adoption post for ${item.petName}`}
+                                  title={`Delete adoption post for ${item.petName}`}
+                                >
+                                  <TrashIcon />
+                                </button>
+                              </div>
                             )}
                           </div>
                         </article>
@@ -2523,10 +2553,12 @@ function App() {
                                 </button>
                                 <button
                                   type="button"
-                                  className="chat-delete-button"
+                                  className="icon-button danger"
                                   onClick={() => handleDeleteChatConversation(conversation.id)}
+                                  aria-label={`Delete chat with ${conversation.counterpartName}`}
+                                  title={`Delete chat with ${conversation.counterpartName}`}
                                 >
-                                  Delete
+                                  <TrashIcon />
                                 </button>
                               </div>
                             ))}
@@ -2549,10 +2581,12 @@ function App() {
                             </div>
                             <button
                               type="button"
-                              className="chat-delete-button"
+                              className="icon-button danger"
                               onClick={() => handleDeleteChatConversation(selectedConversation.id)}
+                              aria-label={`Delete chat with ${selectedConversation.counterpartName}`}
+                              title={`Delete chat with ${selectedConversation.counterpartName}`}
                             >
-                              Delete chat
+                              <TrashIcon />
                             </button>
                           </div>
 

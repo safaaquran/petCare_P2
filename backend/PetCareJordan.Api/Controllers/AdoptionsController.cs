@@ -166,6 +166,35 @@ public class AdoptionsController(PetCareJordanContext context, IWebHostEnvironme
         return NoContent();
     }
 
+    [Authorize(Roles = "User,Vet")]
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteOwnAdoptionListing(int id)
+    {
+        var ownerId = GetCurrentUserId();
+        if (ownerId is null)
+        {
+            return Unauthorized();
+        }
+
+        var listing = await context.AdoptionListings
+            .Include(item => item.Pet)
+            .FirstOrDefaultAsync(item => item.Id == id);
+        if (listing?.Pet is null)
+        {
+            return NotFound();
+        }
+
+        if (listing.Pet.OwnerId != ownerId.Value)
+        {
+            return Forbid();
+        }
+
+        context.AdoptionListings.Remove(listing);
+        await context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
     [HttpPost("existing")]
     public async Task<ActionResult<AdoptionListingDto>> CreateAdoptionListing(CreateAdoptionListingRequest request)
     {

@@ -347,9 +347,16 @@ button {
 
 .owner-note {
   display: block;
-  margin-top: 12px;
   color: #64748b;
   font-weight: 700;
+}
+
+.owner-post-actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .auth-form {
@@ -422,17 +429,45 @@ button {
   padding: 2px 4px;
 }
 
-.chat-vet-list .chat-delete-button,
-.chat-delete-button {
+.chat-vet-list small {
+  color: #64748b;
+}
+
+.icon-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #fff;
+  color: #334155;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  transition: 160ms ease;
+}
+
+.icon-button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.icon-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+}
+
+.icon-button.danger {
   border-color: #fecdd3;
   background: #fff1f2;
   color: #be123c;
-  font-weight: 800;
-  text-align: center;
 }
 
-.chat-vet-list small {
-  color: #64748b;
+.icon-button.danger:hover {
+  border-color: #fda4af;
+  background: #ffe4e6;
+  color: #9f1239;
 }
 
 .chat-conversation-head {

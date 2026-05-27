@@ -2678,14 +2678,18 @@ function App() {
                             </div>
                             <p className="pet-id-line">{t("medical.petId", "Pet ID")}: {pet.collarId}</p>
 
-                            <p>{pet.healthSummary}</p>
+                            <p className={pet.isVaccinesUpToDate ? "health-summary-card stable" : "health-summary-card attention"}>
+                              {pet.healthSummary}
+                            </p>
 
                             <div className="medical-subsection">
-                              <strong>{t("medical.vaccinePlan", "Vaccine Plan")}</strong>
+                              <div className="medical-subsection-title">
+                                <strong>{t("medical.vaccinePlan", "Vaccine Plan")}</strong>
+                              </div>
                               {pet.vaccinePlan.length > 0 ? (
                                 <div className="list-stack">
                                   {pet.vaccinePlan.map((vaccine) => (
-                                    <article key={vaccine.id} className="list-card">
+                                    <article key={vaccine.id} className={vaccine.isCompleted ? "list-card medical-mini-card done" : "list-card medical-mini-card due"}>
                                       <strong>{vaccine.vaccineName}</strong>
                                       <div className="meta-line">
                                         <span>{t("medical.status", "Status")}: {vaccine.status}</span>
@@ -2700,11 +2704,13 @@ function App() {
                             </div>
 
                             <div className="medical-subsection">
-                              <strong>{t("medical.recentVisits", "Recent Medical Visits")}</strong>
+                              <div className="medical-subsection-title">
+                                <strong>{t("medical.recentVisits", "Recent Medical Visits")}</strong>
+                              </div>
                               {pet.medicalHistory.length > 0 ? (
                                 <div className="list-stack">
                                   {pet.medicalHistory.slice(0, 3).map((record) => (
-                                    <article key={record.id} className="list-card">
+                                    <article key={record.id} className="list-card medical-mini-card visit">
                                       <strong>{record.visitReason}</strong>
                                       <p>{record.diagnosis}</p>
                                       <div className="meta-line">

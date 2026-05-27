@@ -120,7 +120,6 @@ public class PetCareJordanFeatureTests
         return (user, vet, admin, pet);
     }
 
-    // TC-AUTO-01: Password hashing
     [Fact]
     public void PasswordHash_ShouldNotStorePlainPassword()
     {
@@ -133,7 +132,6 @@ public class PetCareJordanFeatureTests
         Assert.False(string.IsNullOrWhiteSpace(hash));
     }
 
-    // TC-AUTO-02: Correct password verification
     [Fact]
     public void VerifyPassword_WithCorrectPassword_ShouldReturnTrue()
     {
@@ -145,7 +143,6 @@ public class PetCareJordanFeatureTests
         Assert.True(result);
     }
 
-    // TC-AUTO-03: Wrong password rejection
     [Fact]
     public void VerifyPassword_WithWrongPassword_ShouldReturnFalse()
     {
@@ -157,7 +154,6 @@ public class PetCareJordanFeatureTests
         Assert.False(result);
     }
 
-    // TC-AUTO-04: JWT role claim
     [Fact]
     public void JwtToken_ShouldContainUserRoleClaim()
     {
@@ -179,7 +175,6 @@ public class PetCareJordanFeatureTests
             claim.Value == "Vet");
     }
 
-    // TC-AUTO-05: Register valid user
     [Fact]
     public async Task Register_WithValidUser_ShouldCreateAccount()
     {
@@ -207,7 +202,6 @@ public class PetCareJordanFeatureTests
         Assert.Equal(UserRole.User, body.Role);
     }
 
-    // TC-AUTO-06: Reject public admin registration
     [Fact]
     public async Task Register_WithAdminRole_ShouldReturnBadRequest()
     {
@@ -231,7 +225,6 @@ public class PetCareJordanFeatureTests
         Assert.IsType<BadRequestObjectResult>(response.Result);
     }
 
-    // TC-AUTO-07: Login valid user
     [Fact]
     public async Task Login_WithCorrectCredentials_ShouldReturnToken()
     {
@@ -265,7 +258,6 @@ public class PetCareJordanFeatureTests
         Assert.False(string.IsNullOrWhiteSpace(body.Token));
     }
 
-    // TC-AUTO-08: Login wrong password
     [Fact]
     public async Task Login_WithWrongPassword_ShouldReturnUnauthorized()
     {
@@ -296,7 +288,6 @@ public class PetCareJordanFeatureTests
         Assert.IsType<UnauthorizedObjectResult>(response.Result);
     }
 
-    // TC-AUTO-09: Get pets list
     [Fact]
     public async Task GetPets_ShouldReturnSeededPets()
     {
@@ -314,7 +305,6 @@ public class PetCareJordanFeatureTests
         Assert.Single(pets);
     }
 
-    // TC-AUTO-10: Search pet by collar ID
     [Fact]
     public async Task GetByCollarId_WithExistingCollar_ShouldReturnPet()
     {
@@ -333,7 +323,6 @@ public class PetCareJordanFeatureTests
         Assert.Equal("COL-100", pet.CollarId);
     }
 
-    // TC-AUTO-11: Collar ID not found
     [Fact]
     public async Task GetByCollarId_WithMissingCollar_ShouldReturnNotFound()
     {
@@ -348,7 +337,6 @@ public class PetCareJordanFeatureTests
         Assert.IsType<NotFoundResult>(response.Result);
     }
 
-    // TC-AUTO-12: Create adoption post
     [Fact]
     public async Task CreateAdoptionPost_WithValidUser_ShouldCreatePendingListing()
     {
@@ -380,7 +368,6 @@ public class PetCareJordanFeatureTests
         Assert.Equal(AdoptionStatus.Pending, listing.Status);
     }
 
-    // TC-AUTO-13: Reject invalid adoption post
     [Fact]
     public async Task CreateAdoptionPost_WithMissingRequiredFields_ShouldReturnBadRequest()
     {
@@ -408,7 +395,6 @@ public class PetCareJordanFeatureTests
         Assert.IsType<BadRequestObjectResult>(response.Result);
     }
 
-    // TC-AUTO-14: Create medical record
     [Fact]
     public async Task CreateMedicalRecord_WithValidVetAndPet_ShouldCreateRecord()
     {
@@ -435,7 +421,6 @@ public class PetCareJordanFeatureTests
         Assert.Equal("Omar Vet", record.VetName);
     }
 
-    // TC-AUTO-15: Chat empty message validation
     [Fact]
     public async Task SendMessage_WithEmptyText_ShouldReturnBadRequest()
     {

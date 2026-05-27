@@ -435,6 +435,24 @@ function TrashIcon() {
   );
 }
 
+function ProfileIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+      <path d="M4 21a8 8 0 0 1 16 0H4Z" />
+    </svg>
+  );
+}
+
+function SignOutIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+      <path d="M5 3h8v2H7v14h6v2H5V3Z" />
+      <path d="m16.6 7.4 4.6 4.6-4.6 4.6-1.4-1.4 2.2-2.2H10v-2h7.4l-2.2-2.2 1.4-1.4Z" />
+    </svg>
+  );
+}
+
 function AuthPanel({
   t,
   language,
@@ -461,10 +479,12 @@ function AuthPanel({
 
   return (
     <div className="login-panel">
-      <div className="login-panel-header">
-        <strong>{currentUser ? `${t("auth.loggedInAs", "Logged in as")} ${currentUser.fullName}` : t("auth.chooseRole", "Choose your role to continue.")}</strong>
-        <span>{currentUser ? roleLabels[language][currentUser.role] : t("auth.pickAccess", "Pick the right access category for your account.")}</span>
-      </div>
+      {!currentUser ? (
+        <div className="login-panel-header">
+          <strong>{t("auth.chooseRole", "Choose your role to continue.")}</strong>
+          <span>{t("auth.pickAccess", "Pick the right access category for your account.")}</span>
+        </div>
+      ) : null}
 
       {!currentUser ? (
         <div className="role-list">
@@ -617,9 +637,14 @@ function AuthPanel({
         </>
       ) : (
         <div className="signed-in-card">
-          <p>{currentUser.email}</p>
-          <p>{currentUser.city} | {currentUser.phoneNumber}</p>
-          <button type="button" onClick={handleSignOut}>
+          <div className="signed-in-role">
+            <span className="profile-icon">
+              <ProfileIcon />
+            </span>
+            <strong>{roleLabels[language][currentUser.role]}</strong>
+          </div>
+          <button type="button" className="sign-out-button" onClick={handleSignOut}>
+            <SignOutIcon />
             {t("auth.signOut", "Sign out")}
           </button>
         </div>

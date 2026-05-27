@@ -749,24 +749,47 @@ button {
 
 .signed-in-card {
   display: grid;
-  gap: 8px;
-  padding-top: 4px;
+  gap: 12px;
 }
 
-.signed-in-card p {
-  margin: 0;
-  color: #475569;
-  padding: 10px 12px;
-  border-radius: 12px;
+.signed-in-role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #dbeafe;
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  line-height: 1.25;
-  overflow-wrap: anywhere;
+  color: #0f172a;
+}
+
+.profile-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.profile-icon svg,
+.sign-out-button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 .signed-in-card button {
-  margin-top: 4px;
   min-height: 48px;
+}
+
+.sign-out-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .alert {

@@ -641,7 +641,7 @@ function AuthPanel({
             <span className="profile-icon">
               <ProfileIcon />
             </span>
-            <strong>{roleLabels[language][currentUser.role]}</strong>
+            <strong>{currentUser.fullName}</strong>
           </div>
           <button type="button" className="sign-out-button" onClick={handleSignOut}>
             <SignOutIcon />

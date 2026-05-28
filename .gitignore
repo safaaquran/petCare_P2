@@ -11,5 +11,6 @@
 backend/PetCareJordan.Api/uploads/
 .build-check/
 .run-logs/
+petCare_P2-main.zip
 run-backend-local.ps1
 run-frontend-local.ps1

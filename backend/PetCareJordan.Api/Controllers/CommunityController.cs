@@ -11,7 +11,10 @@ namespace PetCareJordan.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CommunityController(PetCareJordanContext context, IWebHostEnvironment environment) : ControllerBase
+public class CommunityController(
+    PetCareJordanContext context,
+    IWebHostEnvironment environment,
+    VaccineReminderService vaccineReminderService) : ControllerBase
 {
     private static readonly HashSet<string> AllowedImageExtensions = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -354,20 +357,7 @@ public class CommunityController(PetCareJordanContext context, IWebHostEnvironme
     [HttpGet("notifications/{userId:int}")]
     public async Task<ActionResult<IEnumerable<NotificationDto>>> GetNotifications(int userId)
     {
-        var now = DateTime.UtcNow;
-        var expiredNotifications = await context.Notifications
-            .Where(notification =>
-                notification.UserId == userId &&
-                notification.Type == NotificationType.VaccineReminder &&
-                notification.ExpiresAtUtc != null &&
-                notification.ExpiresAtUtc <= now)
-            .ToListAsync();
-
-        if (expiredNotifications.Count > 0)
-        {
-            context.Notifications.RemoveRange(expiredNotifications);
-            await context.SaveChangesAsync();
-        }
+        await vaccineReminderService.RefreshAsync(userId);
 
         var notifications = await context.Notifications
             .Where(notification => notification.UserId == userId)

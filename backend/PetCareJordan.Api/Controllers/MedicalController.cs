@@ -11,26 +11,60 @@ namespace PetCareJordan.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class MedicalController(PetCareJordanContext context, IWebHostEnvironment environment) : ControllerBase
+public class MedicalController(
+    PetCareJordanContext context,
+    IWebHostEnvironment environment,
+    VaccineReminderService vaccineReminderService) : ControllerBase
 {
+    [Authorize(Roles = "Vet,Admin")]
+    [HttpGet("vet-pets")]
+    public async Task<ActionResult<IEnumerable<VetMedicalPetDto>>> GetVetMedicalPets()
+    {
+        var pets = await context.Pets
+            .Include(pet => pet.Owner)
+            .Where(pet => !pet.CollarId.StartsWith("MAP-") && !pet.CollarId.StartsWith("ADOPT-"))
+            .OrderBy(pet => pet.Name)
+            .ThenBy(pet => pet.CollarId)
+            .ToListAsync();
+
+        return Ok(pets.Select(pet => new VetMedicalPetDto(
+            pet.Id,
+            pet.Name,
+            pet.Type,
+            pet.Breed,
+            pet.City,
+            pet.LocationDetails,
+            pet.CollarId,
+            PhotoUrlResolver.Resolve(pet.PhotoUrl, pet.Type, pet.Breed, environment),
+            pet.Owner?.FullName ?? "Unknown Owner",
+            pet.Owner?.PhoneNumber ?? string.Empty)));
+    }
+
     [Authorize(Roles = "Vet,Admin")]
     [HttpGet("upcoming-vaccines")]
     public async Task<ActionResult<IEnumerable<object>>> GetUpcomingVaccines()
     {
-        await RemoveExpiredVaccineNotificationsAsync();
+        await vaccineReminderService.RefreshAsync();
 
         var today = DateTime.UtcNow.Date;
         var cutoff = DateTime.UtcNow.AddDays(30);
         var vaccines = await context.VaccinationRecords
             .Include(vaccine => vaccine.Pet)
                 .ThenInclude(pet => pet!.Owner)
-            .Where(vaccine => !vaccine.IsCompleted && vaccine.DueDateUtc.Date >= today && vaccine.DueDateUtc <= cutoff)
+            .Where(vaccine =>
+                !vaccine.IsCompleted &&
+                vaccine.DueDateUtc.Date >= today &&
+                vaccine.DueDateUtc <= cutoff &&
+                vaccine.Pet != null &&
+                !vaccine.Pet.CollarId.StartsWith("MAP-") &&
+                !vaccine.Pet.CollarId.StartsWith("ADOPT-"))
             .OrderBy(vaccine => vaccine.DueDateUtc)
             .Select(vaccine => new
             {
                 vaccine.Id,
                 vaccine.VaccineName,
                 vaccine.DueDateUtc,
+                PetId = vaccine.Pet!.Id,
                 PetName = vaccine.Pet!.Name,
                 PetCollarId = vaccine.Pet.CollarId,
                 OwnerName = vaccine.Pet.Owner!.FullName,
@@ -53,7 +87,7 @@ public class MedicalController(PetCareJordanContext context, IWebHostEnvironment
         var vet = await context.Users.FirstOrDefaultAsync(user => user.Id == vetId && (user.Role == UserRole.Vet || user.Role == UserRole.Admin));
         var pet = await context.Pets.FindAsync(request.PetId);
 
-        if (vet is null || pet is null)
+        if (vet is null || pet is null || pet.CollarId.StartsWith("MAP-") || pet.CollarId.StartsWith("ADOPT-"))
         {
             return BadRequest("Valid pet and vet are required.");
         }
@@ -75,6 +109,7 @@ public class MedicalController(PetCareJordanContext context, IWebHostEnvironment
 
         context.VaccinationRecords.Add(vaccine);
         await context.SaveChangesAsync();
+        await vaccineReminderService.RefreshAsync(pet.OwnerId);
 
         return CreatedAtAction(nameof(CreateVaccination), new
         {
@@ -90,66 +125,19 @@ public class MedicalController(PetCareJordanContext context, IWebHostEnvironment
     [HttpPost("vaccines/{vaccineId:int}/notify")]
     public async Task<ActionResult<object>> NotifyOwner(int vaccineId)
     {
-        var vaccine = await context.VaccinationRecords
-            .Include(item => item.Pet)
-                .ThenInclude(pet => pet!.Owner)
-            .FirstOrDefaultAsync(item => item.Id == vaccineId);
-
-        if (vaccine?.Pet?.Owner is null)
+        try
+        {
+            var notification = await vaccineReminderService.NotifyOwnerAsync(vaccineId);
+            return Ok(new { notification.Id, notification.Title, notification.Message });
+        }
+        catch (KeyNotFoundException)
         {
             return NotFound();
         }
-
-        if (vaccine.IsCompleted)
+        catch (InvalidOperationException error)
         {
-            return BadRequest("This vaccine is already completed.");
+            return BadRequest(error.Message);
         }
-
-        var today = DateTime.UtcNow.Date;
-        var dueDate = vaccine.DueDateUtc.Date;
-
-        if (dueDate < today)
-        {
-            await RemoveExpiredVaccineNotificationsAsync();
-            return BadRequest("This vaccine date has already passed.");
-        }
-
-        var daysUntilDue = (dueDate - today).Days;
-        var timingText = daysUntilDue switch
-        {
-            0 => "today",
-            1 => "tomorrow",
-            _ => $"in {daysUntilDue} days"
-        };
-
-        var existingNotification = await context.Notifications.FirstOrDefaultAsync(notification =>
-            notification.UserId == vaccine.Pet.OwnerId &&
-            notification.Type == NotificationType.VaccineReminder &&
-            notification.VaccinationRecordId == vaccine.Id);
-
-        var title = $"Vaccine reminder for {vaccine.Pet.Name}";
-        var message = $"{vaccine.VaccineName} is due {timingText} for {vaccine.Pet.Name}. Due date: {dueDate:yyyy-MM-dd}.";
-
-        if (existingNotification is null)
-        {
-            existingNotification = new Notification
-            {
-                UserId = vaccine.Pet.OwnerId,
-                Type = NotificationType.VaccineReminder,
-                VaccinationRecordId = vaccine.Id
-            };
-            context.Notifications.Add(existingNotification);
-        }
-
-        existingNotification.Title = title;
-        existingNotification.Message = message;
-        existingNotification.TriggerDateUtc = DateTime.UtcNow;
-        existingNotification.ExpiresAtUtc = dueDate.AddDays(1);
-        existingNotification.IsRead = false;
-
-        await context.SaveChangesAsync();
-
-        return Ok(new { existingNotification.Id, existingNotification.Title, existingNotification.Message });
     }
 
     [Authorize(Roles = "User")]
@@ -160,6 +148,8 @@ public class MedicalController(PetCareJordanContext context, IWebHostEnvironment
         {
             return Unauthorized();
         }
+
+        await vaccineReminderService.RefreshAsync(userId);
 
         var pets = await context.Pets
             .Where(pet => pet.OwnerId == userId)
@@ -290,22 +280,4 @@ public class MedicalController(PetCareJordanContext context, IWebHostEnvironment
         return "Scheduled";
     }
 
-    private async Task RemoveExpiredVaccineNotificationsAsync()
-    {
-        var now = DateTime.UtcNow;
-        var expiredNotifications = await context.Notifications
-            .Where(notification =>
-                notification.Type == NotificationType.VaccineReminder &&
-                notification.ExpiresAtUtc != null &&
-                notification.ExpiresAtUtc <= now)
-            .ToListAsync();
-
-        if (expiredNotifications.Count == 0)
-        {
-            return;
-        }
-
-        context.Notifications.RemoveRange(expiredNotifications);
-        await context.SaveChangesAsync();
-    }
 }

@@ -165,6 +165,10 @@ export const api = {
       method: "POST",
       headers: buildHeaders({}, token)
     }),
+  getVetMedicalPets: (token) =>
+    request("/medical/vet-pets", {
+      headers: buildHeaders({}, token)
+    }),
   getMyMedicalPets: (token) =>
     request("/medical/my-pets", {
       headers: buildHeaders({}, token)

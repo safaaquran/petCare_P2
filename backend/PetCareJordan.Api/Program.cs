@@ -28,6 +28,8 @@ builder.Services.AddDbContext<PetCareJordanContext>(options =>
 });
 builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<JwtTokenService>();
+builder.Services.AddScoped<VaccineReminderService>();
+builder.Services.AddHostedService<VaccineReminderHostedService>();
 var jwtKey = builder.Configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT key is missing.");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

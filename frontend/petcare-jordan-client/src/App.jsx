@@ -13,7 +13,7 @@ const adminHiddenTabs = new Set(["chat", "medical"]);
 const roleOrder = ["User", "Vet", "Admin"];
 const roleLabels = {
   en: { User: "User", Vet: "Vet", Admin: "Admin" },
-  ar: { User: "مستخدم", Vet: "طبيب", Admin: "مشرف" }
+  ar: { User: "حساب مستخدم", Vet: "طبيب بيطري", Admin: "مشرف" }
 };
 const roleConfig = {
   User: {
@@ -31,19 +31,19 @@ const uiText = {
   ar: {
     "languageToggle": "English",
     "graduationProject": "مشروع تخرج",
-    "sidebarCopy": "منصة أردنية لتبني الحيوانات، البحث عن المفقود، وإدارة الرعاية الطبية البيطرية.",
+    "sidebarCopy": "منصة أردنية لتبني الحيوانات، البحث عن الحيوانات المفقودة، ومتابعة الرعاية الصحية البيطرية.",
     "roleDemoAccounts": "حسابات تجريبية",
     "showAllRoleDemos": "عرض كل الحسابات",
     "heroEyebrow": "شبكة رعاية للحيوانات في الأردن",
-    "heroTitle": "إدارة التبني، الحيوانات المفقودة، السجل الطبي، وتنبيهات المطاعيم من مكان واحد.",
+    "heroTitle": "إدارة التبني، بلاغات الحيوانات المفقودة، السجل الصحي، وتنبيهات المطاعيم من مكان واحد.",
     "loadingProjectData": "جاري تحميل بيانات المشروع...",
     "tab.overview": "الرئيسية",
     "tab.adoption": "التبني",
     "tab.lostfound": "المفقودات",
     "tab.chat": "المحادثة",
-    "tab.medical": "الطبي",
-    "auth.chooseRole": "اختاري الدور للمتابعة.",
-    "auth.pickAccess": "اختاري نوع الدخول المناسب لحسابك.",
+    "tab.medical": "الحالة الصحية",
+    "auth.chooseRole": "اختر نوع الحساب للمتابعة.",
+    "auth.pickAccess": "اختر طريقة الدخول المناسبة لحسابك.",
     "auth.loggedInAs": "مسجل دخول باسم",
     "auth.changeRole": "تغيير الدور",
     "auth.login": "دخول",
@@ -54,18 +54,18 @@ const uiText = {
     "auth.petcareEmail": "الإيميل لازم ينتهي بـ @petcare.com",
     "auth.phone": "رقم الهاتف",
     "auth.city": "المدينة",
-    "auth.signInAs": "تسجيل دخول كـ",
+    "auth.signInAs": "تسجيل الدخول كـ",
     "auth.createAccount": "إنشاء حساب",
-    "auth.noAccount": "ما عندك حساب؟ اختاري تسجيل.",
-    "auth.hasAccount": "عندك حساب؟ اختاري دخول.",
-    "auth.selectRole": "اختاري كرت الدور لفتح تسجيل الدخول.",
+    "auth.noAccount": "لا يوجد حساب؟ انتقل إلى التسجيل.",
+    "auth.hasAccount": "لديك حساب؟ انتقل إلى تسجيل الدخول.",
+    "auth.selectRole": "اختر نوع الحساب لفتح تسجيل الدخول.",
     "auth.signOut": "تسجيل خروج",
     "role.User.hint": "تبنّي الحيوانات، نشر البلاغات، ومتابعة تقاريرك.",
-    "role.Vet.hint": "إدارة السجلات الطبية وخطط المطاعيم.",
+    "role.Vet.hint": "إدارة السجلات الصحية وخطط المطاعيم.",
     "role.Admin.hint": "مراجعة المنشورات المعلقة وتنظيم محتوى المنصة.",
     "overview.analyticsTitle": "لوحة الإحصائيات",
     "overview.analyticsSubtitle": "ملخص سريع للمشروع للمشرفين.",
-    "overview.users": "المستخدمين المسجلين",
+    "overview.users": "الحسابات المسجلة",
     "overview.vets": "الأطباء البيطريين",
     "overview.pets": "الحيوانات في النظام",
     "overview.adoptionPets": "حيوانات للتبني",
@@ -74,49 +74,49 @@ const uiText = {
     "overview.animalsByType": "الحيوانات حسب النوع",
     "overview.animalsByTypeSubtitle": "توزيع الحيوانات بين التبني والمفقود والمعثور عليه.",
     "overview.mapTitle": "خريطة الحيوانات العامة",
-    "overview.mapSubtitle": "اضغطي على المدينة لرؤية الحيوانات الموجودة فيها.",
-    "overview.notificationsTitle": "تنبيهات المالك",
-    "overview.notificationsSubtitle": "تذكيرات المطاعيم التي تصل للمالك قبل موعد المطعوم.",
-    "overview.signInReminders": "سجلي دخول حتى تشوفي تنبيهات حسابك.",
-    "medical.userTitle": "الحالة الطبية لحيواناتي",
-    "medical.userSubtitle": "هنا تظهر حيواناتك فقط مع الحالة الصحية وخطة المطاعيم.",
+    "overview.mapSubtitle": "اضغط على المدينة لرؤية الحيوانات الموجودة فيها.",
+    "overview.notificationsTitle": "تنبيهات صاحب الحيوان",
+    "overview.notificationsSubtitle": "تذكيرات المطاعيم التي تصل لصاحب الحيوان قبل الموعد.",
+    "overview.signInReminders": "سجّل الدخول لعرض تنبيهات حسابك.",
+    "medical.userTitle": "الحالة الصحية لحيواناتك",
+    "medical.userSubtitle": "هنا تظهر الحيوانات المرتبطة بحسابك مع الحالة الصحية وخطة المطاعيم.",
     "medical.vaccineReminders": "تنبيهات المطاعيم",
-    "medical.vaccineRemindersSubtitle": "التنبيهات الفعالة التي أرسلها الطبيب لحيواناتك.",
+    "medical.vaccineRemindersSubtitle": "التنبيهات الفعالة التي أرسلها الطبيب البيطري لحيواناتك.",
     "medical.noActiveReminders": "لا يوجد تنبيهات مطاعيم فعالة حالياً.",
-    "medical.addTitle": "إضافة حاجة مطعوم",
-    "medical.addSubtitle": "أنشئي خطة مطعوم للحيوان، ثم أرسلي تنبيه للمالك عند اقتراب الموعد.",
+    "medical.addTitle": "إضافة موعد مطعوم",
+    "medical.addSubtitle": "يمكن إنشاء موعد مطعوم للحيوان، وسيصل تنبيه تلقائي لصاحب الحيوان قبل الموعد.",
     "medical.pet": "الحيوان",
-    "medical.vaccineName": "اسم المطعوم",
+    "medical.vaccineName": "اسم اللقاح / المطعوم",
     "medical.dueDate": "تاريخ الموعد",
-    "medical.addVaccine": "إضافة مطعوم",
-    "medical.monitorTitle": "متابعة مطاعيم الحيوانات",
-    "medical.monitorSubtitle": "كل حيوان له بطاقة خاصة مع بيانات المالك وتنبيهات المطاعيم الفعالة.",
+    "medical.addVaccine": "إضافة الموعد",
+    "medical.monitorTitle": "متابعة الحالة الصحية والمطاعيم",
+    "medical.monitorSubtitle": "كل حيوان له بطاقة مستقلة تعرض بيانات صاحب الحيوان والتنبيهات الصحية الفعالة.",
     "medical.noPetsMonitor": "لا يوجد حيوانات للمتابعة حالياً.",
     "medical.upcomingTitle": "المطاعيم القادمة",
-    "medical.upcomingSubtitle": "هذه القائمة تستخدم لإرسال تذكيرات المطاعيم للمالكين.",
+    "medical.upcomingSubtitle": "المواعيد القريبة تُرسل تنبيهات تلقائية لأصحاب الحيوانات، وتختفي بعد انتهاء تاريخها.",
     "medical.noUpcoming": "لا يوجد مطاعيم مستحقة خلال 30 يوم.",
     "medical.noLinkedPets": "لا يوجد حيوانات مرتبطة بحسابك حالياً.",
     "medical.petId": "رقم الحيوان",
     "medical.vaccinePlan": "خطة المطاعيم",
-    "medical.recentVisits": "آخر الزيارات الطبية",
+    "medical.recentVisits": "آخر الزيارات الصحية",
     "medical.noVaccines": "لا يوجد سجلات مطاعيم بعد.",
     "medical.noVisits": "لا يوجد زيارات طبية مسجلة لهذا الحيوان بعد.",
     "medical.activeNeeds": "احتياجات المطاعيم الفعالة",
     "medical.noNeeds": "لا يوجد مطاعيم قادمة لهذا الحيوان.",
     "medical.noActiveReminder": "لا يوجد تنبيه فعال",
     "medical.upcoming": "قادم",
-    "medical.owner": "المالك",
+    "medical.owner": "صاحب الحيوان",
     "medical.due": "الموعد",
     "medical.notify": "تنبيه",
     "medical.status": "الحالة",
     "medical.upToDate": "المطاعيم محدثة",
-    "medical.vaccinesNeeded": "مطعوم مطلوب",
+    "medical.vaccinesNeeded": "مطعوم قادم",
     "common.delete": "حذف",
     "common.approve": "موافقة",
     "common.reject": "رفض",
     "common.loadingAccount": "جاري تحميل بيانات الحساب...",
     "common.loginRequired": "تسجيل الدخول مطلوب",
-    "common.loginRequiredSubtitle": "رجاءً سجلي دخول أولاً، هذا القسم يظهر بعد تسجيل الدخول."
+    "common.loginRequiredSubtitle": "يرجى تسجيل الدخول أولاً، هذا القسم يظهر بعد تسجيل الدخول."
   }
 };
 
@@ -748,6 +748,7 @@ function App() {
   const [foundPhotoUploading, setFoundPhotoUploading] = useState(false);
   const t = (key, fallback) => translate(language, key, fallback);
   const isArabic = language === "ar";
+  const toggleLanguage = () => setLanguage((current) => current === "en" ? "ar" : "en");
 
   useEffect(() => {
     localStorage.setItem("petcareLanguage", language);
@@ -831,7 +832,7 @@ function App() {
             ? api.getMyMedicalPets(currentUser.token)
             : api.getUpcomingVaccines(currentUser.token);
         const vetPetsRequest = currentUser.role === "Vet"
-          ? api.getPets()
+          ? api.getVetMedicalPets(currentUser.token)
           : Promise.resolve([]);
         const chatConversationsRequest = isAdmin
           ? Promise.resolve([])
@@ -1211,8 +1212,8 @@ function App() {
     item.title.toLowerCase().includes("vaccine") ||
     item.message.toLowerCase().includes("vaccine")
   );
-  const vaccinesByPetCollarId = vaccines.reduce((grouped, vaccine) => {
-    const key = vaccine.petCollarId;
+  const vaccinesByPetId = vaccines.reduce((grouped, vaccine) => {
+    const key = vaccine.petId;
     return {
       ...grouped,
       [key]: [...(grouped[key] ?? []), vaccine]
@@ -1529,7 +1530,7 @@ function App() {
     if (currentUser.role === "Vet") {
       const [upcomingVaccines, allPets] = await Promise.all([
         api.getUpcomingVaccines(currentUser.token),
-        api.getPets()
+        api.getVetMedicalPets(currentUser.token)
       ]);
       setVaccines(upcomingVaccines);
       setVetPets(allPets);
@@ -1573,7 +1574,7 @@ function App() {
       }, currentUser.token);
       await refreshMedicalData();
       setVaccineForm((current) => ({ ...current, vaccineName: "", dueDateUtc: getDateInputValue(2) }));
-      setMedicalNotice("Vaccine plan added. Use Notify when you want to alert the owner.");
+      setMedicalNotice("Vaccine date added. The owner will be notified automatically when the due date is close.");
       setError("");
     } catch (requestError) {
       setError(requestError.message || "Could not add this vaccine plan.");
@@ -1702,19 +1703,21 @@ function App() {
           <p className="eyebrow">{t("graduationProject", "Graduation Project")}</p>
           <div className="sidebar-title-row">
             <h1>PetCare Jordan</h1>
-            {currentUser && isChatRole ? (
-              <button type="button" className="chat-bell-icon-button" onClick={() => setActiveTab("chat")}>
-                <span className="chat-bell-emoji" aria-hidden="true">🔔</span>
-                <strong className="chat-bell-badge">{chatUnreadCount}</strong>
+            <div className="sidebar-actions">
+              <button type="button" className="top-language-toggle compact" onClick={toggleLanguage} aria-label="Switch language">
+                <span>{isArabic ? "EN" : "AR"}</span>
               </button>
-            ) : null}
+              {currentUser && isChatRole ? (
+                <button type="button" className="chat-bell-icon-button" onClick={() => setActiveTab("chat")}>
+                  <span className="chat-bell-emoji" aria-hidden="true">🔔</span>
+                  <strong className="chat-bell-badge">{chatUnreadCount}</strong>
+                </button>
+              ) : null}
+            </div>
           </div>
           <p className="sidebar-copy">
             {t("sidebarCopy", "A pet adoption, recovery, and veterinary care platform built with ASP.NET Core and React.")}
           </p>
-          <button type="button" className="language-toggle" onClick={() => setLanguage((current) => current === "en" ? "ar" : "en")}>
-            {t("languageToggle", "العربية")}
-          </button>
         </div>
 
         <nav className="tab-list">
@@ -2947,7 +2950,7 @@ function App() {
                 </>
               ) : (
                 <div className="content-grid two-column">
-                  <SectionCard title={t("medical.addTitle", "Add Vaccine Need")} subtitle={t("medical.addSubtitle", "Create a vaccine plan for a pet, then notify the owner when the due date is close.")}>
+                  <SectionCard title={t("medical.addTitle", "Add Vaccine Date")} subtitle={t("medical.addSubtitle", "Create a vaccine date for a pet. The owner is notified automatically when the due date is close.")}>
                     <form className="post-form" onSubmit={handleCreateVaccination}>
                       <label>
                         {t("medical.pet", "Pet")}
@@ -2989,7 +2992,7 @@ function App() {
                     {vetPets.length > 0 ? (
                       <div className="user-medical-grid">
                         {vetPets.map((pet) => {
-                          const petVaccines = vaccinesByPetCollarId[pet.collarId] ?? [];
+                          const petVaccines = vaccinesByPetId[pet.id] ?? [];
 
                           return (
                             <article key={pet.id} className="medical-pet-card">
@@ -3038,7 +3041,7 @@ function App() {
                     )}
                   </SectionCard>
 
-                  <SectionCard title={t("medical.upcomingTitle", "Upcoming Vaccines")} subtitle={t("medical.upcomingSubtitle", "This list powers the vaccine reminder workflow for owners.")}>
+                  <SectionCard title={t("medical.upcomingTitle", "Upcoming Vaccines")} subtitle={t("medical.upcomingSubtitle", "Due-soon vaccines notify owners automatically and disappear after their due date passes.")}>
                     <div className="list-stack">
                       {vaccines.length > 0 ? (
                         vaccines.map((item) => (

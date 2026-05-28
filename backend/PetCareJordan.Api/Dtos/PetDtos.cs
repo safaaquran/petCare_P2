@@ -84,3 +84,15 @@ public record UserPetMedicalSnapshotDto(
     int PendingVaccinesCount,
     IEnumerable<MedicalRecordDto> MedicalHistory,
     IEnumerable<UserPetVaccinePlanDto> VaccinePlan);
+
+public record VetMedicalPetDto(
+    int Id,
+    string Name,
+    PetType Type,
+    string Breed,
+    string City,
+    string LocationDetails,
+    string CollarId,
+    string PhotoUrl,
+    string OwnerName,
+    string OwnerPhone);

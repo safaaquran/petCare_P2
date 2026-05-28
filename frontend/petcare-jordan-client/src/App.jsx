@@ -731,6 +731,13 @@ function App() {
     health: "all",
     city: "all"
   });
+  const [lostFoundFilters, setLostFoundFilters] = useState({
+    query: "",
+    type: "all",
+    postKind: "all",
+    age: "all",
+    place: "all"
+  });
   const [vaccineForm, setVaccineForm] = useState({ petId: "", vaccineName: "", dueDateUtc: getDateInputValue(2) });
   const [medicalNotice, setMedicalNotice] = useState("");
   const [adoptionNotice, setAdoptionNotice] = useState("");
@@ -1127,6 +1134,75 @@ function App() {
   const communityFoundPets = canPublishCommunityPost
     ? foundPets.filter((item) => item.reporterId !== currentUser.id)
     : foundPets;
+  const lostFoundPlaceOptions = [
+    ...new Set([
+      ...communityLostPets.map((item) => item.lastSeenPlace),
+      ...communityFoundPets.map((item) => item.foundPlace)
+    ].filter(Boolean))
+  ].sort((a, b) => a.localeCompare(b));
+  const filteredCommunityLostPets = communityLostPets.filter((item) => {
+    const query = lostFoundFilters.query.trim().toLowerCase();
+    const searchText = [
+      item.petName,
+      item.petType,
+      item.description,
+      item.lastSeenPlace,
+      item.contactName,
+      item.contactPhone
+    ].join(" ").toLowerCase();
+
+    if (lostFoundFilters.postKind === "found") {
+      return false;
+    }
+
+    if (query && !searchText.includes(query)) {
+      return false;
+    }
+
+    if (lostFoundFilters.type !== "all" && item.petType !== lostFoundFilters.type) {
+      return false;
+    }
+
+    if (lostFoundFilters.age !== "all" && !matchesAdoptionAge(item.approximateAgeInMonths ?? 0, lostFoundFilters.age)) {
+      return false;
+    }
+
+    if (lostFoundFilters.place !== "all" && item.lastSeenPlace !== lostFoundFilters.place) {
+      return false;
+    }
+
+    return true;
+  });
+  const filteredCommunityFoundPets = communityFoundPets.filter((item) => {
+    const query = lostFoundFilters.query.trim().toLowerCase();
+    const searchText = [
+      item.petType,
+      item.description,
+      item.foundPlace,
+      item.contactName,
+      item.contactPhone
+    ].join(" ").toLowerCase();
+
+    if (lostFoundFilters.postKind === "lost" || lostFoundFilters.age !== "all") {
+      return false;
+    }
+
+    if (query && !searchText.includes(query)) {
+      return false;
+    }
+
+    if (lostFoundFilters.type !== "all" && item.petType !== lostFoundFilters.type) {
+      return false;
+    }
+
+    if (lostFoundFilters.place !== "all" && item.foundPlace !== lostFoundFilters.place) {
+      return false;
+    }
+
+    return true;
+  });
+  const filteredLostFoundCount = filteredCommunityLostPets.length + filteredCommunityFoundPets.length;
+  const totalCommunityLostFoundCount = communityLostPets.length + communityFoundPets.length;
   const chatUnreadCount = chatConversations.reduce(
     (total, conversation) => total + (conversation.unreadIncomingCount ?? 0),
     0
@@ -2306,11 +2382,91 @@ function App() {
                       </div>
                     </SectionCard>
 
+                    <SectionCard title="Search Lost / Found Posts" subtitle="Filter community reports by animal type, post kind, age, or place.">
+                      <div className="adoption-filter-panel">
+                        <div className="filter-search-row">
+                          <input
+                            type="search"
+                            placeholder="Search by pet name, description, place, or contact"
+                            value={lostFoundFilters.query}
+                            onChange={(event) => setLostFoundFilters((current) => ({ ...current, query: event.target.value }))}
+                          />
+                          <button type="button" className="filter-search-button">
+                            Search
+                          </button>
+                        </div>
+                        <div className="filter-control-grid">
+                          <label>
+                            Post
+                            <select
+                              value={lostFoundFilters.postKind}
+                              onChange={(event) => setLostFoundFilters((current) => ({ ...current, postKind: event.target.value }))}
+                            >
+                              <option value="all">Lost and found</option>
+                              <option value="lost">Lost only</option>
+                              <option value="found">Found only</option>
+                            </select>
+                          </label>
+                          <label>
+                            Type
+                            <select
+                              value={lostFoundFilters.type}
+                              onChange={(event) => setLostFoundFilters((current) => ({ ...current, type: event.target.value }))}
+                            >
+                              <option value="all">All types</option>
+                              {petTypeOptions.map((type) => (
+                                <option key={type} value={type}>
+                                  {type}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                          <label>
+                            Age
+                            <select
+                              value={lostFoundFilters.age}
+                              onChange={(event) => setLostFoundFilters((current) => ({ ...current, age: event.target.value }))}
+                            >
+                              {adoptionAgeOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                          <label>
+                            Place
+                            <select
+                              value={lostFoundFilters.place}
+                              onChange={(event) => setLostFoundFilters((current) => ({ ...current, place: event.target.value }))}
+                            >
+                              <option value="all">All places</option>
+                              {lostFoundPlaceOptions.map((place) => (
+                                <option key={place} value={place}>
+                                  {place}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                        </div>
+                        <div className="filter-summary-row">
+                          <span>{filteredLostFoundCount} of {totalCommunityLostFoundCount} reports match</span>
+                          <button
+                            type="button"
+                            className="filter-reset-button"
+                            onClick={() => setLostFoundFilters({ query: "", type: "all", postKind: "all", age: "all", place: "all" })}
+                          >
+                            Clear filters
+                          </button>
+                        </div>
+                      </div>
+                    </SectionCard>
+
                     <div className="content-grid two-column">
                       <SectionCard title="Community Lost Pets" subtitle="Approved missing-pet posts from other accounts.">
                         <div className="list-stack">
-                          {communityLostPets.length > 0 ? (
-                            communityLostPets.map((item) => (
+                          {filteredCommunityLostPets.length > 0 ? (
+                            filteredCommunityLostPets.map((item) => (
                               <article key={item.id} className="list-card">
                                 <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
                                 <strong>{item.petName}</strong>
@@ -2341,15 +2497,15 @@ function App() {
                               </article>
                             ))
                           ) : (
-                            <p className="empty-state">No approved lost pet posts from other accounts.</p>
+                            <p className="empty-state">{communityLostPets.length > 0 ? "No lost pet posts match these filters." : "No approved lost pet posts from other accounts."}</p>
                           )}
                         </div>
                       </SectionCard>
 
                       <SectionCard title="Community Found Pets" subtitle="Approved found-pet posts from other accounts.">
                         <div className="list-stack">
-                          {communityFoundPets.length > 0 ? (
-                            communityFoundPets.map((item) => (
+                          {filteredCommunityFoundPets.length > 0 ? (
+                            filteredCommunityFoundPets.map((item) => (
                               <article key={item.id} className="list-card">
                                 <PostPhoto src={item.photoUrl} alt={`Found ${item.petType}`} petType={item.petType} />
                                 <strong>{item.petType}</strong>
@@ -2380,7 +2536,7 @@ function App() {
                               </article>
                             ))
                           ) : (
-                            <p className="empty-state">No approved found pet posts from other accounts.</p>
+                            <p className="empty-state">{communityFoundPets.length > 0 ? "No found pet posts match these filters." : "No approved found pet posts from other accounts."}</p>
                           )}
                         </div>
                       </SectionCard>

@@ -711,6 +711,20 @@ button {
   padding: 10px 12px;
 }
 
+.form-error {
+  margin: 2px 0 0;
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 700;
+}
+
+.auth-error {
+  font-size: 0.9rem;
+}
+
 .auth-toggle {
   display: grid;
   grid-template-columns: 1fr 1fr;

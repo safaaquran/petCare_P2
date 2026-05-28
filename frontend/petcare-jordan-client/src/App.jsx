@@ -453,6 +453,15 @@ function SignOutIcon() {
   );
 }
 
+function friendlyErrorMessage(error, fallback) {
+  const message = error?.message?.trim();
+  if (!message || /failed to fetch/i.test(message)) {
+    return fallback;
+  }
+
+  return message;
+}
+
 function AuthPanel({
   t,
   language,
@@ -467,6 +476,8 @@ function AuthPanel({
   setLoginForms,
   registerForms,
   setRegisterForms,
+  authError,
+  setAuthError,
   handleLogin,
   handleRegister,
   handleSignOut
@@ -496,6 +507,7 @@ function AuthPanel({
               onClick={() => {
                 setSelectedRole(role);
                 setIsRoleLocked(true);
+                setAuthError("");
                 setAuthModeByRole((current) => ({ ...current, [role]: "login" }));
               }}
             >
@@ -524,14 +536,20 @@ function AuthPanel({
                   <button
                     type="button"
                     className={selectedAuthMode === "login" ? "toggle active" : "toggle"}
-                    onClick={() => setAuthModeByRole((current) => ({ ...current, [selectedRole]: "login" }))}
+                    onClick={() => {
+                      setAuthError("");
+                      setAuthModeByRole((current) => ({ ...current, [selectedRole]: "login" }));
+                    }}
                   >
                     {t("auth.login", "Login")}
                   </button>
                   <button
                     type="button"
                     className={selectedAuthMode === "register" ? "toggle active" : "toggle"}
-                    onClick={() => setAuthModeByRole((current) => ({ ...current, [selectedRole]: "register" }))}
+                    onClick={() => {
+                      setAuthError("");
+                      setAuthModeByRole((current) => ({ ...current, [selectedRole]: "register" }));
+                    }}
                   >
                     {t("auth.register", "Register")}
                   </button>
@@ -625,6 +643,8 @@ function AuthPanel({
                 </form>
               )}
 
+              {authError ? <p className="form-error auth-error">{authError}</p> : null}
+
               {canRegister ? (
                 <p className="auth-footnote">
                   {selectedAuthMode === "login" ? t("auth.noAccount", "No account yet? Choose Register.") : t("auth.hasAccount", "Already have an account? Choose Login.")}
@@ -684,6 +704,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [privateLoading, setPrivateLoading] = useState(false);
   const [error, setError] = useState("");
+  const [authError, setAuthError] = useState("");
   const [selectedRole, setSelectedRole] = useState("User");
   const [isRoleLocked, setIsRoleLocked] = useState(false);
   const [authModeByRole, setAuthModeByRole] = useState({
@@ -1145,23 +1166,36 @@ function App() {
 
   async function handleLogin(event) {
     event.preventDefault();
+    setAuthError("");
     try {
       const user = await api.login(loginForms[selectedRole].email, loginForms[selectedRole].password);
       if (user.role !== selectedRole) {
-        setError(`This account is ${user.role}. Please use the ${user.role} login category.`);
+        setAuthError(`This account is registered as ${user.role}. Please choose the ${user.role} login category.`);
+        setError("");
         return;
       }
       setCurrentUser(user);
+      setAuthError("");
       setError("");
     } catch (loginError) {
-      setError(loginError.message || "Login failed.");
+      setAuthError(
+        friendlyErrorMessage(
+          loginError,
+          "Could not sign in right now. Please check your connection and try again."
+        ) === "Invalid email or password."
+          ? "Invalid email or password. Please check both fields and try again."
+          : friendlyErrorMessage(loginError, "Could not sign in right now. Please check your connection and try again.")
+      );
+      setError("");
     }
   }
 
   async function handleRegister(event) {
     event.preventDefault();
+    setAuthError("");
     if (selectedRole === "Admin") {
-      setError("Admin accounts cannot be registered from this page.");
+      setAuthError("Admin accounts cannot be registered from this page.");
+      setError("");
       return;
     }
 
@@ -1173,9 +1207,11 @@ function App() {
         ...current,
         [selectedRole]: { ...emptyRegisterForms[selectedRole] }
       }));
+      setAuthError("");
       setError("");
     } catch (registerError) {
-      setError(registerError.message || "Registration failed.");
+      setAuthError(friendlyErrorMessage(registerError, "Registration failed. Please check the form and try again."));
+      setError("");
     }
   }
 
@@ -1628,6 +1664,7 @@ function App() {
               onClick={() => {
                 setSelectedRole(role);
                 setIsRoleLocked(true);
+                setAuthError("");
                 setAuthModeByRole((current) => ({ ...current, [role]: "login" }));
                 setLoginForms((current) => ({
                   ...current,
@@ -1667,6 +1704,8 @@ function App() {
             setLoginForms={setLoginForms}
             registerForms={registerForms}
             setRegisterForms={setRegisterForms}
+            authError={authError}
+            setAuthError={setAuthError}
             handleLogin={handleLogin}
             handleRegister={handleRegister}
             handleSignOut={handleSignOut}

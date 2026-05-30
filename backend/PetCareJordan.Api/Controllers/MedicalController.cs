@@ -1,4 +1,4 @@
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +20,8 @@ public class MedicalController(
     [HttpGet("vet-pets")]
     public async Task<ActionResult<IEnumerable<VetMedicalPetDto>>> GetVetMedicalPets()
     {
+        await vaccineReminderService.RefreshAsync();
+
         var pets = await context.Pets
             .Include(pet => pet.Owner)
             .Where(pet => !pet.CollarId.StartsWith("MAP-") && !pet.CollarId.StartsWith("ADOPT-"))
@@ -68,7 +70,12 @@ public class MedicalController(
                 PetName = vaccine.Pet!.Name,
                 PetCollarId = vaccine.Pet.CollarId,
                 OwnerName = vaccine.Pet.Owner!.FullName,
-                OwnerPhone = vaccine.Pet.Owner.PhoneNumber
+                OwnerPhone = vaccine.Pet.Owner.PhoneNumber,
+                IsNotified = context.Notifications.Any(notification =>
+                    notification.UserId == vaccine.Pet.OwnerId &&
+                    notification.Type == NotificationType.VaccineReminder &&
+                    notification.VaccinationRecordId == vaccine.Id &&
+                    notification.IsSentByVet)
             })
             .ToListAsync();
 
@@ -95,6 +102,11 @@ public class MedicalController(
         if (string.IsNullOrWhiteSpace(request.VaccineName))
         {
             return BadRequest("Vaccine name is required.");
+        }
+
+        if (!request.IsCompleted && request.DueDateUtc.Date < DateTime.UtcNow.Date)
+        {
+            return BadRequest("Vaccine due date has already passed.");
         }
 
         var vaccine = new VaccinationRecord
@@ -281,3 +293,6 @@ public class MedicalController(
     }
 
 }
+
+
+

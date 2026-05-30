@@ -1,18 +1,21 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetCareJordan.Api.Data;
 using PetCareJordan.Api.Dtos;
 using PetCareJordan.Api.Models;
+using PetCareJordan.Api.Services;
 
 namespace PetCareJordan.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class DashboardController(PetCareJordanContext context) : ControllerBase
+public class DashboardController(PetCareJordanContext context, VaccineReminderService vaccineReminderService) : ControllerBase
 {
     [HttpGet("summary")]
     public async Task<ActionResult<DashboardSummaryDto>> GetSummary()
     {
+        await vaccineReminderService.RefreshAsync();
+
         var pets = await context.Pets.ToListAsync();
         var users = await context.Users.ToListAsync();
         var listings = await context.AdoptionListings
@@ -33,7 +36,12 @@ public class DashboardController(PetCareJordanContext context) : ControllerBase
             .Concat(activeLostReports.Select(report => new MapAnimal(report.PetType.ToString(), NormalizeJordanCity(report.LastSeenPlace))))
             .Concat(activeFoundReports.Select(report => new MapAnimal(report.PetType.ToString(), NormalizeJordanCity(report.FoundPlace))))
             .ToList();
-        var upcomingVaccineCount = await context.VaccinationRecords.CountAsync(item => !item.IsCompleted && item.DueDateUtc <= DateTime.UtcNow.AddDays(30));
+        var today = DateTime.UtcNow.Date;
+        var upcomingVaccineCutoff = today.AddDays(30);
+        var upcomingVaccineCount = await context.VaccinationRecords.CountAsync(item =>
+            !item.IsCompleted &&
+            item.DueDateUtc.Date >= today &&
+            item.DueDateUtc.Date <= upcomingVaccineCutoff);
 
         var summary = new DashboardSummaryDto(
             users.Count(user => user.Role == UserRole.User || user.Role == UserRole.Admin),
@@ -71,3 +79,4 @@ public class DashboardController(PetCareJordanContext context) : ControllerBase
 
     private sealed record MapAnimal(string Type, string City);
 }
+

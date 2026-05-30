@@ -1,4 +1,4 @@
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -360,7 +360,9 @@ public class CommunityController(
         await vaccineReminderService.RefreshAsync(userId);
 
         var notifications = await context.Notifications
-            .Where(notification => notification.UserId == userId)
+            .Where(notification =>
+                notification.UserId == userId &&
+                (notification.Type != NotificationType.VaccineReminder || notification.IsSentByVet))
             .OrderByDescending(notification => notification.TriggerDateUtc)
             .Select(notification => new NotificationDto(notification.Id, notification.Title, notification.Message, notification.TriggerDateUtc, notification.IsRead))
             .ToListAsync();
@@ -405,3 +407,4 @@ public class CommunityController(
         return int.TryParse(claimValue, out var userId) ? userId : null;
     }
 }
+

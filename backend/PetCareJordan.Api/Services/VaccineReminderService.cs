@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PetCareJordan.Api.Data;
 using PetCareJordan.Api.Models;
 
@@ -11,7 +11,8 @@ public class VaccineReminderService(PetCareJordanContext context)
     public async Task RefreshAsync(int? ownerId = null)
     {
         await RemoveExpiredVaccinePlansAsync(ownerId);
-        await EnsureUpcomingReminderNotificationsAsync(ownerId);
+        await RemoveExpiredReminderNotificationsAsync(ownerId);
+        await UpdateActiveReminderNotificationTextAsync(ownerId);
     }
 
     public async Task<Notification> NotifyOwnerAsync(int vaccineId, bool forceUnread = true)
@@ -81,6 +82,67 @@ public class VaccineReminderService(PetCareJordanContext context)
         await context.SaveChangesAsync();
     }
 
+
+    private async Task RemoveExpiredReminderNotificationsAsync(int? ownerId = null)
+    {
+        var now = DateTime.UtcNow;
+        var activeVaccineIds = await context.VaccinationRecords
+            .Where(vaccine => !vaccine.IsCompleted && vaccine.DueDateUtc.Date >= now.Date)
+            .Select(vaccine => vaccine.Id)
+            .ToListAsync();
+
+        var query = context.Notifications
+            .Where(notification =>
+                notification.Type == NotificationType.VaccineReminder &&
+                (
+                    notification.VaccinationRecordId == null ||
+                    notification.ExpiresAtUtc <= now ||
+                    !activeVaccineIds.Contains(notification.VaccinationRecordId.Value)
+                ));
+
+        if (ownerId.HasValue)
+        {
+            query = query.Where(notification => notification.UserId == ownerId.Value);
+        }
+
+        var expiredNotifications = await query.ToListAsync();
+        if (expiredNotifications.Count == 0)
+        {
+            return;
+        }
+
+        context.Notifications.RemoveRange(expiredNotifications);
+        await context.SaveChangesAsync();
+    }
+
+    private async Task UpdateActiveReminderNotificationTextAsync(int? ownerId = null)
+    {
+        var today = DateTime.UtcNow.Date;
+        var query = context.VaccinationRecords
+            .Include(vaccine => vaccine.Pet)
+                .ThenInclude(pet => pet!.Owner)
+            .Where(vaccine =>
+                !vaccine.IsCompleted &&
+                vaccine.DueDateUtc.Date >= today &&
+                vaccine.Pet != null &&
+                vaccine.Pet.Owner != null &&
+                context.Notifications.Any(notification =>
+                    notification.UserId == vaccine.Pet.OwnerId &&
+                    notification.Type == NotificationType.VaccineReminder &&
+                    notification.VaccinationRecordId == vaccine.Id));
+
+        if (ownerId.HasValue)
+        {
+            query = query.Where(vaccine => vaccine.Pet!.OwnerId == ownerId.Value);
+        }
+
+        var activeReminderVaccines = await query.ToListAsync();
+        foreach (var vaccine in activeReminderVaccines)
+        {
+            await UpsertReminderNotificationAsync(vaccine, forceUnread: false);
+        }
+    }
+
     private async Task EnsureUpcomingReminderNotificationsAsync(int? ownerId = null)
     {
         var today = DateTime.UtcNow.Date;
@@ -145,16 +207,22 @@ public class VaccineReminderService(PetCareJordanContext context)
                 UserId = vaccine.Pet.OwnerId,
                 Type = NotificationType.VaccineReminder,
                 VaccinationRecordId = vaccine.Id,
+                IsSentByVet = forceUnread,
                 IsRead = false
             };
             context.Notifications.Add(notification);
         }
         else if (forceUnread)
         {
-            notification.IsRead = false;
+            notification!.IsRead = false;
         }
 
-        notification.Title = $"Vaccine reminder for {vaccine.Pet.Name}";
+        if (forceUnread)
+        {
+            notification!.IsSentByVet = true;
+        }
+
+        notification!.Title = $"Vaccine reminder for {vaccine.Pet.Name}";
         notification.Message = $"{vaccine.VaccineName} is due {timingText} for {vaccine.Pet.Name}. Due date: {dueDate:yyyy-MM-dd}.";
         if (isNewNotification || forceUnread)
         {
@@ -169,3 +237,9 @@ public class VaccineReminderService(PetCareJordanContext context)
     private static bool IsPublicDemoPet(Pet pet) =>
         pet.CollarId.StartsWith("MAP-") || pet.CollarId.StartsWith("ADOPT-");
 }
+
+
+
+
+
+

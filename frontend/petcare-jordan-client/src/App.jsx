@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { api } from "./api";
 
 const tabs = [
@@ -64,7 +64,6 @@ const uiText = {
     "role.Vet.hint": "إدارة السجلات الصحية وخطط المطاعيم.",
     "role.Admin.hint": "مراجعة المنشورات المعلقة وتنظيم محتوى المنصة.",
     "overview.analyticsTitle": "لوحة الإحصائيات",
-    "overview.analyticsSubtitle": "ملخص سريع للمشروع للمشرفين.",
     "overview.users": "الحسابات المسجلة",
     "overview.vets": "الأطباء البيطريين",
     "overview.pets": "الحيوانات في النظام",
@@ -102,12 +101,13 @@ const uiText = {
     "medical.noVaccines": "لا يوجد سجلات مطاعيم بعد.",
     "medical.noVisits": "لا يوجد زيارات طبية مسجلة لهذا الحيوان بعد.",
     "medical.activeNeeds": "احتياجات المطاعيم الفعالة",
-    "medical.noNeeds": "لا يوجد مطاعيم قادمة لهذا الحيوان.",
     "medical.noActiveReminder": "لا يوجد تنبيه فعال",
     "medical.upcoming": "قادم",
     "medical.owner": "صاحب الحيوان",
     "medical.due": "الموعد",
     "medical.notify": "تنبيه",
+    "medical.notified": "تم التنبيه",
+    "medical.notNotified": "لم يتم التنبيه",
     "medical.status": "الحالة",
     "medical.upToDate": "المطاعيم محدثة",
     "medical.vaccinesNeeded": "مطعوم قادم",
@@ -1219,6 +1219,7 @@ function App() {
       [key]: [...(grouped[key] ?? []), vaccine]
     };
   }, {});
+  const vetPetsWithVaccines = vetPets.filter((pet) => (vaccinesByPetId[pet.id] ?? []).length > 0);
   const visibleTabs = currentUser?.role === "Admin"
     ? tabs.filter((tab) => !adminHiddenTabs.has(tab.id))
     : tabs;
@@ -1798,7 +1799,7 @@ function App() {
           <>
             {activeTab === "overview" ? (
               <div className="content-grid">
-                <SectionCard title={t("overview.analyticsTitle", "Analytics Dashboard")} subtitle={t("overview.analyticsSubtitle", "A quick project snapshot for admins and supervisors.")}>
+                <SectionCard title={t("overview.analyticsTitle", "Analytics Dashboard")}>
                   <div className="stats-grid">
                     <StatCard label={t("overview.users", "Registered users")} value={dashboardView.totalUsers} accent="#0f766e" />
                     <StatCard label={t("overview.vets", "Veterinarians")} value={dashboardView.totalVets} accent="#a16207" />
@@ -2834,11 +2835,11 @@ function App() {
 
                           <form className="chat-compose" onSubmit={handleSendChatMessage}>
                             <textarea
-                              placeholder="Write your message..."
+                              placeholder="اكتب رسالتك الخاصة"
                               value={chatMessageDraft}
                               onChange={(event) => setChatMessageDraft(event.target.value)}
                             />
-                            <button type="submit">Send</button>
+                            <button type="submit">ارسل</button>
                           </form>
                         </>
                       ) : (
@@ -2989,9 +2990,9 @@ function App() {
                   </SectionCard>
 
                   <SectionCard title={t("medical.monitorTitle", "Pet Vaccine Monitor")} subtitle={t("medical.monitorSubtitle", "Each pet has its own card with owner details and active vaccine reminders.")}>
-                    {vetPets.length > 0 ? (
+                    {vetPetsWithVaccines.length > 0 ? (
                       <div className="user-medical-grid">
-                        {vetPets.map((pet) => {
+                        {vetPetsWithVaccines.map((pet) => {
                           const petVaccines = vaccinesByPetId[pet.id] ?? [];
 
                           return (
@@ -3013,25 +3014,22 @@ function App() {
 
                               <div className="medical-subsection">
                                 <strong>{t("medical.activeNeeds", "Active Vaccine Needs")}</strong>
-                                {petVaccines.length > 0 ? (
-                                  <div className="list-stack">
-                                    {petVaccines.map((vaccine) => (
-                                      <article key={vaccine.id} className="list-card">
-                                        <strong>{vaccine.vaccineName}</strong>
-                                        <div className="meta-line">
-                                          <span>{t("medical.due", "Due")}: {new Date(vaccine.dueDateUtc).toLocaleDateString()}</span>
-                                          <span>{vaccine.ownerPhone}</span>
-                                        </div>
-                                        <button type="button" className="card-primary-action" onClick={() => handleNotifyVaccineOwner(vaccine.id)}>
-                                          {t("medical.notify", "Notify")}
-                                        </button>
-                                      </article>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <p className="empty-state">{t("medical.noNeeds", "No upcoming vaccine needs for this pet.")}</p>
-                                )}
+                                <div className="list-stack">
+                                  {petVaccines.map((vaccine) => (
+                                    <article key={vaccine.id} className="list-card">
+                                      <strong>{vaccine.vaccineName}</strong>
+                                      <div className="meta-line">
+                                        <span>{t("medical.due", "Due")}: {new Date(vaccine.dueDateUtc).toLocaleDateString()}</span>
+                                        <span>{vaccine.ownerPhone}</span>
+                                      </div>
+                                      <span className={vaccine.isNotified ? "pill success" : "pill warning"}>
+                                        {vaccine.isNotified ? t("medical.notified", "Notified") : t("medical.notNotified", "Not notified")}
+                                      </span>
+                                    </article>
+                                  ))}
+                                </div>
                               </div>
+
                             </article>
                           );
                         })}
@@ -3056,9 +3054,13 @@ function App() {
                               <span>{t("medical.petId", "Pet ID")}: {item.petCollarId}</span>
                               <span>{item.ownerPhone}</span>
                             </div>
-                            <button type="button" className="card-primary-action" onClick={() => handleNotifyVaccineOwner(item.id)}>
-                              {t("medical.notify", "Notify")}
-                            </button>
+                            {item.isNotified ? (
+                              <span className="pill success">{t("medical.notified", "Notified")}</span>
+                            ) : (
+                              <button type="button" className="card-primary-action" onClick={() => handleNotifyVaccineOwner(item.id)}>
+                                {t("medical.notify", "Notify")}
+                              </button>
+                            )}
                           </article>
                         ))
                       ) : (
@@ -3109,3 +3111,4 @@ function App() {
 }
 
 export default App;
+

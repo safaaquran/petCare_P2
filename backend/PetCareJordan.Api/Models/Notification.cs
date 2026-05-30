@@ -1,4 +1,4 @@
-namespace PetCareJordan.Api.Models;
+﻿namespace PetCareJordan.Api.Models;
 
 public class Notification
 {
@@ -11,5 +11,7 @@ public class Notification
     public DateTime TriggerDateUtc { get; set; }
     public DateTime? ExpiresAtUtc { get; set; }
     public int? VaccinationRecordId { get; set; }
+    public bool IsSentByVet { get; set; }
     public bool IsRead { get; set; }
 }
+

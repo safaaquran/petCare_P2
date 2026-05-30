@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PetCareJordan.Api.Models;
 using PetCareJordan.Api.Services;
 
@@ -590,6 +590,11 @@ public static class SeedData
             BEGIN
                 ALTER TABLE [Notifications] ADD [VaccinationRecordId] INT NULL;
             END
+
+            IF COL_LENGTH(N'[Notifications]', N'IsSentByVet') IS NULL
+            BEGIN
+                ALTER TABLE [Notifications] ADD [IsSentByVet] BIT NOT NULL CONSTRAINT [DF_Notifications_IsSentByVet] DEFAULT 0;
+            END
             """;
 
         await context.Database.ExecuteSqlRawAsync(sql);
@@ -871,3 +876,4 @@ public static class SeedData
         }
     }
 }
+

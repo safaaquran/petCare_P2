@@ -1331,7 +1331,11 @@ function AuthPanel({
 function App() {
   // Adoption Arabic localization: dynamic labels enabled for cards, filters, cities, breeds, status, kg, and contact method.
   const [language, setLanguage] = useState(() => localStorage.getItem("petcareLanguage") || "en");
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState(() => {
+    const hash = window.location.hash.replace("#", "");
+    const validTabs = ["overview", "adoption", "lostfound", "chat", "medical"];
+    return validTabs.includes(hash) ? hash : "overview";
+  });
   const [dashboard, setDashboard] = useState(null);
   const [selectedMapCity, setSelectedMapCity] = useState("");
   const [adoptions, setAdoptions] = useState([]);
@@ -1471,6 +1475,38 @@ function App() {
     document.documentElement.lang = language;
     document.documentElement.dir = isArabic ? "rtl" : "ltr";
   }, [language, isArabic]);
+
+  // ── Sync activeTab → browser history (push a new entry on every tab change)
+  useEffect(() => {
+    const currentHash = window.location.hash.replace("#", "");
+    if (currentHash !== activeTab) {
+      window.history.pushState({ tab: activeTab }, "", `#${activeTab}`);
+    }
+  }, [activeTab]);
+
+  // ── Listen to browser back/forward — go to overview, and if already at
+  //    overview (meaning the user left the site), clear the session
+  useEffect(() => {
+    function handlePopState(event) {
+      const hash = window.location.hash.replace("#", "");
+      const validTabs = ["overview", "adoption", "lostfound", "chat", "medical"];
+
+      if (validTabs.includes(hash)) {
+        // Normal back inside the app → just switch tab
+        setActiveTab(hash);
+      } else {
+        // User went back past the first page → sign out & reset to overview
+        localStorage.removeItem("petcareCurrentUser");
+        setCurrentUser(null);
+        setActiveTab("overview");
+        // Replace current history entry so forward won't bring them back in
+        window.history.replaceState({ tab: "overview" }, "", "#overview");
+      }
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   useEffect(() => {
     async function loadData() {
@@ -1692,7 +1728,7 @@ function App() {
     }
 
     syncConversations();
-    const timerId = window.setInterval(syncConversations, 5000);
+    const timerId = window.setInterval(syncConversations, 30000);
 
     return () => {
       isCancelled = true;
@@ -1700,17 +1736,21 @@ function App() {
     };
   }, [currentUser]);
 
-  useEffect(() => {
+useEffect(() => {
     if (!currentUser?.token || !selectedConversationId || activeTab !== "chat") {
       setChatMessages([]);
+      setChatLoading(false);
       return;
     }
 
     let isCancelled = false;
 
-    async function syncMessages() {
+    async function syncMessages(showLoader = false) {
       try {
-        setChatLoading(true);
+        if (showLoader) {
+          setChatLoading(true);
+        }
+
         const messages = await api.getChatMessages(selectedConversationId, currentUser.token);
         if (!isCancelled) {
           setChatMessages(messages);
@@ -1720,20 +1760,20 @@ function App() {
           setError("Could not load chat messages.");
         }
       } finally {
-        if (!isCancelled) {
+        if (!isCancelled && showLoader) {
           setChatLoading(false);
         }
       }
     }
 
-    syncMessages();
-    const timerId = window.setInterval(syncMessages, 3000);
+    syncMessages(true);
+    const timerId = window.setInterval(() => syncMessages(false), 30000);
 
     return () => {
       isCancelled = true;
       window.clearInterval(timerId);
     };
-  }, [activeTab, currentUser, selectedConversationId]);
+  }, [activeTab, currentUser?.token, selectedConversationId]);
 
   useEffect(() => {
     if (activeTab !== "chat" || !selectedConversationId) {
@@ -2409,8 +2449,10 @@ function App() {
   }
 
   function handleSignOut() {
+    localStorage.removeItem("petcareCurrentUser");
     setCurrentUser(null);
     setActiveTab("overview");
+    window.history.replaceState({ tab: "overview" }, "", "#overview");
   }
 
   return (
@@ -3536,7 +3578,7 @@ function App() {
                                       <strong className="chat-unread-pill">{conversation.unreadIncomingCount}</strong>
                                     ) : null}
                                   </div>
-                                  <small>{conversation.lastMessage ? valueLabel(conversation.lastMessage) : t("chat.noMessagesYet", "No messages yet.")}</small>
+                                  <small>{conversation.lastMessage ? conversation.lastMessage : t("chat.noMessagesYet", "No messages yet.")}</small>
                                 </button>
                                 <button
                                   type="button"
@@ -3591,7 +3633,7 @@ function App() {
                                   <strong>{message.senderName}</strong>
                                   <span>{formatJordanDateTime(message.sentAtUtc)}</span>
                                 </div>
-                                <p>{valueLabel(message.message)}</p>
+                                <p>{message.message}</p>
                               </article>
                             ))}
                           </div>

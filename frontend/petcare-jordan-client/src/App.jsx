@@ -1692,7 +1692,7 @@ function App() {
     }
 
     syncConversations();
-    const timerId = window.setInterval(syncConversations, 5000);
+    const timerId = window.setInterval(syncConversations, 30000);
 
     return () => {
       isCancelled = true;
@@ -1700,17 +1700,21 @@ function App() {
     };
   }, [currentUser]);
 
-  useEffect(() => {
+useEffect(() => {
     if (!currentUser?.token || !selectedConversationId || activeTab !== "chat") {
       setChatMessages([]);
+      setChatLoading(false);
       return;
     }
 
     let isCancelled = false;
 
-    async function syncMessages() {
+    async function syncMessages(showLoader = false) {
       try {
-        setChatLoading(true);
+        if (showLoader) {
+          setChatLoading(true);
+        }
+
         const messages = await api.getChatMessages(selectedConversationId, currentUser.token);
         if (!isCancelled) {
           setChatMessages(messages);
@@ -1720,20 +1724,20 @@ function App() {
           setError("Could not load chat messages.");
         }
       } finally {
-        if (!isCancelled) {
+        if (!isCancelled && showLoader) {
           setChatLoading(false);
         }
       }
     }
 
-    syncMessages();
-    const timerId = window.setInterval(syncMessages, 3000);
+    syncMessages(true);
+    const timerId = window.setInterval(() => syncMessages(false), 30000);
 
     return () => {
       isCancelled = true;
       window.clearInterval(timerId);
     };
-  }, [activeTab, currentUser, selectedConversationId]);
+  }, [activeTab, currentUser?.token, selectedConversationId]);
 
   useEffect(() => {
     if (activeTab !== "chat" || !selectedConversationId) {
@@ -3536,7 +3540,7 @@ function App() {
                                       <strong className="chat-unread-pill">{conversation.unreadIncomingCount}</strong>
                                     ) : null}
                                   </div>
-                                  <small>{conversation.lastMessage ? valueLabel(conversation.lastMessage) : t("chat.noMessagesYet", "No messages yet.")}</small>
+                                  <small>{conversation.lastMessage ? conversation.lastMessage : t("chat.noMessagesYet", "No messages yet.")}</small>
                                 </button>
                                 <button
                                   type="button"
@@ -3591,7 +3595,7 @@ function App() {
                                   <strong>{message.senderName}</strong>
                                   <span>{formatJordanDateTime(message.sentAtUtc)}</span>
                                 </div>
-                                <p>{valueLabel(message.message)}</p>
+                                <p>{message.message}</p>
                               </article>
                             ))}
                           </div>

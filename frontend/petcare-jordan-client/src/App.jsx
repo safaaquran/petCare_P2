@@ -115,8 +115,221 @@ const uiText = {
     "common.approve": "موافقة",
     "common.reject": "رفض",
     "common.loadingAccount": "جاري تحميل بيانات الحساب...",
+    "common.of": "من",
+    "unit.kg": "كغم",
     "common.loginRequired": "تسجيل الدخول مطلوب",
-    "common.loginRequiredSubtitle": "يرجى تسجيل الدخول أولاً، هذا القسم يظهر بعد تسجيل الدخول."
+    "common.loginRequiredSubtitle": "يرجى تسجيل الدخول أولاً، هذا القسم يظهر بعد تسجيل الدخول.",
+    "adoption.pendingTitle": "منشورات التبني المعلقة",
+"adoption.pendingSubtitle": "راجع المنشورات قبل نشرها للمستخدمين.",
+"adoption.noPending": "لا توجد منشورات تبني معلقة.",
+"adoption.publishedTitle": "منشورات التبني المنشورة",
+"adoption.noPublished": "لا توجد منشورات تبني منشورة.",
+"adoption.rejectedTitle": "منشورات التبني المرفوضة",
+"adoption.noRejected": "لا توجد منشورات تبني مرفوضة.",
+"adoption.createTitle": "نشر حيوان للتبني",
+"adoption.createSubtitle": "أضف معلومات الحيوان ليظهر بعد موافقة المشرف.",
+"adoption.petName": "اسم الحيوان",
+"adoption.petType": "نوع الحيوان",
+"adoption.ageMonths": "العمر بالأشهر",
+"adoption.neutered": "معقّم",
+"adoption.weight": "الوزن بالكيلو",
+"adoption.city": "المدينة",
+"adoption.location": "تفاصيل الموقع",
+"adoption.description": "الوصف",
+"adoption.photoUrl": "رابط الصورة، اختياري إذا رفعت صورة من الجهاز",
+"adoption.uploading": "جاري رفع الصورة...",
+"adoption.imageReady": "الصورة جاهزة. يمكنك إرسال منشور التبني.",
+"adoption.chooseImage": "اختر صورة من جهازك أو ضع رابط الصورة.",
+"adoption.contactPhone": "رقم تواصل المالك",
+"adoption.submit": "إرسال منشور التبني",
+"adoption.onlyUsersVets": "فقط حسابات المستخدم والطبيب البيطري يمكنها نشر منشورات التبني.",
+"adoption.marketplaceTitle": "سوق التبني",
+"adoption.marketplaceSubtitle": "يمكن للمالكين نشر حيوانات للتبني والتواصل مع المهتمين مباشرة.",
+"adoption.searchPlaceholder": "ابحث بالاسم، النوع، المدينة، أو المالك",
+"adoption.search": "بحث",
+"adoption.type": "النوع",
+"adoption.age": "العمر",
+"adoption.health": "الحالة الصحية",
+"adoption.allTypes": "كل الأنواع",
+"adoption.allCities": "كل المدن",
+"adoption.matches": "حيوانات مطابقة",
+"adoption.clearFilters": "مسح الفلاتر",
+"adoption.photoUnavailable": "الصورة غير متوفرة",
+"adoption.notNeutered": "غير معقّم",
+"adoption.ownerPost": "هذا منشور التبني الخاص بك.",
+"adoption.noMatch": "لا توجد حيوانات تطابق هذه الفلاتر.",
+"adoption.noPosts": "لا توجد منشورات تبني بعد.",
+"adoption.adopt": "تبنّي",
+"adoption.available": "متاح",
+"adoption.publishedSubtitle": "منشورات التبني الموافق عليها والظاهرة لحسابات المستخدم والطبيب البيطري.",
+"adoption.rejectedSubtitle": "المنشورات المرفوضة تبقى مخفية عن المستخدمين والأطباء.",
+"adoption.approve": "موافقة",
+"adoption.reject": "رفض",
+"adoption.delete": "حذف",
+"adoption.ageNotListed": "العمر غير مذكور",
+"adoption.monthsOld": "{count} شهر",
+"adoption.yearsMonthsOld": "{years} سنة و {months} شهر",
+"adoption.yearsOld": "{years} سنة",
+"adoption.age.any": "أي عمر",
+"adoption.age.baby": "صغير جداً، 0-6 أشهر",
+"adoption.age.young": "صغير، 7-24 شهر",
+"adoption.age.adult": "بالغ، أكثر من سنتين",
+"adoption.health.any": "أي حالة صحية",
+"adoption.health.neutered": "معقّم",
+"adoption.health.notNeutered": "غير معقّم",
+"adoption.health.not-neutered": "غير معقّم",
+"pet.Cat": "قط",
+"pet.Dog": "كلب",
+"pet.Bird": "طائر",
+"pet.Rabbit": "أرنب",
+"pet.Other": "أخرى",
+"lostfound.pendingLostTitle": "بلاغات الحيوانات المفقودة بانتظار الموافقة",
+"lostfound.pendingLostSubtitle": "وافق على البلاغات لنشرها، أو ارفض البلاغات غير المناسبة.",
+"lostfound.pendingFoundTitle": "بلاغات الحيوانات المعثور عليها بانتظار الموافقة",
+"lostfound.pendingFoundSubtitle": "بلاغات الحيوانات المعثور عليها تبقى مخفية إلى أن يوافق عليها المشرف.",
+"lostfound.publishedLostTitle": "بلاغات الحيوانات المفقودة المنشورة",
+"lostfound.publishedLostSubtitle": "بلاغات تمت الموافقة عليها وتظهر للمستخدمين والأطباء البيطريين.",
+"lostfound.publishedFoundTitle": "بلاغات الحيوانات المعثور عليها المنشورة",
+"lostfound.publishedFoundSubtitle": "احذف البلاغات التي لم تعد بحاجة للظهور للعامة.",
+"lostfound.myPostsTitle": "بلاغاتي",
+"lostfound.myPostsSubtitle": "بلاغاتك عن الحيوانات المفقودة والمعثور عليها تظهر هنا بشكل منفصل عن بلاغات الآخرين.",
+"lostfound.myLostReports": "بلاغاتي عن الحيوانات المفقودة",
+"lostfound.myFoundReports": "بلاغاتي عن الحيوانات المعثور عليها",
+"lostfound.searchTitle": "البحث في بلاغات المفقودات والمعثور عليها",
+"lostfound.searchSubtitle": "فلتر البلاغات حسب نوع الحيوان، نوع البلاغ، العمر، أو المكان.",
+"lostfound.searchPlaceholder": "ابحث باسم الحيوان، الوصف، المكان، أو جهة التواصل",
+"lostfound.searchButton": "بحث",
+"lostfound.post": "نوع البلاغ",
+"lostfound.lostAndFound": "مفقود ومعثور عليه",
+"lostfound.lostOnly": "مفقود فقط",
+"lostfound.foundOnly": "معثور عليه فقط",
+"lostfound.type": "نوع الحيوان",
+"lostfound.age": "العمر",
+"lostfound.place": "المكان",
+"lostfound.allTypes": "كل الأنواع",
+"lostfound.allPlaces": "كل الأماكن",
+"lostfound.clearFilters": "مسح الفلاتر",
+"lostfound.reportsMatch": "بلاغات مطابقة",
+"lostfound.communityLostTitle": "حيوانات مفقودة من المجتمع",
+"lostfound.communityLostSubtitle": "بلاغات حيوانات مفقودة تمت الموافقة عليها من حسابات أخرى.",
+"lostfound.communityFoundTitle": "حيوانات معثور عليها من المجتمع",
+"lostfound.communityFoundSubtitle": "بلاغات حيوانات معثور عليها تمت الموافقة عليها من حسابات أخرى.",
+"lostfound.publishTitle": "نشر بلاغ مفقود / معثور عليه",
+"lostfound.publishSubtitle": "يتم حفظ البلاغ كقيد المراجعة، ويظهر للعامة فقط بعد موافقة المشرف.",
+"lostfound.reportLostTitle": "إضافة بلاغ حيوان مفقود",
+"lostfound.reportFoundTitle": "إضافة بلاغ حيوان معثور عليه",
+"lostfound.petName": "اسم الحيوان",
+"lostfound.description": "الوصف",
+"lostfound.approximateAge": "العمر التقريبي بالأشهر",
+"lostfound.lastSeenPlace": "آخر مكان شوهد فيه",
+"lostfound.lastSeenDate": "تاريخ آخر مشاهدة",
+"lostfound.foundPlace": "مكان العثور",
+"lostfound.foundDate": "تاريخ العثور",
+"lostfound.rewardAmount": "قيمة المكافأة، اختياري",
+"lostfound.contactName": "اسم جهة التواصل",
+"lostfound.contactPhone": "رقم التواصل",
+"lostfound.photoUrl": "رابط الصورة",
+"lostfound.uploadingImage": "جاري رفع الصورة...",
+"lostfound.imageReady": "الصورة جاهزة. يمكنك إرسال البلاغ.",
+"lostfound.chooseImage": "اختر صورة من جهازك، أو الصق رابط الصورة.",
+"lostfound.submitLost": "إرسال بلاغ مفقود",
+"lostfound.submitFound": "إرسال بلاغ معثور عليه",
+"lostfound.noPendingLost": "لا توجد بلاغات مفقودة بانتظار الموافقة.",
+"lostfound.noPendingFound": "لا توجد بلاغات معثور عليها بانتظار الموافقة.",
+"lostfound.noPublishedLost": "لا توجد بلاغات مفقودة منشورة.",
+"lostfound.noPublishedFound": "لا توجد بلاغات معثور عليها منشورة.",
+"lostfound.noMyLost": "لم تقم بإرسال بلاغات عن حيوانات مفقودة بعد.",
+"lostfound.noMyFound": "لم تقم بإرسال بلاغات عن حيوانات معثور عليها بعد.",
+"lostfound.noLostMatches": "لا توجد بلاغات مفقودة مطابقة لهذه الفلاتر.",
+"lostfound.noLostPosts": "لا توجد بلاغات مفقودة منشورة من حسابات أخرى.",
+"lostfound.noFoundMatches": "لا توجد بلاغات معثور عليها مطابقة لهذه الفلاتر.",
+"lostfound.noFoundPosts": "لا توجد بلاغات معثور عليها منشورة من حسابات أخرى.",
+"lostfound.onlyUsersVets": "فقط حسابات المستخدم والطبيب البيطري يمكنها نشر بلاغات المفقودات والمعثور عليها.",
+"lostfound.contact": "التواصل",
+"lostfound.reward": "المكافأة",
+"lostfound.noReward": "لا توجد مكافأة مذكورة",
+"lostfound.messageOwner": "مراسلة صاحب البلاغ",
+"lostfound.messageFinder": "مراسلة صاحب بلاغ العثور",
+"lostfound.approve": "موافقة",
+"lostfound.reject": "رفض",
+"lostfound.delete": "حذف",
+"lostfound.sentLostNotice": "تم إرسال بلاغ الحيوان المفقود بنجاح. سيظهر بعد موافقة المشرف.",
+"lostfound.sentFoundNotice": "تم إرسال بلاغ الحيوان المعثور عليه بنجاح. سيظهر بعد موافقة المشرف.",
+"lostfound.photoUploadedNotice": "تم رفع الصورة بنجاح. يمكنك الآن إرسال البلاغ.",
+"lostfound.noticeApproved": "تمت الموافقة على البلاغ ونشره.",
+"lostfound.noticeRejected": "تم رفض البلاغ.",
+"lostfound.noticeDeleted": "تم حذف البلاغ.",
+"lostfound.signInToPublishLost": "يرجى تسجيل الدخول لنشر بلاغ حيوان مفقود.",
+"lostfound.signInToPublishFound": "يرجى تسجيل الدخول لنشر بلاغ حيوان معثور عليه.",
+"lostfound.signInToUploadPhoto": "يرجى تسجيل الدخول أولاً لرفع صورة.",
+"lostfound.adminOnlyReview": "فقط حساب المشرف يمكنه مراجعة بلاغات المفقودات والمعثور عليها.",
+"lostfound.adminOnlyDelete": "فقط حساب المشرف يمكنه حذف بلاغات المفقودات والمعثور عليها.",
+"lostfound.onlyUsersVetsPublish": "فقط حسابات المستخدم والطبيب البيطري يمكنها نشر بلاغات المفقودات والمعثور عليها.",
+"lostfound.createLostFailed": "تعذر إرسال بلاغ الحيوان المفقود.",
+"lostfound.createFoundFailed": "تعذر إرسال بلاغ الحيوان المعثور عليه.",
+"lostfound.uploadFailed": "تعذر رفع هذه الصورة.",
+"lostfound.updateFailed": "تعذر تحديث هذا البلاغ.",
+"lostfound.deleteFailed": "تعذر حذف هذا البلاغ.",
+"lostfound.messageOpened": "تم فتح المحادثة مع {name}.",
+"lostfound.lostOpeningMessage": "مرحباً {name}، شاهدت بلاغك عن الحيوان المفقود {petName} وقد تكون لدي معلومات تساعدك.",
+"lostfound.foundOpeningMessage": "مرحباً {name}، شاهدت بلاغ العثور على {petType} وأريد التأكد إذا كان يطابق حيواني.",
+"lostfound.age.all": "أي عمر",
+"lostfound.age.baby": "صغير جداً، 0-6 أشهر",
+"lostfound.age.young": "صغير، 7-24 شهر",
+"lostfound.age.adult": "بالغ، أكثر من سنتين",
+"status.Pending": "قيد المراجعة",
+"status.Approved": "مقبول",
+"status.Rejected": "مرفوض",
+"status.Published": "منشور",
+"status.Active": "نشط",
+"status.Available": "متاح",
+
+"chat.title": "المحادثة مع الطبيب البيطري",
+"chat.subtitle": "اختر طبيباً بيطرياً وابدأ محادثة مباشرة. يمكن للأطباء الرد من حساباتهم.",
+"chat.startNew": "بدء محادثة جديدة",
+"chat.allVetsStarted": "بدأت محادثات مع جميع الأطباء المتاحين.",
+"chat.myChats": "محادثاتي",
+"chat.userChats": "محادثات المستخدمين",
+"chat.noMessagesYet": "لا توجد رسائل بعد.",
+"chat.noChats": "لا توجد محادثات بعد.",
+"chat.veterinarian": "طبيب بيطري",
+"chat.petOwner": "صاحب الحيوان",
+"chat.loadingMessages": "جاري تحميل الرسائل...",
+"chat.noThreadMessages": "لا توجد رسائل بعد. ابدأ المحادثة الآن.",
+"chat.chooseChat": "اختر محادثة من الجهة اليسرى لبدء المراسلة.",
+"chat.onlyUsersVets": "المحادثة متاحة فقط لحسابات المستخدم والطبيب البيطري.",
+"chat.messagePlaceholder": "اكتب رسالتك الخاصة",
+"chat.send": "إرسال",
+"chat.opened": "تم فتح المحادثة بنجاح.",
+"chat.chooseFirst": "اختر محادثة أولاً.",
+"chat.sendFailed": "تعذر إرسال الرسالة.",
+"chat.deleted": "تم حذف المحادثة. يمكنك بدء محادثة جديدة مع نفس الحساب في أي وقت.",
+"chat.deleteFailed": "تعذر حذف هذه المحادثة.",
+"chat.noAccess": "يرجى تسجيل الدخول أولاً.",
+"chat.ownPost": "هذا المنشور تابع لحسابك.",
+"chat.deleteWith": "حذف المحادثة مع {name}",
+"medical.onlyVetAdd": "فقط حساب الطبيب البيطري يمكنه إضافة خطط المطاعيم.",
+"medical.choosePetVaccineDate": "اختر الحيوان، واسم المطعوم، وتاريخ الموعد.",
+"medical.vaccineAddedNotice": "تمت إضافة موعد المطعوم. سيصل تنبيه تلقائي لصاحب الحيوان عند اقتراب الموعد.",
+"medical.addFailed": "تعذر إضافة خطة المطعوم هذه.",
+"medical.onlyVetNotify": "فقط حساب الطبيب البيطري يمكنه إرسال تنبيهات للمالكين.",
+"medical.notificationSent": "تم إرسال التنبيه: {message}",
+"medical.notifyFailed": "تعذر إرسال هذا التنبيه.",
+"medical.rabiesPlaceholder": "مطعوم السعار",
+"medical.roleStoryTitle": "شرح دور الطبيب البيطري",
+"medical.roleStorySubtitle": "كيف تعمل متابعة الحالة الصحية في هذا المشروع.",
+"medical.createHistoryTitle": "إنشاء سجل طبي",
+"medical.createHistoryText": "يمكن للأطباء البيطريين إضافة ملاحظات الزيارة، التشخيص، وخطة العلاج لكل حيوان.",
+"medical.updateRecordsTitle": "تحديث السجلات",
+"medical.updateRecordsText": "يمكن للطبيب تعديل السجلات الطبية عند تغيّر خطة العلاج مع الوقت.",
+"medical.trackVaccinesTitle": "متابعة المطاعيم",
+"medical.trackVaccinesText": "النظام يحدد المطاعيم المستحقة خلال 30 يوم ويعرض تنبيهات لأصحاب الحيوانات.",
+"medical.searchCollarTitle": "البحث برقم الطوق",
+"medical.searchCollarText": "يمكن الوصول لأي حيوان بسرعة من خلال رقم الطوق الخاص به لعرض بيانات المالك والحالة الصحية.",
+"adoption.sentNotice": "تم إرسال منشور التبني بنجاح. سيظهر بعد موافقة المشرف.",
+"adoption.approvedNotice": "تمت الموافقة على منشور التبني ونشره.",
+"adoption.rejectedNotice": "تم رفض منشور التبني.",
+"adoption.deletedNotice": "تم حذف منشور التبني."
   }
 };
 
@@ -171,6 +384,422 @@ const fallbackPetPhotos = {
   Rabbit: wikimediaPhoto("Cute rabbit.JPG"),
   Other: wikimediaPhoto("Turtle.JPG")
 };
+
+const arabicKnownValues = {
+  // Cities
+  amman: "عمّان",
+  zarqa: "الزرقاء",
+  irbid: "إربد",
+  aqaba: "العقبة",
+  salt: "السلط",
+  madaba: "مادبا",
+  karak: "الكرك",
+  tafilah: "الطفيلة",
+  maan: "معان",
+  mafraq: "المفرق",
+  jerash: "جرش",
+  ajloun: "عجلون",
+
+  // Common places and Jordan areas
+  "aqaba, south beach road": "العقبة، طريق الشاطئ الجنوبي",
+  "zarqa, al-dulayl road": "الزرقاء، طريق الضليل",
+  "salt, al-sarou, salt ring road": "السلط، السرو، طريق السلط الدائري",
+  "irbid, al-mazar street": "إربد، شارع المزار",
+  "zarqa, russeifa, yajouz road": "الزرقاء، الرصيفة، طريق ياجوز",
+  "madaba, city center, talal street": "مادبا، وسط المدينة، شارع طلال",
+  "zarqa, jabal tareq": "الزرقاء، جبل طارق",
+  "jerash, al-mastaba road": "جرش، طريق المصطبة",
+  "irbid, al-husun, main street": "إربد، الحصن، الشارع الرئيسي",
+  "south beach road": "طريق الشاطئ الجنوبي",
+  "al-dulayl road": "طريق الضليل",
+  "al-sarou": "السرو",
+  "salt ring road": "طريق السلط الدائري",
+  "al-mazar street": "شارع المزار",
+  "russeifa": "الرصيفة",
+  "yajouz road": "طريق ياجوز",
+  "city center": "وسط المدينة",
+  "talal street": "شارع طلال",
+  "jabal tareq": "جبل طارق",
+  "al-mastaba road": "طريق المصطبة",
+  "al-husun": "الحصن",
+  "main street": "الشارع الرئيسي",
+
+  // Pet types and breeds
+  cat: "قط",
+  dog: "كلب",
+  bird: "طائر",
+  rabbit: "أرنب",
+  other: "أخرى",
+  turtle: "سلحفاة",
+  persian: "قط فارسي",
+  siamese: "قط سيامي",
+  labrador: "لابرادور",
+  husky: "هاسكي",
+  parrot: "ببغاء",
+  mixed: "مختلط",
+  "mixed breed": "سلالة مختلطة",
+  "white rabbit": "أرنب أبيض",
+  "orange tabby": "قط برتقالي مخطط",
+  "holland lop": "هولاند لوب",
+  lionhead: "ليون هيد",
+  "scottish fold": "سكوتش فولد",
+  "tabby": "قط مخطط",
+  "domestic shorthair": "قط منزلي قصير الشعر",
+  "dutch rabbit": "أرنب هولندي",
+  "dutch": "هولندي",
+  "german shepherd": "جيرمن شيبرد",
+  "mini rex": "ميني ريكس",
+  "golden retriever": "جولدن ريتريفر",
+  "beagle": "بيغل",
+  "calico": "قط كاليكو",
+  "grey cat": "قط رمادي",
+  "ginger cat": "قط برتقالي",
+
+  // Lost and found demo descriptions
+  "yellow labrador puppy with blue collar.": "جرو لابرادور أصفر يرتدي طوقًا أزرق.",
+  "young cat found near clinic entrance.": "قط صغير عُثر عليه قرب مدخل العيادة.",
+  "ginger cat, very social.": "قط برتقالي اجتماعي جداً.",
+  "small brown friendly dog.": "كلب بني صغير وودود.",
+  "black rabbit escaped from garden.": "أرنب أسود هرب من الحديقة.",
+  "black cat with a green collar.": "قط أسود يرتدي طوقًا أخضر.",
+  "striped cat lost near the market.": "قط مخطط ضائع بالقرب من السوق.",
+  "calico cat wearing a red collar.": "قط كاليكو يرتدي طوقًا أحمر.",
+  "sand colored house cat.": "قط منزلي بلون رملي.",
+  "small white rabbit found in a garden.": "أرنب أبيض صغير عُثر عليه في حديقة.",
+  "grey cat found with no visible injuries.": "قط رمادي عُثر عليه دون إصابات ظاهرة.",
+  "white mixed-breed dog found near the market.": "كلب أبيض من سلالة مختلطة عُثر عليه بالقرب من السوق.",
+  "beagle found near a clinic.": "كلب بيغل عُثر عليه بالقرب من عيادة.",
+  "brown rabbit found near school.": "أرنب بني عُثر عليه بالقرب من مدرسة.",
+
+  // Lost and found demo places
+  "amman, tabarbour, al-shahid street": "عمّان، طبربور، شارع الشهيد",
+  "tabarbour": "طبربور",
+  "al-shahid street": "شارع الشهيد",
+  "amman, sweifieh, ali nasouh al-taher street": "عمّان، الصويفية، شارع علي نصوح الطاهر",
+  "sweifieh": "الصويفية",
+  "ali nasouh al-taher street": "شارع علي نصوح الطاهر",
+  "salt, downtown salt, hammam street": "السلط، وسط البلد، شارع الحمام",
+  "downtown salt": "وسط البلد",
+  "hammam street": "شارع الحمام",
+  "irbid, al-husun, petra street": "إربد، الحصن، شارع البتراء",
+  "petra street": "شارع البتراء",
+  "amman, jabal amman, rainbow street": "عمّان، جبل عمّان، شارع الرينبو",
+  "jabal amman": "جبل عمّان",
+  "rainbow street": "شارع الرينبو",
+  "zarqa, al-hussein district": "الزرقاء، حي الحسين",
+  "al-hussein district": "حي الحسين",
+  "madaba, mount nebo road": "مادبا، طريق جبل نيبو",
+  "mount nebo road": "طريق جبل نيبو",
+  "irbid, al-husun, yarmouk road": "إربد، الحصن، شارع اليرموك",
+  "yarmouk road": "شارع اليرموك",
+  "amman, al-madina street": "عمّان، شارع المدينة",
+  "al-madina street": "شارع المدينة",
+  "aqaba, tala bay road": "العقبة، طريق تالا باي",
+  "tala bay road": "طريق تالا باي",
+
+  // Demo contact names
+  "mohammad abbadi": "محمد عبادي",
+  "nadine shousha": "نادين شوشة",
+  "tareq fares": "طارق فارس",
+  "ahmad shannaq": "أحمد الشناق",
+  "rama azar": "راما عازر",
+
+
+  // More Jordan areas and streets
+  "jerash, souf, roman road": "جرش، سوف، الطريق الروماني",
+  "zarqa, new zarqa, 36th street": "الزرقاء، الزرقاء الجديدة، شارع 36",
+  "irbid, university district, university street": "إربد، حي الجامعة، شارع الجامعة",
+  "aqaba, al-rabieh, beach road": "العقبة، الرابية، طريق الشاطئ",
+  "amman, khalda, wasfi al-tal street": "عمّان، خلدا، شارع وصفي التل",
+  "amman, jabal al-weibdeh, college street": "عمّان، جبل اللويبدة، شارع الكلية",
+  "amman, abdoun, cairo street": "عمّان، عبدون، شارع القاهرة",
+  "souf": "سوف",
+  "roman road": "الطريق الروماني",
+  "new zarqa": "الزرقاء الجديدة",
+  "36th street": "شارع 36",
+  "university district": "حي الجامعة",
+  "university street": "شارع الجامعة",
+  "al-rabieh": "الرابية",
+  "beach road": "طريق الشاطئ",
+  "khalda": "خلدا",
+  "wasfi al-tal street": "شارع وصفي التل",
+  "jabal al-weibdeh": "جبل اللويبدة",
+  "college street": "شارع الكلية",
+  "abdoun": "عبدون",
+  "cairo street": "شارع القاهرة",
+
+  // Contact methods and statuses
+  phone: "الهاتف",
+  whatsapp: "واتساب",
+  email: "البريد الإلكتروني",
+  available: "متاح",
+  pending: "قيد المراجعة",
+  rejected: "مرفوض",
+  active: "نشط",
+  approved: "مقبول",
+  published: "منشور",
+  lost: "مفقود",
+  found: "معثور عليه",
+  "lost pet": "حيوان مفقود",
+  "found pet": "حيوان معثور عليه",
+  puppy: "جرو",
+  kitten: "قط صغير",
+  small: "صغير",
+  young: "صغير",
+  friendly: "ودود",
+  social: "اجتماعي",
+  white: "أبيض",
+  black: "أسود",
+  brown: "بني",
+  yellow: "أصفر",
+  grey: "رمادي",
+  gray: "رمادي",
+  ginger: "برتقالي",
+  striped: "مخطط",
+  collar: "طوق",
+  clinic: "عيادة",
+  school: "مدرسة",
+  market: "السوق",
+  garden: "حديقة",
+
+  // Seed/demo descriptions used by the project
+  "scout comes with a basic turtle habitat.": "سكاوت يأتي مع بيت أساسي للسلحفاة.",
+  "cotton is a young rabbit ready for a first home.": "كوتون أرنب صغير جاهز لأول بيت له.",
+  "leo is curious and social.": "ليو فضولي واجتماعي.",
+  "max is a rescue dog looking for a second chance.": "ماكس كلب إنقاذ يبحث عن فرصة ثانية.",
+  "snow is gentle and used to apartment life.": "سنو لطيف ومعتاد على حياة الشقق.",
+  "lulu is affectionate and social.": "لولو حنونة واجتماعية.",
+  "thor is trained and calm around people.": "ثور مدرّب وهادئ حول الناس.",
+  "mochi is friendly and comfortable indoors.": "موتشي ودود ومرتاح داخل المنزل.",
+  "poppy is quiet and litter trained.": "بوبي هادئة ومتدربة على صندوق الرمل.",
+  "daisy is easy to handle and healthy.": "ديزي سهلة التعامل وبصحة جيدة.",
+  "simba is playful and ready for a family.": "سيمبا مرح وجاهز لعائلة تهتم به.",
+  "rocky needs space and daily exercise.": "روكي يحتاج مساحة وتمرين يومي.",
+  "hazel is suited for a calm apartment.": "هازل مناسبة لشقة هادئة.",
+  "milo needs a quiet indoor adopter.": "ميلو يحتاج متبنّي هادئ داخل المنزل.",
+  "family is relocating and wants bella in a stable home.": "العائلة ستنتقل وتريد لبيلا بيتًا مستقرًا.",
+  "nala needs an active adopter.": "نالا تحتاج متبنّيًا نشيطًا.",
+  "comes with a basic turtle habitat.": "يأتي مع بيت أساسي للسلحفاة."
+};
+
+function normalizeLabelKey(value = "") {
+  return String(value).trim().replace(/\s+/g, " ").toLowerCase();
+}
+
+function localizeKnownValue(value, language = "en") {
+  if (value === null || value === undefined) {
+    return "";
+  }
+
+  const originalText = String(value);
+  if (language !== "ar") {
+    return originalText;
+  }
+
+  const exactMatch = arabicKnownValues[normalizeLabelKey(originalText)];
+  if (exactMatch) {
+    return exactMatch;
+  }
+
+  const replacements = [
+    ["Yellow Labrador puppy with blue collar.", "جرو لابرادور أصفر يرتدي طوقًا أزرق."],
+    ["Young Cat found near clinic entrance.", "قط صغير عُثر عليه قرب مدخل العيادة."],
+    ["Young cat found near clinic entrance.", "قط صغير عُثر عليه قرب مدخل العيادة."],
+    ["Ginger Cat, very social.", "قط برتقالي اجتماعي جداً."],
+    ["Ginger cat, very social.", "قط برتقالي اجتماعي جداً."],
+    ["Small brown friendly Dog.", "كلب بني صغير وودود."],
+    ["Small brown friendly dog.", "كلب بني صغير وودود."],
+    ["Black Rabbit escaped from garden.", "أرنب أسود هرب من الحديقة."],
+    ["Black rabbit escaped from garden.", "أرنب أسود هرب من الحديقة."],
+    ["Black Cat with a green collar.", "قط أسود يرتدي طوقًا أخضر."],
+    ["Black cat with a green collar.", "قط أسود يرتدي طوقًا أخضر."],
+    ["Striped Cat lost near the market.", "قط مخطط ضائع بالقرب من السوق."],
+    ["Striped cat lost near the market.", "قط مخطط ضائع بالقرب من السوق."],
+    ["Calico Cat wearing a red collar.", "قط كاليكو يرتدي طوقًا أحمر."],
+    ["Calico cat wearing a red collar.", "قط كاليكو يرتدي طوقًا أحمر."],
+    ["Sand colored house Cat.", "قط منزلي بلون رملي."],
+    ["Sand colored house cat.", "قط منزلي بلون رملي."],
+    ["Small White Rabbit found in a garden.", "أرنب أبيض صغير عُثر عليه في حديقة."],
+    ["Small white Rabbit found in a garden.", "أرنب أبيض صغير عُثر عليه في حديقة."],
+    ["Small white rabbit found in a garden.", "أرنب أبيض صغير عُثر عليه في حديقة."],
+    ["Grey Cat found with no visible injuries.", "قط رمادي عُثر عليه دون إصابات ظاهرة."],
+    ["Grey cat found with no visible injuries.", "قط رمادي عُثر عليه دون إصابات ظاهرة."],
+    ["White mixed-breed Dog found near the market.", "كلب أبيض من سلالة مختلطة عُثر عليه بالقرب من السوق."],
+    ["White mixed-breed dog found near the market.", "كلب أبيض من سلالة مختلطة عُثر عليه بالقرب من السوق."],
+    ["Beagle found near a clinic.", "كلب بيغل عُثر عليه بالقرب من عيادة."],
+    ["Brown Rabbit found near school.", "أرنب بني عُثر عليه بالقرب من مدرسة."],
+    ["Brown rabbit found near school.", "أرنب بني عُثر عليه بالقرب من مدرسة."],
+    ["Amman, Tabarbour, Al-Shahid Street", "عمّان، طبربور، شارع الشهيد"],
+    ["Amman, Sweifieh, Ali Nasouh Al-Taher Street", "عمّان، الصويفية، شارع علي نصوح الطاهر"],
+    ["Salt, Downtown Salt, Hammam Street", "السلط، وسط البلد، شارع الحمام"],
+    ["Irbid, Al-Husun, Petra Street", "إربد، الحصن، شارع البتراء"],
+    ["Amman, Jabal Amman, Rainbow Street", "عمّان، جبل عمّان، شارع الرينبو"],
+    ["Zarqa, Al-Hussein District", "الزرقاء، حي الحسين"],
+    ["Madaba, Mount Nebo Road", "مادبا، طريق جبل نيبو"],
+    ["Irbid, Al-Husun, Yarmouk Road", "إربد، الحصن، شارع اليرموك"],
+    ["Amman, Al-Madina Street", "عمّان، شارع المدينة"],
+    ["Aqaba, Tala Bay Road", "العقبة، طريق تالا باي"],
+    ["Tabarbour", "طبربور"],
+    ["Al-Shahid Street", "شارع الشهيد"],
+    ["Sweifieh", "الصويفية"],
+    ["Ali Nasouh Al-Taher Street", "شارع علي نصوح الطاهر"],
+    ["Downtown Salt", "وسط البلد"],
+    ["Hammam Street", "شارع الحمام"],
+    ["Petra Street", "شارع البتراء"],
+    ["Jabal Amman", "جبل عمّان"],
+    ["Rainbow Street", "شارع الرينبو"],
+    ["Al-Hussein District", "حي الحسين"],
+    ["Mount Nebo Road", "طريق جبل نيبو"],
+    ["Yarmouk Road", "شارع اليرموك"],
+    ["Al-Madina Street", "شارع المدينة"],
+    ["Tala Bay Road", "طريق تالا باي"],
+    ["Active", "نشط"],
+    ["Mohammad Abbadi", "محمد عبادي"],
+    ["Nadine Shousha", "نادين شوشة"],
+    ["Tareq Fares", "طارق فارس"],
+    ["Ahmad Shannaq", "أحمد الشناق"],
+    ["Rama Azar", "راما عازر"],
+    ["lost pet", "حيوان مفقود"],
+    ["found pet", "حيوان معثور عليه"],
+    ["missing pet", "حيوان مفقود"],
+    ["puppy", "جرو"],
+    ["kitten", "قط صغير"],
+    ["small", "صغير"],
+    ["young", "صغير"],
+    ["friendly", "ودود"],
+    ["social", "اجتماعي"],
+    ["calm", "هادئ"],
+    ["scared", "خائف"],
+    ["injured", "مصاب"],
+    ["healthy", "بصحة جيدة"],
+    ["white", "أبيض"],
+    ["black", "أسود"],
+    ["brown", "بني"],
+    ["yellow", "أصفر"],
+    ["grey", "رمادي"],
+    ["gray", "رمادي"],
+    ["ginger", "برتقالي"],
+    ["striped", "مخطط"],
+    ["sand colored", "بلون رملي"],
+    ["blue collar", "طوق أزرق"],
+    ["green collar", "طوق أخضر"],
+    ["red collar", "طوق أحمر"],
+    ["with collar", "يرتدي طوقًا"],
+    ["without collar", "بدون طوق"],
+    ["near clinic entrance", "قرب مدخل العيادة"],
+    ["near clinic", "قرب عيادة"],
+    ["near the market", "بالقرب من السوق"],
+    ["near market", "بالقرب من السوق"],
+    ["near school", "بالقرب من مدرسة"],
+    ["near", "بالقرب من"],
+    ["found in a garden", "عُثر عليه في حديقة"],
+    ["found", "عُثر عليه"],
+    ["lost", "مفقود"],
+    ["escaped", "هرب"],
+    ["garden", "حديقة"],
+    ["clinic", "عيادة"],
+    ["school", "مدرسة"],
+    ["market", "السوق"],
+    ["street", "شارع"],
+    ["road", "طريق"],
+    ["district", "حي"],
+    ["downtown", "وسط البلد"],
+    ["entrance", "مدخل"],
+    ["collar", "طوق"],
+    ["Aqaba, South Beach Road", "العقبة، طريق الشاطئ الجنوبي"],
+    ["Zarqa, Al-Dulayl Road", "الزرقاء، طريق الضليل"],
+    ["Salt, Al-Sarou, Salt Ring Road", "السلط، السرو، طريق السلط الدائري"],
+    ["Irbid, Al-Mazar Street", "إربد، شارع المزار"],
+    ["Zarqa, Russeifa, Yajouz Road", "الزرقاء، الرصيفة، طريق ياجوز"],
+    ["Madaba, City Center, Talal Street", "مادبا، وسط المدينة، شارع طلال"],
+    ["Zarqa, Jabal Tareq", "الزرقاء، جبل طارق"],
+    ["Jerash, Al-Mastaba Road", "جرش، طريق المصطبة"],
+    ["Irbid, Al-Husun, Main Street", "إربد، الحصن، الشارع الرئيسي"],
+    ["South Beach Road", "طريق الشاطئ الجنوبي"],
+    ["Al-Dulayl Road", "طريق الضليل"],
+    ["Al-Sarou", "السرو"],
+    ["Salt Ring Road", "طريق السلط الدائري"],
+    ["Al-Mazar Street", "شارع المزار"],
+    ["Russeifa", "الرصيفة"],
+    ["Yajouz Road", "طريق ياجوز"],
+    ["City Center", "وسط المدينة"],
+    ["Talal Street", "شارع طلال"],
+    ["Jabal Tareq", "جبل طارق"],
+    ["Al-Mastaba Road", "طريق المصطبة"],
+    ["Al-Husun", "الحصن"],
+    ["Main Street", "الشارع الرئيسي"],
+    ["Jerash, Souf, Roman Road", "جرش، سوف، الطريق الروماني"],
+    ["Zarqa, New Zarqa, 36th Street", "الزرقاء، الزرقاء الجديدة، شارع 36"],
+    ["Irbid, University District, University Street", "إربد، حي الجامعة، شارع الجامعة"],
+    ["Aqaba, Al-Rabieh, Beach Road", "العقبة، الرابية، طريق الشاطئ"],
+    ["Amman, Khalda, Wasfi Al-Tal Street", "عمّان، خلدا، شارع وصفي التل"],
+    ["Amman, Jabal Al-Weibdeh, College Street", "عمّان، جبل اللويبدة، شارع الكلية"],
+    ["Amman, Abdoun, Cairo Street", "عمّان، عبدون، شارع القاهرة"],
+    ["University District", "حي الجامعة"],
+    ["University Street", "شارع الجامعة"],
+    ["New Zarqa", "الزرقاء الجديدة"],
+    ["36th Street", "شارع 36"],
+    ["Souf", "سوف"],
+    ["Roman Road", "الطريق الروماني"],
+    ["Al-Rabieh", "الرابية"],
+    ["Beach Road", "طريق الشاطئ"],
+    ["Khalda", "خلدا"],
+    ["Wasfi Al-Tal Street", "شارع وصفي التل"],
+    ["Jabal Al-Weibdeh", "جبل اللويبدة"],
+    ["College Street", "شارع الكلية"],
+    ["Abdoun", "عبدون"],
+    ["Cairo Street", "شارع القاهرة"],
+    ["Dutch Rabbit", "أرنب هولندي"],
+    ["German Shepherd", "جيرمن شيبرد"],
+    ["Golden Retriever", "جولدن ريتريفر"],
+    ["Mini Rex", "ميني ريكس"],
+    ["Mixed Breed", "سلالة مختلطة"],
+    ["White Rabbit", "أرنب أبيض"],
+    ["Orange Tabby", "قط برتقالي مخطط"],
+    ["Holland Lop", "هولاند لوب"],
+    ["Scottish Fold", "سكوتش فولد"],
+    ["Domestic Shorthair", "قط منزلي قصير الشعر"],
+    ["Lionhead", "ليون هيد"],
+    ["Labrador", "لابرادور"],
+    ["Siamese", "سيامي"],
+    ["Persian", "فارسي"],
+    ["Turtle", "سلحفاة"],
+    ["Rabbit", "أرنب"],
+    ["Cat", "قط"],
+    ["Dog", "كلب"],
+    ["Bird", "طائر"],
+    ["Other", "أخرى"],
+    ["Available", "متاح"],
+    ["Pending", "قيد المراجعة"],
+    ["Rejected", "مرفوض"],
+    ["Phone", "الهاتف"],
+    ["WhatsApp", "واتساب"],
+    ["Email", "البريد الإلكتروني"],
+    ["Amman", "عمّان"],
+    ["Zarqa", "الزرقاء"],
+    ["Irbid", "إربد"],
+    ["Aqaba", "العقبة"],
+    ["Salt", "السلط"],
+    ["Madaba", "مادبا"],
+    ["Karak", "الكرك"],
+    ["Tafilah", "الطفيلة"],
+    ["Maan", "معان"],
+    ["Mafraq", "المفرق"],
+    ["Jerash", "جرش"],
+    ["Ajloun", "عجلون"]
+  ];
+
+  const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  let translated = originalText;
+  replacements
+    .sort((first, second) => second[0].length - first[0].length)
+    .forEach(([english, arabic]) => {
+      translated = translated.replace(new RegExp(`\\b${escapeRegExp(english)}\\b`, "gi"), arabic);
+    });
+
+  return translated;
+}
+
 const jordanTimeFormatter = new Intl.DateTimeFormat("en-JO", {
   dateStyle: "medium",
   timeStyle: "short",
@@ -277,20 +906,20 @@ function countBy(items, getKey) {
   }, {});
 }
 
-function formatPetAge(ageInMonths = 0) {
+function formatPetAge(ageInMonths = 0, t = (key, fallback) => fallback) {
   if (ageInMonths <= 0) {
-    return "Age not listed";
+    return t("adoption.ageNotListed", "Age not listed");
   }
 
   if (ageInMonths < 12) {
-    return `${ageInMonths} month${ageInMonths === 1 ? "" : "s"}`;
+    return t("adoption.monthsOld", `${ageInMonths} month${ageInMonths === 1 ? "" : "s"}`).replace("{count}", ageInMonths);
   }
 
   const years = Math.floor(ageInMonths / 12);
   const months = ageInMonths % 12;
   return months > 0
-    ? `${years} yr ${months} mo`
-    : `${years} year${years === 1 ? "" : "s"}`;
+    ? t("adoption.yearsMonthsOld", `${years} yr ${months} mo`).replace("{years}", years).replace("{months}", months)
+    : t("adoption.yearsOld", `${years} year${years === 1 ? "" : "s"}`).replace("{years}", years);
 }
 
 function matchesAdoptionAge(ageInMonths = 0, selectedAge) {
@@ -318,25 +947,50 @@ function jordanMapQuery(location = "") {
   return /jordan/i.test(value) ? value : `${value}, Jordan`;
 }
 
-function JordanPetsMap({ petsByCity, pets, selectedCity, onSelectCity }) {
+function JordanPetsMap({ petsByCity, pets, selectedCity, onSelectCity, cityLabel = (city) => city, language = "en" }) {
   const entries = Object.entries(petsByCity);
   const maxPets = Math.max(...entries.map(([, value]) => value), 1);
   const mappedCities = entries.filter(([city]) => jordanCityPositions[city]);
   const activeCity = selectedCity && petsByCity[selectedCity] ? selectedCity : mappedCities[0]?.[0] ?? "";
   const selectedPets = pets.filter((pet) => pet.city === activeCity);
   const mapQuery = jordanMapQuery(selectedPets[0]?.locationDetails || activeCity);
+  const isArabicMap = language === "ar";
+  const mapText = {
+    selectedCity: isArabicMap ? "المدينة المختارة" : "Selected city",
+    noCity: isArabicMap ? "لا توجد مدينة مختارة" : "No city selected",
+    pets: isArabicMap ? "حيوانات" : "pets",
+    adoption: isArabicMap ? "تبنّي" : "Adoption",
+    lost: isArabicMap ? "مفقود" : "Lost",
+    found: isArabicMap ? "معثور عليه" : "Found",
+    openMaps: isArabicMap ? "فتح في خرائط Google" : "Open in Google Maps",
+    empty: isArabicMap ? "اختر مدينة من الخريطة لعرض الحيوانات ومواقعها." : "Choose a city marker to see its pets and exact locations.",
+    mapAlt: isArabicMap ? "خريطة الأردن" : "Jordan map outline",
+    mapAria: isArabicMap ? "خريطة الحيوانات حسب مدن الأردن" : "Jordan pets by city map"
+  };
+  const sourceLabel = (source) => {
+    if (source === "Adoption") return mapText.adoption;
+    if (source === "Lost") return mapText.lost;
+    if (source === "Found") return mapText.found;
+    return localizeKnownValue(source, language);
+  };
+  const mapPetName = (pet) => {
+    if (pet.source === "Found" && isArabicMap) {
+      return `معثور عليه - ${localizeKnownValue(pet.type, language)}`;
+    }
+    return localizeKnownValue(pet.name, language);
+  };
 
   return (
     <div className="jordan-map-layout interactive">
-      <div className="jordan-map-panel" aria-label="Jordan pets by city map">
-        <img className="jordan-map-template" src="/jordan-map-template.jfif" alt="Jordan map outline" />
+      <div className="jordan-map-panel" aria-label={mapText.mapAria}>
+        <img className="jordan-map-template" src="/jordan-map-template.jfif" alt={mapText.mapAlt} />
 
         {mappedCities.map(([city, value]) => {
           const position = jordanCityPositions[city];
           const markerSize = 26 + (value / maxPets) * 10;
           return (
             <button
-              key={city}
+              key={cityLabel(city)}
               type="button"
               className={city === activeCity ? "map-city-pin active" : "map-city-pin"}
               onClick={() => onSelectCity(city)}
@@ -345,12 +999,12 @@ function JordanPetsMap({ petsByCity, pets, selectedCity, onSelectCity }) {
                 top: `${position.y}%`,
                 "--pin-size": `${markerSize}px`
               }}
-              title={`${city}: ${value} pets`}
+              title={`${cityLabel(city)}: ${value} ${mapText.pets}`}
             >
               <span className="map-pin-head">
                 <strong>{value}</strong>
               </span>
-              <span>{city}</span>
+              <span>{cityLabel(city)}</span>
             </button>
           );
         })}
@@ -359,16 +1013,16 @@ function JordanPetsMap({ petsByCity, pets, selectedCity, onSelectCity }) {
       <aside className="map-details-panel">
         <div className="map-details-head">
           <div>
-            <span>Selected city</span>
-            <strong>{activeCity || "No city selected"}</strong>
+            <span>{mapText.selectedCity}</span>
+            <strong>{activeCity ? cityLabel(activeCity) : mapText.noCity}</strong>
           </div>
-          <span className="pill success">{selectedPets.length} pets</span>
+          <span className="pill success">{selectedPets.length} {mapText.pets}</span>
         </div>
 
         <div className="map-pet-list">
           <iframe
             className="google-map-preview"
-            title={`${activeCity} pets map`}
+            title={`${activeCity ? cityLabel(activeCity) : mapText.noCity} ${isArabicMap ? "خريطة الحيوانات" : "pets map"}`}
             src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`}
             loading="lazy"
           />
@@ -378,25 +1032,26 @@ function JordanPetsMap({ petsByCity, pets, selectedCity, onSelectCity }) {
               <article key={pet.id} className="map-pet-card">
                 <img
                   src={pet.photoUrl}
-                  alt={pet.name}
+                  alt=""
+                  aria-hidden="true"
                   onError={(event) => { event.currentTarget.src = fallbackPetPhotos[pet.type] ?? fallbackPetPhotos.Other; }}
                 />
                 <div>
-                  <strong>{pet.name}</strong>
-                  <span>{pet.source} | {pet.type} | {pet.breed}</span>
-                  <p>{pet.locationDetails || pet.city}</p>
+                  <strong>{mapPetName(pet)}</strong>
+                  <span>{sourceLabel(pet.source)} | {localizeKnownValue(pet.type, language)} | {localizeKnownValue(pet.breed, language)}</span>
+                  <p>{localizeKnownValue(pet.locationDetails || pet.city, language)}</p>
                   <a
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(jordanMapQuery(pet.locationDetails || pet.city))}`}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Open in Google Maps
+                    {mapText.openMaps}
                   </a>
                 </div>
               </article>
             ))
           ) : (
-            <p className="empty-state">Choose a city marker to see its pets and exact locations.</p>
+            <p className="empty-state">{mapText.empty}</p>
           )}
         </div>
       </aside>
@@ -674,6 +1329,7 @@ function AuthPanel({
 }
 
 function App() {
+  // Adoption Arabic localization: dynamic labels enabled for cards, filters, cities, breeds, status, kg, and contact method.
   const [language, setLanguage] = useState(() => localStorage.getItem("petcareLanguage") || "en");
   const [activeTab, setActiveTab] = useState("overview");
   const [dashboard, setDashboard] = useState(null);
@@ -747,6 +1403,66 @@ function App() {
   const [lostPhotoUploading, setLostPhotoUploading] = useState(false);
   const [foundPhotoUploading, setFoundPhotoUploading] = useState(false);
   const t = (key, fallback) => translate(language, key, fallback);
+  const valueLabel = (value) => localizeKnownValue(value, language);
+  const petTypeLabel = (type) => t(`pet.${type}`, valueLabel(type));
+  const petBreedLabel = (breed) => valueLabel(breed || t("pet.Other", "Other"));
+  const cityLabel = (city) => valueLabel(city);
+  const locationLabel = (location) => valueLabel(location);
+  const contactMethodLabel = (method) => valueLabel(method || "Phone");
+  const adoptionStoryLabel = (story) => valueLabel(story);
+  const adoptionStatusLabel = (status) => valueLabel(status || "Available");
+  const weightLabel = (weightKg) => `${weightKg ?? ""} ${language === "ar" ? "كغم" : "kg"}`.trim();
+  const formatPetAgeLocalized = (ageInMonths = 0) => {
+    const monthsCount = Number(ageInMonths || 0);
+
+    if (language !== "ar") {
+      return formatPetAge(monthsCount);
+    }
+
+    if (monthsCount <= 0) {
+      return "العمر غير مذكور";
+    }
+
+    if (monthsCount < 12) {
+      return `${monthsCount} شهر`;
+    }
+
+    const years = Math.floor(monthsCount / 12);
+    const months = monthsCount % 12;
+    return months > 0 ? `${years} سنة ${months} شهر` : `${years} سنة`;
+  };
+  const adoptionAgeLabel = (value, fallback) =>
+    t(`adoption.age.${value}`, fallback);
+
+  const adoptionHealthLabel = (value, fallback) => {
+    const healthKey = value === "not-neutered" ? "notNeutered" : value;
+    return t(`adoption.health.${healthKey}`, valueLabel(fallback));
+  };
+  const lostFoundStatusLabel = (status) => t(`status.${status}`, valueLabel(status || "Pending"));
+  const lostFoundAgeLabel = (value, fallback) => t(`lostfound.age.${value}`, fallback);
+  const lostFoundRewardLabel = (amount) =>
+    amount ? `${amount} ${language === "ar" ? "د.أ" : "JOD"}` : t("lostfound.noReward", "No reward listed");
+  const lostFoundMessageOpened = (name) =>
+    t("lostfound.messageOpened", `Message opened with ${name}.`).replace("{name}", valueLabel(name));
+  const lostFoundLostOpeningMessage = (name, petName) =>
+    t("lostfound.lostOpeningMessage", `Hi ${name}, I saw your lost pet post for ${petName}. I may have information that can help.`)
+      .replace("{name}", valueLabel(name))
+      .replace("{petName}", petName);
+  const lostFoundFoundOpeningMessage = (name, petType) =>
+    t("lostfound.foundOpeningMessage", `Hi ${name}, I saw your found ${petType} report and want to check if it matches my pet.`)
+      .replace("{name}", valueLabel(name))
+      .replace("{petType}", petTypeLabel(petType));
+  const localizeNewCommunityText = (text) => language === "ar" ? valueLabel(text) : text;
+  const localizeNewLostPayload = (payload) => ({
+    ...payload,
+    description: localizeNewCommunityText(payload.description),
+    lastSeenPlace: localizeNewCommunityText(payload.lastSeenPlace)
+  });
+  const localizeNewFoundPayload = (payload) => ({
+    ...payload,
+    description: localizeNewCommunityText(payload.description),
+    foundPlace: localizeNewCommunityText(payload.foundPlace)
+  });
   const isArabic = language === "ar";
   const toggleLanguage = () => setLanguage((current) => current === "en" ? "ar" : "en");
 
@@ -1318,7 +2034,7 @@ function App() {
       setSelectedMapCity(normalizeJordanCity(adoptionPostForm.city));
 
       setAdoptionPostForm(createInitialAdoptionPostForm(currentUser));
-      setAdoptionNotice("Adoption post sent successfully. It will appear after admin approval.");
+      setAdoptionNotice(t("adoption.sentNotice", "Adoption post sent successfully. It will appear after admin approval."));
       setError("");
     } catch (createError) {
       setError(createError.message || "Could not submit the adoption post.");
@@ -1329,30 +2045,30 @@ function App() {
     event.preventDefault();
 
     if (!currentUser?.token) {
-      setError("Please sign in to publish a lost pet report.");
+      setError(t("lostfound.signInToPublishLost", "Please sign in to publish a lost pet report."));
       return;
     }
 
     if (!canPublishCommunityPost) {
-      setError("Only User and Vet accounts can publish lost or found posts.");
+      setError(t("lostfound.onlyUsersVetsPublish", "Only User and Vet accounts can publish lost or found posts."));
       return;
     }
 
     try {
-      const payload = {
+      const payload = localizeNewLostPayload({
         ...lostPostForm,
         approximateAgeInMonths: Number(lostPostForm.approximateAgeInMonths),
         lastSeenDateUtc: new Date(lostPostForm.lastSeenDateUtc).toISOString(),
         rewardAmount: lostPostForm.rewardAmount ? Number(lostPostForm.rewardAmount) : null
-      };
+      });
       const createdReport = await api.createLostPetReport(payload, currentUser.token);
 
       setMyLostPets((current) => [createdReport, ...current]);
       setLostPostForm(createInitialLostPostForm(currentUser));
-      setLostFoundNotice("Lost pet post sent successfully. It will appear after admin approval.");
+      setLostFoundNotice(t("lostfound.sentLostNotice", "Lost pet post sent successfully. It will appear after admin approval."));
       setError("");
     } catch (createError) {
-      setError(createError.message || "Could not submit the lost pet post.");
+      setError(createError.message || t("lostfound.createLostFailed", "Could not submit the lost pet post."));
     }
   }
 
@@ -1360,28 +2076,28 @@ function App() {
     event.preventDefault();
 
     if (!currentUser?.token) {
-      setError("Please sign in to publish a found pet report.");
+      setError(t("lostfound.signInToPublishFound", "Please sign in to publish a found pet report."));
       return;
     }
 
     if (!canPublishCommunityPost) {
-      setError("Only User and Vet accounts can publish lost or found posts.");
+      setError(t("lostfound.onlyUsersVetsPublish", "Only User and Vet accounts can publish lost or found posts."));
       return;
     }
 
     try {
-      const payload = {
+      const payload = localizeNewFoundPayload({
         ...foundPostForm,
         foundDateUtc: new Date(foundPostForm.foundDateUtc).toISOString()
-      };
+      });
       const createdReport = await api.createFoundPetReport(payload, currentUser.token);
 
       setMyFoundPets((current) => [createdReport, ...current]);
       setFoundPostForm(createInitialFoundPostForm(currentUser));
-      setLostFoundNotice("Found pet post sent successfully. It will appear after admin approval.");
+      setLostFoundNotice(t("lostfound.sentFoundNotice", "Found pet post sent successfully. It will appear after admin approval."));
       setError("");
     } catch (createError) {
-      setError(createError.message || "Could not submit the found pet post.");
+      setError(createError.message || t("lostfound.createFoundFailed", "Could not submit the found pet post."));
     }
   }
 
@@ -1391,7 +2107,7 @@ function App() {
     }
 
     if (!currentUser?.token) {
-      setError("Please sign in first to upload a photo.");
+      setError(t("lostfound.signInToUploadPhoto", "Please sign in first to upload a photo."));
       return;
     }
 
@@ -1399,10 +2115,10 @@ function App() {
       setUploading(true);
       const uploaded = await api.uploadCommunityImage(file, currentUser.token);
       setForm((current) => ({ ...current, photoUrl: uploaded.url }));
-      setNotice("Photo uploaded successfully. You can now submit your post.");
+      setNotice(t("lostfound.photoUploadedNotice", "Photo uploaded successfully. You can now submit your post."));
       setError("");
     } catch (uploadError) {
-      setError(uploadError.message || "Could not upload this image.");
+      setError(uploadError.message || t("lostfound.uploadFailed", "Could not upload this image."));
     } finally {
       setUploading(false);
     }
@@ -1410,7 +2126,7 @@ function App() {
 
   async function handleReviewCommunityReport(kind, id, decision) {
     if (!currentUser?.token || currentUser.role !== "Admin") {
-      setError("Only Admin accounts can review lost and found posts.");
+      setError(t("lostfound.adminOnlyReview", "Only Admin accounts can review lost and found posts."));
       return;
     }
 
@@ -1434,10 +2150,10 @@ function App() {
       const publicReports = await Promise.all([api.getLostPets(), api.getFoundPets()]);
       setLostPets(publicReports[0]);
       setFoundPets(publicReports[1]);
-      setLostFoundNotice(decision === "approve" ? "Post approved and published." : "Post rejected.");
+      setLostFoundNotice(decision === "approve" ? t("lostfound.noticeApproved", "Post approved and published.") : t("lostfound.noticeRejected", "Post rejected."));
       setError("");
     } catch (reviewError) {
-      setError(reviewError.message || "Could not update this post.");
+      setError(reviewError.message || t("lostfound.updateFailed", "Could not update this post."));
     }
   }
 
@@ -1465,7 +2181,7 @@ function App() {
       } else {
         setAdoptions((current) => current.filter((item) => item.id !== id));
       }
-      setAdoptionNotice(decision === "approve" ? "Adoption post approved and published." : "Adoption post rejected.");
+      setAdoptionNotice(decision === "approve" ? t("adoption.approvedNotice", "Adoption post approved and published.") : t("adoption.rejectedNotice", "Adoption post rejected."));
       setError("");
     } catch (reviewError) {
       setError(reviewError.message || "Could not update this adoption post.");
@@ -1474,7 +2190,7 @@ function App() {
 
   async function handleDeleteAdoptionPost(id, ownerId = null) {
     if (!currentUser?.token) {
-      setError("Please sign in first.");
+      setError(t("chat.noAccess", "Please sign in first."));
       return;
     }
 
@@ -1492,7 +2208,7 @@ function App() {
       }
       setAdminAdoptions((current) => current.filter((item) => item.id !== id));
       setAdoptions((current) => current.filter((item) => item.id !== id));
-      setAdoptionNotice("Adoption post deleted.");
+      setAdoptionNotice(t("adoption.deletedNotice", "Adoption post deleted."));
       setError("");
     } catch (deleteError) {
       setError(deleteError.message || "Could not delete this adoption post.");
@@ -1501,7 +2217,7 @@ function App() {
 
   async function handleDeleteCommunityReport(kind, id) {
     if (!currentUser?.token || currentUser.role !== "Admin") {
-      setError("Only Admin accounts can delete lost and found posts.");
+      setError(t("lostfound.adminOnlyDelete", "Only Admin accounts can delete lost and found posts."));
       return;
     }
 
@@ -1516,10 +2232,10 @@ function App() {
         setPendingFoundPets((current) => current.filter((item) => item.id !== id));
       }
 
-      setLostFoundNotice("Post deleted.");
+      setLostFoundNotice(t("lostfound.noticeDeleted", "Post deleted."));
       setError("");
     } catch (deleteError) {
-      setError(deleteError.message || "Could not delete this post.");
+      setError(deleteError.message || t("lostfound.deleteFailed", "Could not delete this post."));
     }
   }
 
@@ -1556,12 +2272,12 @@ function App() {
     event.preventDefault();
 
     if (!currentUser?.token || currentUser.role !== "Vet") {
-      setError("Only Vet accounts can add vaccine plans.");
+      setError(t("medical.onlyVetAdd", "Only Vet accounts can add vaccine plans."));
       return;
     }
 
     if (!vaccineForm.petId || !vaccineForm.vaccineName.trim() || !vaccineForm.dueDateUtc) {
-      setError("Choose a pet, vaccine name, and due date.");
+      setError(t("medical.choosePetVaccineDate", "Choose a pet, vaccine name, and due date."));
       return;
     }
 
@@ -1575,26 +2291,26 @@ function App() {
       }, currentUser.token);
       await refreshMedicalData();
       setVaccineForm((current) => ({ ...current, vaccineName: "", dueDateUtc: getDateInputValue(2) }));
-      setMedicalNotice("Vaccine date added. The owner will be notified automatically when the due date is close.");
+      setMedicalNotice(t("medical.vaccineAddedNotice", "Vaccine date added. The owner will be notified automatically when the due date is close."));
       setError("");
     } catch (requestError) {
-      setError(requestError.message || "Could not add this vaccine plan.");
+      setError(requestError.message || t("medical.addFailed", "Could not add this vaccine plan."));
     }
   }
 
   async function handleNotifyVaccineOwner(vaccineId) {
     if (!currentUser?.token || currentUser.role !== "Vet") {
-      setError("Only Vet accounts can notify owners.");
+      setError(t("medical.onlyVetNotify", "Only Vet accounts can notify owners."));
       return;
     }
 
     try {
       const notification = await api.notifyVaccineOwner(vaccineId, currentUser.token);
       await refreshMedicalData();
-      setMedicalNotice(`Notification sent: ${notification.message}`);
+      setMedicalNotice(t("medical.notificationSent", "Notification sent: {message}").replace("{message}", valueLabel(notification.message)));
       setError("");
     } catch (requestError) {
-      setError(requestError.message || "Could not send this notification.");
+      setError(requestError.message || t("medical.notifyFailed", "Could not send this notification."));
     }
   }
 
@@ -1624,17 +2340,17 @@ function App() {
   }
 
   async function handleStartChatWithVet(vetId) {
-    await handleStartChatWithUser(vetId, "Chat opened successfully.");
+    await handleStartChatWithUser(vetId, t("chat.opened", "Chat opened successfully."));
   }
 
   async function handleStartChatWithUser(participantId, successMessage, openingMessage = "") {
     if (!currentUser?.token) {
-      setError("Please sign in first.");
+      setError(t("chat.noAccess", "Please sign in first."));
       return;
     }
 
     if (!participantId || participantId === currentUser.id) {
-      setError("This post belongs to your account.");
+      setError(t("chat.ownPost", "This post belongs to your account."));
       return;
     }
 
@@ -1653,7 +2369,7 @@ function App() {
     event.preventDefault();
 
     if (!currentUser?.token || !selectedConversationId) {
-      setError("Choose a chat first.");
+      setError(t("chat.chooseFirst", "Choose a chat first."));
       return;
     }
 
@@ -1670,13 +2386,13 @@ function App() {
       await refreshChatLists(selectedConversationId);
       setError("");
     } catch (requestError) {
-      setError(requestError.message || "Could not send message.");
+      setError(requestError.message || t("chat.sendFailed", "Could not send message."));
     }
   }
 
   async function handleDeleteChatConversation(conversationId) {
     if (!currentUser?.token) {
-      setError("Please sign in first.");
+      setError(t("chat.noAccess", "Please sign in first."));
       return;
     }
 
@@ -1684,11 +2400,11 @@ function App() {
       await api.deleteChatConversation(conversationId, currentUser.token);
       setChatMessages([]);
       setChatMessageDraft("");
-      setChatNotice("Chat deleted. You can start a new one with the same account anytime.");
+      setChatNotice(t("chat.deleted", "Chat deleted. You can start a new one with the same account anytime."));
       await refreshChatLists();
       setError("");
     } catch (requestError) {
-      setError(requestError.message || "Could not delete this chat.");
+      setError(requestError.message || t("chat.deleteFailed", "Could not delete this chat."));
     }
   }
 
@@ -1814,7 +2530,7 @@ function App() {
                   <div className="bar-list">
                     {Object.entries(dashboardView.petsByType).filter(([label]) => Number.isNaN(Number(label))).map(([label, value]) => (
                       <div key={label} className="bar-row">
-                        <span>{label}</span>
+                        <span>{petTypeLabel(label)}</span>
                         <div className="bar-track">
                           <div className="bar-fill" style={{ width: `${(value / dashboardTypeTotal) * 100}%` }} />
                         </div>
@@ -1830,6 +2546,8 @@ function App() {
                     pets={publicMapPets}
                     selectedCity={selectedMapCity}
                     onSelectCity={setSelectedMapCity}
+                    cityLabel={cityLabel}
+                    language={language}
                   />
                 </SectionCard>
 
@@ -1854,96 +2572,96 @@ function App() {
               <div className="content-grid">
                 {currentUser.role === "Admin" ? (
                   <>
-                    <SectionCard title="Pending Adoption Posts" subtitle="Approve posts to publish them, or reject posts that should stay hidden.">
+                    <SectionCard title={t("adoption.pendingTitle", "Pending Adoption Posts")} subtitle={t("adoption.pendingSubtitle", "Approve posts to publish them, or reject posts that should stay hidden.")}>
                       <div className="list-stack">
                         {pendingAdoptions.length > 0 ? (
                           pendingAdoptions.map((item) => (
                             <article key={item.id} className="list-card">
                               <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
                               <strong>{item.petName}</strong>
-                              <p>{item.story}</p>
+                              <p>{adoptionStoryLabel(item.story)}</p>
                               <div className="meta-line">
-                                <span>{item.petType}</span>
-                                <span>{item.city}</span>
-                                <span>{item.weightKg} kg</span>
+                                <span>{petTypeLabel(item.petType)}</span>
+                                <span>{cityLabel(item.city)}</span>
+                                <span>{weightLabel(item.weightKg)}</span>
                               </div>
                               <div className="meta-line">
-                                <span>{item.contactMethod}: {item.contactDetails}</span>
+                                <span>{contactMethodLabel(item.contactMethod)}: {item.contactDetails}</span>
                               </div>
                               <div className="form-grid-two">
                                 <button type="button" className="admin-action-button" onClick={() => handleReviewAdoptionPost(item.id, "approve")}>
-                                  Approve
-                                </button>
-                                <button type="button" className="admin-action-button" onClick={() => handleReviewAdoptionPost(item.id, "reject")}>
-                                  Reject
-                                </button>
+  {t("adoption.approve", "Approve")}
+</button>
+<button type="button" className="admin-action-button" onClick={() => handleReviewAdoptionPost(item.id, "reject")}>
+  {t("adoption.reject", "Reject")}
+</button>
                               </div>
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">No pending adoption posts.</p>
+                          <p className="empty-state">{t("adoption.noPending", "No pending adoption posts.")}</p>
                         )}
                       </div>
                     </SectionCard>
 
-                    <SectionCard title="Published Adoption Posts" subtitle="Approved adoption posts visible to User and Vet accounts.">
+                    <SectionCard title={t("adoption.publishedTitle", "Published Adoption Posts")} subtitle={t("adoption.publishedSubtitle", "Approved adoption posts visible to User and Vet accounts.")}>
                       <div className="list-stack">
                         {publishedAdoptions.length > 0 ? (
                           publishedAdoptions.map((item) => (
                             <article key={item.id} className="list-card">
                               <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
                               <strong>{item.petName}</strong>
-                              <p>{item.story}</p>
+                              <p>{adoptionStoryLabel(item.story)}</p>
                               <div className="meta-line">
-                                <span>{item.petType}</span>
-                                <span>{item.city}</span>
-                                <span>{item.weightKg} kg</span>
+                                <span>{petTypeLabel(item.petType)}</span>
+                                <span>{cityLabel(item.city)}</span>
+                                <span>{weightLabel(item.weightKg)}</span>
                               </div>
                               <div className="meta-line">
-                                <span>{item.contactMethod}: {item.contactDetails}</span>
+                                <span>{contactMethodLabel(item.contactMethod)}: {item.contactDetails}</span>
                               </div>
                               <button type="button" className="admin-action-button" onClick={() => handleDeleteAdoptionPost(item.id)}>
-                                Delete
-                              </button>
+  {t("adoption.delete", "Delete")}
+</button>
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">No published adoption posts.</p>
+                          <p className="empty-state">{t("adoption.noPublished", "No published adoption posts.")}</p>
                         )}
                       </div>
                     </SectionCard>
 
-                    <SectionCard title="Rejected Adoption Posts" subtitle="Rejected posts stay hidden from users and vets.">
+                    <SectionCard title={t("adoption.rejectedTitle", "Rejected Adoption Posts")} subtitle={t("adoption.rejectedSubtitle", "Rejected posts stay hidden from users and vets.")}>
                       <div className="list-stack">
                         {rejectedAdoptions.length > 0 ? (
                           rejectedAdoptions.map((item) => (
                             <article key={item.id} className="list-card">
                               <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
                               <strong>{item.petName}</strong>
-                              <p>{item.story}</p>
+                              <p>{adoptionStoryLabel(item.story)}</p>
                               <div className="meta-line">
-                                <span>{item.petType}</span>
-                                <span>{item.city}</span>
+                                <span>{petTypeLabel(item.petType)}</span>
+                                <span>{cityLabel(item.city)}</span>
                               </div>
                               <button type="button" className="admin-action-button" onClick={() => handleDeleteAdoptionPost(item.id)}>
-                                Delete
+                                {t("adoption.delete", "Delete")}
                               </button>
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">No rejected adoption posts.</p>
+                          <p className="empty-state">{t("adoption.noRejected", "No rejected adoption posts.")}</p>
                         )}
                       </div>
                     </SectionCard>
                   </>
                 ) : (
-                  <SectionCard title="Publish Adoption Post" subtitle="User and Vet accounts can add a pet with direct owner contact.">
+                  <SectionCard title={t("adoption.createTitle", "Publish Adoption Post")} subtitle={t("adoption.createSubtitle", "User and Vet accounts can add a pet with direct owner contact.")}>
                     {canPublishCommunityPost ? (
                       <form className="post-form adoption-form" onSubmit={handleCreateAdoptionPost}>
                         <div className="form-grid-two">
                           <input
                             type="text"
-                            placeholder="Pet name"
+                            placeholder={t("adoption.petName", "Pet name")}
                             value={adoptionPostForm.petName}
                             onChange={(event) => setAdoptionPostForm((current) => ({ ...current, petName: event.target.value }))}
                             required
@@ -1954,7 +2672,7 @@ function App() {
                           >
                             {petTypeOptions.map((type) => (
                               <option key={type} value={type}>
-                                {type}
+                                {petTypeLabel(type)}
                               </option>
                             ))}
                           </select>
@@ -1964,7 +2682,7 @@ function App() {
                             type="number"
                             min="0"
                             step="1"
-                            placeholder="Age in months"
+                            placeholder={t("adoption.ageMonths", "Age in months")}
                             value={adoptionPostForm.ageInMonths}
                             onChange={(event) => setAdoptionPostForm((current) => ({ ...current, ageInMonths: event.target.value }))}
                           />
@@ -1974,41 +2692,41 @@ function App() {
                               checked={adoptionPostForm.isNeutered}
                               onChange={(event) => setAdoptionPostForm((current) => ({ ...current, isNeutered: event.target.checked }))}
                             />
-                            Neutered
+                            {t("adoption.neutered", "Neutered")}
                           </label>
                         </div>
                         <input
                           type="number"
                           min="0.1"
                           step="0.1"
-                          placeholder="Weight in kg"
+                          placeholder={t("adoption.weight", "Weight in kg")}
                           value={adoptionPostForm.weightKg}
                           onChange={(event) => setAdoptionPostForm((current) => ({ ...current, weightKg: event.target.value }))}
                           required
                         />
                         <input
                           type="text"
-                          placeholder="City"
+                          placeholder={t("adoption.city", "City")}
                           value={adoptionPostForm.city}
                           onChange={(event) => setAdoptionPostForm((current) => ({ ...current, city: event.target.value }))}
                           required
                         />
                         <input
                           type="text"
-                          placeholder="Exact location, area, or street"
+                          placeholder={t("adoption.location", "Exact location, area, or street")}
                           value={adoptionPostForm.locationDetails}
                           onChange={(event) => setAdoptionPostForm((current) => ({ ...current, locationDetails: event.target.value }))}
                           required
                         />
                         <textarea
-                          placeholder="Simple description"
+                          placeholder={t("adoption.description", "Simple description")}
                           value={adoptionPostForm.description}
                           onChange={(event) => setAdoptionPostForm((current) => ({ ...current, description: event.target.value }))}
                           required
                         />
                         <input
                           type="url"
-                          placeholder="Photo URL (optional if you upload from device)"
+                          placeholder={t("adoption.photoUrl", "Photo URL (optional if you upload from device)")}
                           value={adoptionPostForm.photoUrl}
                           onChange={(event) => setAdoptionPostForm((current) => ({ ...current, photoUrl: event.target.value }))}
                         />
@@ -2026,22 +2744,22 @@ function App() {
                         />
                         <p className="upload-hint">
                           {adoptionPhotoUploading
-                            ? "Uploading image..."
+                            ? t("adoption.uploading", "Uploading image...")
                             : adoptionPostForm.photoUrl
-                            ? "Image is ready. You can submit the adoption post."
-                            : "Choose an image from your device, or paste a Photo URL."}
+                            ? t("adoption.imageReady", "Image is ready. You can submit the adoption post.")
+                            : t("adoption.chooseImage", "Choose an image from your device, or paste a Photo URL.")}
                         </p>
                         <input
                           type="text"
-                          placeholder="Owner contact phone"
+                          placeholder={t("adoption.contactPhone", "Owner contact phone")}
                           value={adoptionPostForm.contactPhone}
                           onChange={(event) => setAdoptionPostForm((current) => ({ ...current, contactPhone: event.target.value }))}
                           required
                         />
-                        <button type="submit">Submit Adoption Post</button>
+                        <button type="submit">{t("adoption.submit", "Submit Adoption Post")}</button>
                       </form>
                     ) : (
-                      <p className="empty-state">Only User and Vet accounts can publish adoption posts.</p>
+                      <p className="empty-state">{t("adoption.onlyUsersVets", "Only User and Vet accounts can publish adoption posts.")}</p>
                     )}
                   </SectionCard>
                 )}
@@ -2049,83 +2767,83 @@ function App() {
                 {adoptionNotice ? <p className="form-success">{adoptionNotice}</p> : null}
 
                 {currentUser.role !== "Admin" ? (
-                <SectionCard title="Adoption Marketplace" subtitle="Owners can publish pets for adoption and adopters can contact them directly.">
+                <SectionCard title={t("adoption.marketplaceTitle", "Adoption Marketplace")} subtitle={t("adoption.marketplaceSubtitle", "Owners can publish pets for adoption and adopters can contact them directly.")}>
                   <div className="adoption-filter-panel">
                     <div className="filter-search-row">
                       <input
                         type="search"
-                        placeholder="Search by name, breed, city, or owner"
+                        placeholder={t("adoption.searchPlaceholder", "Search by name, breed, city, or owner")}
                         value={adoptionFilters.query}
                         onChange={(event) => setAdoptionFilters((current) => ({ ...current, query: event.target.value }))}
                       />
                       <button type="button" className="filter-search-button">
-                        Search
+                        {t("adoption.search", "Search")}
                       </button>
                     </div>
                     <div className="filter-control-grid">
                       <label>
-                        Type
+                        {t("adoption.type", "Type")}
                         <select
                           value={adoptionFilters.type}
                           onChange={(event) => setAdoptionFilters((current) => ({ ...current, type: event.target.value }))}
                         >
-                          <option value="all">All types</option>
+                          <option value="all">{t("adoption.allTypes", "All types")}</option>
                           {petTypeOptions.map((type) => (
                             <option key={type} value={type}>
-                              {type}
+                              {petTypeLabel(type)}
                             </option>
                           ))}
                         </select>
                       </label>
                       <label>
-                        Age
+                        {t("adoption.age", "Age")}
                         <select
                           value={adoptionFilters.age}
                           onChange={(event) => setAdoptionFilters((current) => ({ ...current, age: event.target.value }))}
                         >
                           {adoptionAgeOptions.map((option) => (
                             <option key={option.value} value={option.value}>
-                              {option.label}
+                              {adoptionAgeLabel(option.value, option.label)}
                             </option>
                           ))}
                         </select>
                       </label>
                       <label>
-                        Health
+                        {t("adoption.health", "Health")}
                         <select
                           value={adoptionFilters.health}
                           onChange={(event) => setAdoptionFilters((current) => ({ ...current, health: event.target.value }))}
                         >
                           {adoptionHealthOptions.map((option) => (
                             <option key={option.value} value={option.value}>
-                              {option.label}
+                              {adoptionHealthLabel(option.value, option.label)}
                             </option>
                           ))}
                         </select>
                       </label>
                       <label>
-                        City
+                        {t("adoption.city", "City")}
                         <select
                           value={adoptionFilters.city}
                           onChange={(event) => setAdoptionFilters((current) => ({ ...current, city: event.target.value }))}
                         >
-                          <option value="all">All cities</option>
+                          <option value="all">{t("adoption.allCities", "All cities")}</option>
                           {adoptionCityOptions.map((city) => (
                             <option key={city} value={city}>
-                              {city}
+                              {cityLabel(city)}
                             </option>
                           ))}
                         </select>
                       </label>
                     </div>
                     <div className="filter-summary-row">
-                      <span>{filteredAdoptions.length} of {adoptions.length} pets match</span>
+                      <span>{filteredAdoptions.length} {t("common.of", "of")} {adoptions.length} {t("adoption.matches", "pets match")}</span>
                       <button
                         type="button"
                         className="filter-reset-button"
                         onClick={() => setAdoptionFilters({ query: "", type: "all", age: "all", health: "all", city: "all" })}
                       >
-                        Clear filters
+                        {t("adoption.clearFilters", "Clear filters")}
                       </button>
                     </div>
                   </div>
@@ -2134,7 +2852,7 @@ function App() {
                       filteredAdoptions.map((item) => (
                         <article key={item.id} className="pet-card">
                           {brokenAdoptionImages[item.id] ? (
-                            <div className="pet-image-fallback">Photo unavailable</div>
+                            <div className="pet-image-fallback">{t("adoption.photoUnavailable", "Photo unavailable")}</div>
                           ) : (
                             <img
                               src={item.photoUrl}
@@ -2153,22 +2871,22 @@ function App() {
                             <div className="pet-card-head">
                               <div>
                                 <h4>{item.petName}</h4>
-                                <span>{item.petType} | {item.breed}</span>
+                                <span>{petTypeLabel(item.petType)} | {petBreedLabel(item.breed)}</span>
                               </div>
-                              <span className={item.status === "Available" ? "pill success" : "pill warning"}>{item.status}</span>
+                              <span className={item.status === "Available" ? "pill success" : "pill warning"}>{adoptionStatusLabel(item.status)}</span>
                             </div>
-                            <p>{item.story}</p>
+                            <p>{adoptionStoryLabel(item.story)}</p>
                             <div className="meta-line">
-                              <span>{formatPetAge(item.ageInMonths)}</span>
-                              <span>{item.city}</span>
-                              <span>{item.weightKg} kg</span>
-                            </div>
-                            <div className="meta-line">
-                              <span>{item.isNeutered ? "Neutered" : "Not neutered"}</span>
-                              <span>{item.locationDetails}</span>
+                              <span>{formatPetAgeLocalized(item.ageInMonths)}</span>
+                              <span>{cityLabel(item.city)}</span>
+                              <span>{weightLabel(item.weightKg)}</span>
                             </div>
                             <div className="meta-line">
-                              <span>{item.contactMethod}: {item.contactDetails}</span>
+                              <span>{item.isNeutered ? t("adoption.neutered", "Neutered") : t("adoption.notNeutered", "Not neutered")}</span>
+                              <span>{locationLabel(item.locationDetails)}</span>
+                            </div>
+                            <div className="meta-line">
+                              <span>{contactMethodLabel(item.contactMethod)}: {item.contactDetails}</span>
                             </div>
                             {item.ownerId !== currentUser.id ? (
                               <button
@@ -2177,22 +2895,22 @@ function App() {
                                 onClick={() =>
                                   handleStartChatWithUser(
                                     item.ownerId,
-                                    `Adoption chat opened with ${item.ownerName}.`,
-                                    `Hi ${item.ownerName}, I would like to adopt ${item.petName}.`
+                                    language === "ar" ? `تم فتح محادثة التبني مع ${item.ownerName}.` : `Adoption chat opened with ${item.ownerName}.`,
+                                    language === "ar" ? `مرحباً ${item.ownerName}، أريد تبنّي ${item.petName}.` : `Hi ${item.ownerName}, I would like to adopt ${item.petName}.`
                                   )
                                 }
                               >
-                                Adopt {item.petName}
+                                {t("adoption.adopt", "Adopt")} {item.petName}
                               </button>
                             ) : (
                               <div className="owner-post-actions">
-                                <span className="owner-note">This is your adoption post.</span>
+                                <span className="owner-note">{t("adoption.ownerPost", "This is your adoption post.")}</span>
                                 <button
                                   type="button"
                                   className="icon-button danger"
                                   onClick={() => handleDeleteAdoptionPost(item.id, item.ownerId)}
-                                  aria-label={`Delete adoption post for ${item.petName}`}
-                                  title={`Delete adoption post for ${item.petName}`}
+                                  aria-label={language === "ar" ? `حذف منشور التبني لـ ${item.petName}` : `Delete adoption post for ${item.petName}`}
+                                  title={language === "ar" ? `حذف منشور التبني لـ ${item.petName}` : `Delete adoption post for ${item.petName}`}
                                 >
                                   <TrashIcon />
                                 </button>
@@ -2202,7 +2920,7 @@ function App() {
                         </article>
                       ))
                     ) : (
-                      <p className="empty-state">{adoptions.length > 0 ? "No pets match these filters." : "No adoption posts yet."}</p>
+                      <p className="empty-state">{adoptions.length > 0 ? t("adoption.noMatch", "No pets match these filters.") : t("adoption.noPosts", "No adoption posts yet.")}</p>
                     )}
                   </div>
                 </SectionCard>
@@ -2214,273 +2932,294 @@ function App() {
               <div className="content-grid">
                 {currentUser.role === "Admin" ? (
                   <>
-                    <SectionCard title="Pending Lost Pet Posts" subtitle="Approve posts to publish them, or reject posts that should stay hidden.">
+                    <SectionCard
+                      title={t("lostfound.pendingLostTitle", "Pending Lost Pet Posts")}
+                      subtitle={t("lostfound.pendingLostSubtitle", "Approve posts to publish them, or reject posts that should stay hidden.")}
+                    >
                       <div className="list-stack">
                         {pendingLostPets.length > 0 ? (
                           pendingLostPets.map((item) => (
                             <article key={item.id} className="list-card">
-                              <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
+                              <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
                               <strong>{item.petName}</strong>
-                              <p>{item.description}</p>
+                              <p>{valueLabel(item.description)}</p>
                               <div className="meta-line">
-                                <span>{item.petType}</span>
-                                <span>{item.lastSeenPlace}</span>
+                                <span>{petTypeLabel(item.petType)}</span>
+                                <span>{locationLabel(item.lastSeenPlace)}</span>
                                 <span>{new Date(item.lastSeenDateUtc).toLocaleDateString()}</span>
                               </div>
                               <div className="meta-line">
-                                <span>Contact: {item.contactName}</span>
+                                <span>{t("lostfound.contact", "Contact")}: {valueLabel(item.contactName)}</span>
                                 <span>{item.contactPhone}</span>
                               </div>
                               <div className="form-grid-two">
                                 <button type="button" className="admin-action-button" onClick={() => handleReviewCommunityReport("lost", item.id, "approve")}>
-                                  Approve
+                                  {t("lostfound.approve", "Approve")}
                                 </button>
                                 <button type="button" className="admin-action-button" onClick={() => handleReviewCommunityReport("lost", item.id, "reject")}>
-                                  Reject
+                                  {t("lostfound.reject", "Reject")}
                                 </button>
                               </div>
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">No pending lost pet posts.</p>
+                          <p className="empty-state">{t("lostfound.noPendingLost", "No pending lost pet posts.")}</p>
                         )}
                       </div>
                     </SectionCard>
 
-                    <SectionCard title="Pending Found Pet Posts" subtitle="Found pet reports also stay hidden until admin approval.">
+                    <SectionCard
+                      title={t("lostfound.pendingFoundTitle", "Pending Found Pet Posts")}
+                      subtitle={t("lostfound.pendingFoundSubtitle", "Found pet reports also stay hidden until admin approval.")}
+                    >
                       <div className="list-stack">
                         {pendingFoundPets.length > 0 ? (
                           pendingFoundPets.map((item) => (
                             <article key={item.id} className="list-card">
-                              <PostPhoto src={item.photoUrl} alt={`Found ${item.petType}`} petType={item.petType} />
-                              <strong>{item.petType}</strong>
-                              <p>{item.description}</p>
+                              <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
+                              <strong>{petTypeLabel(item.petType)}</strong>
+                              <p>{valueLabel(item.description)}</p>
                               <div className="meta-line">
-                                <span>{item.foundPlace}</span>
+                                <span>{locationLabel(item.foundPlace)}</span>
                                 <span>{new Date(item.foundDateUtc).toLocaleDateString()}</span>
                               </div>
                               <div className="meta-line">
-                                <span>Contact: {item.contactName}</span>
+                                <span>{t("lostfound.contact", "Contact")}: {valueLabel(item.contactName)}</span>
                                 <span>{item.contactPhone}</span>
                               </div>
                               <div className="form-grid-two">
                                 <button type="button" className="admin-action-button" onClick={() => handleReviewCommunityReport("found", item.id, "approve")}>
-                                  Approve
+                                  {t("lostfound.approve", "Approve")}
                                 </button>
                                 <button type="button" className="admin-action-button" onClick={() => handleReviewCommunityReport("found", item.id, "reject")}>
-                                  Reject
+                                  {t("lostfound.reject", "Reject")}
                                 </button>
                               </div>
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">No pending found pet posts.</p>
+                          <p className="empty-state">{t("lostfound.noPendingFound", "No pending found pet posts.")}</p>
                         )}
                       </div>
                     </SectionCard>
 
-                    <SectionCard title="Published Lost Pet Posts" subtitle="Already approved posts visible to User and Vet accounts.">
+                    <SectionCard
+                      title={t("lostfound.publishedLostTitle", "Published Lost Pet Posts")}
+                      subtitle={t("lostfound.publishedLostSubtitle", "Already approved posts visible to User and Vet accounts.")}
+                    >
                       <div className="list-stack">
                         {lostPets.length > 0 ? (
                           lostPets.map((item) => (
                             <article key={item.id} className="list-card">
-                              <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
+                              <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
                               <strong>{item.petName}</strong>
-                              <p>{item.description}</p>
+                              <p>{valueLabel(item.description)}</p>
                               <div className="meta-line">
-                                <span>{item.petType}</span>
-                                <span>{item.lastSeenPlace}</span>
+                                <span>{petTypeLabel(item.petType)}</span>
+                                <span>{locationLabel(item.lastSeenPlace)}</span>
                                 <span>{new Date(item.lastSeenDateUtc).toLocaleDateString()}</span>
                               </div>
                               <div className="meta-line">
-                                <span>Contact: {item.contactName}</span>
+                                <span>{t("lostfound.contact", "Contact")}: {valueLabel(item.contactName)}</span>
                                 <span>{item.contactPhone}</span>
                               </div>
                               <button type="button" className="admin-action-button" onClick={() => handleDeleteCommunityReport("lost", item.id)}>
-                                Delete
+                                {t("lostfound.delete", "Delete")}
                               </button>
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">No published lost pet posts.</p>
+                          <p className="empty-state">{t("lostfound.noPublishedLost", "No published lost pet posts.")}</p>
                         )}
                       </div>
                     </SectionCard>
 
-                    <SectionCard title="Published Found Pet Posts" subtitle="Remove found pet posts that should no longer appear publicly.">
+                    <SectionCard
+                      title={t("lostfound.publishedFoundTitle", "Published Found Pet Posts")}
+                      subtitle={t("lostfound.publishedFoundSubtitle", "Remove found pet posts that should no longer appear publicly.")}
+                    >
                       <div className="list-stack">
                         {foundPets.length > 0 ? (
                           foundPets.map((item) => (
                             <article key={item.id} className="list-card">
-                              <PostPhoto src={item.photoUrl} alt={`Found ${item.petType}`} petType={item.petType} />
-                              <strong>{item.petType}</strong>
-                              <p>{item.description}</p>
+                              <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
+                              <strong>{petTypeLabel(item.petType)}</strong>
+                              <p>{valueLabel(item.description)}</p>
                               <div className="meta-line">
-                                <span>{item.foundPlace}</span>
+                                <span>{locationLabel(item.foundPlace)}</span>
                                 <span>{new Date(item.foundDateUtc).toLocaleDateString()}</span>
                               </div>
                               <div className="meta-line">
-                                <span>Contact: {item.contactName}</span>
+                                <span>{t("lostfound.contact", "Contact")}: {valueLabel(item.contactName)}</span>
                                 <span>{item.contactPhone}</span>
                               </div>
                               <button type="button" className="admin-action-button" onClick={() => handleDeleteCommunityReport("found", item.id)}>
-                                Delete
+                                {t("lostfound.delete", "Delete")}
                               </button>
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">No published found pet posts.</p>
+                          <p className="empty-state">{t("lostfound.noPublishedFound", "No published found pet posts.")}</p>
                         )}
                       </div>
                     </SectionCard>
                   </>
                 ) : (
                   <>
-                    <SectionCard title="My Posts" subtitle="Your lost and found reports stay here, separate from other people's posts.">
+                    <SectionCard
+                      title={t("lostfound.myPostsTitle", "My Posts")}
+                      subtitle={t("lostfound.myPostsSubtitle", "Your lost and found reports stay here, separate from other people's posts.")}
+                    >
                       <div className="content-grid two-column">
                         <div className="list-stack">
-                          <strong>My Lost Reports</strong>
+                          <strong>{t("lostfound.myLostReports", "My Lost Reports")}</strong>
                           {myLostPets.length > 0 ? (
                             myLostPets.map((item) => (
                               <article key={item.id} className="list-card">
-                                <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
+                                <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
                                 <strong>{item.petName}</strong>
-                                <p>{item.description}</p>
+                                <p>{valueLabel(item.description)}</p>
                                 <div className="meta-line">
-                                  <span>{item.lastSeenPlace}</span>
+                                  <span>{locationLabel(item.lastSeenPlace)}</span>
                                   <span>{new Date(item.lastSeenDateUtc).toLocaleDateString()}</span>
                                 </div>
                                 <div className="meta-line">
-                                  <span className="pill warning">{item.status}</span>
-                                  <span>Reward: {item.rewardAmount ? `${item.rewardAmount} JOD` : "No reward listed"}</span>
+                                  <span className="pill warning">{lostFoundStatusLabel(item.status)}</span>
+                                  <span>{t("lostfound.reward", "Reward")}: {lostFoundRewardLabel(item.rewardAmount)}</span>
                                 </div>
                               </article>
                             ))
                           ) : (
-                            <p className="empty-state">You have not submitted lost pet reports yet.</p>
+                            <p className="empty-state">{t("lostfound.noMyLost", "You have not submitted lost pet reports yet.")}</p>
                           )}
                         </div>
 
                         <div className="list-stack">
-                          <strong>My Found Reports</strong>
+                          <strong>{t("lostfound.myFoundReports", "My Found Reports")}</strong>
                           {myFoundPets.length > 0 ? (
                             myFoundPets.map((item) => (
                               <article key={item.id} className="list-card">
-                                <PostPhoto src={item.photoUrl} alt={`Found ${item.petType}`} petType={item.petType} />
-                                <strong>{item.petType}</strong>
-                                <p>{item.description}</p>
+                                <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
+                                <strong>{petTypeLabel(item.petType)}</strong>
+                                <p>{valueLabel(item.description)}</p>
                                 <div className="meta-line">
-                                  <span>{item.foundPlace}</span>
+                                  <span>{locationLabel(item.foundPlace)}</span>
                                   <span>{new Date(item.foundDateUtc).toLocaleDateString()}</span>
                                 </div>
                                 <div className="meta-line">
-                                  <span className="pill warning">{item.status}</span>
+                                  <span className="pill warning">{lostFoundStatusLabel(item.status)}</span>
                                   <span>{item.contactPhone}</span>
                                 </div>
                               </article>
                             ))
                           ) : (
-                            <p className="empty-state">You have not submitted found pet reports yet.</p>
+                            <p className="empty-state">{t("lostfound.noMyFound", "You have not submitted found pet reports yet.")}</p>
                           )}
                         </div>
                       </div>
                     </SectionCard>
 
-                    <SectionCard title="Search Lost / Found Posts" subtitle="Filter community reports by animal type, post kind, age, or place.">
+                    <SectionCard
+                      title={t("lostfound.searchTitle", "Search Lost / Found Posts")}
+                      subtitle={t("lostfound.searchSubtitle", "Filter community reports by animal type, post kind, age, or place.")}
+                    >
                       <div className="adoption-filter-panel">
                         <div className="filter-search-row">
                           <input
                             type="search"
-                            placeholder="Search by pet name, description, place, or contact"
+                            placeholder={t("lostfound.searchPlaceholder", "Search by pet name, description, place, or contact")}
                             value={lostFoundFilters.query}
                             onChange={(event) => setLostFoundFilters((current) => ({ ...current, query: event.target.value }))}
                           />
                           <button type="button" className="filter-search-button">
-                            Search
+                            {t("lostfound.searchButton", "Search")}
                           </button>
                         </div>
                         <div className="filter-control-grid">
                           <label>
-                            Post
+                            {t("lostfound.post", "Post")}
                             <select
                               value={lostFoundFilters.postKind}
                               onChange={(event) => setLostFoundFilters((current) => ({ ...current, postKind: event.target.value }))}
                             >
-                              <option value="all">Lost and found</option>
-                              <option value="lost">Lost only</option>
-                              <option value="found">Found only</option>
+                              <option value="all">{t("lostfound.lostAndFound", "Lost and found")}</option>
+                              <option value="lost">{t("lostfound.lostOnly", "Lost only")}</option>
+                              <option value="found">{t("lostfound.foundOnly", "Found only")}</option>
                             </select>
                           </label>
                           <label>
-                            Type
+                            {t("lostfound.type", "Type")}
                             <select
                               value={lostFoundFilters.type}
                               onChange={(event) => setLostFoundFilters((current) => ({ ...current, type: event.target.value }))}
                             >
-                              <option value="all">All types</option>
+                              <option value="all">{t("lostfound.allTypes", "All types")}</option>
                               {petTypeOptions.map((type) => (
                                 <option key={type} value={type}>
-                                  {type}
+                                  {petTypeLabel(type)}
                                 </option>
                               ))}
                             </select>
                           </label>
                           <label>
-                            Age
+                            {t("lostfound.age", "Age")}
                             <select
                               value={lostFoundFilters.age}
                               onChange={(event) => setLostFoundFilters((current) => ({ ...current, age: event.target.value }))}
                             >
                               {adoptionAgeOptions.map((option) => (
                                 <option key={option.value} value={option.value}>
-                                  {option.label}
+                                  {lostFoundAgeLabel(option.value, option.label)}
                                 </option>
                               ))}
                             </select>
                           </label>
                           <label>
-                            Place
+                            {t("lostfound.place", "Place")}
                             <select
                               value={lostFoundFilters.place}
                               onChange={(event) => setLostFoundFilters((current) => ({ ...current, place: event.target.value }))}
                             >
-                              <option value="all">All places</option>
+                              <option value="all">{t("lostfound.allPlaces", "All places")}</option>
                               {lostFoundPlaceOptions.map((place) => (
                                 <option key={place} value={place}>
-                                  {place}
+                                  {locationLabel(place)}
                                 </option>
                               ))}
                             </select>
                           </label>
                         </div>
                         <div className="filter-summary-row">
-                          <span>{filteredLostFoundCount} of {totalCommunityLostFoundCount} reports match</span>
+                          <span>{filteredLostFoundCount} {t("common.of", "of")} {totalCommunityLostFoundCount} {t("lostfound.reportsMatch", "reports match")}</span>
                           <button
                             type="button"
                             className="filter-reset-button"
                             onClick={() => setLostFoundFilters({ query: "", type: "all", postKind: "all", age: "all", place: "all" })}
                           >
-                            Clear filters
+                            {t("lostfound.clearFilters", "Clear filters")}
                           </button>
                         </div>
                       </div>
                     </SectionCard>
 
                     <div className="content-grid two-column">
-                      <SectionCard title="Community Lost Pets" subtitle="Approved missing-pet posts from other accounts.">
+                      <SectionCard
+                        title={t("lostfound.communityLostTitle", "Community Lost Pets")}
+                        subtitle={t("lostfound.communityLostSubtitle", "Approved missing-pet posts from other accounts.")}
+                      >
                         <div className="list-stack">
                           {filteredCommunityLostPets.length > 0 ? (
                             filteredCommunityLostPets.map((item) => (
                               <article key={item.id} className="list-card">
-                                <PostPhoto src={item.photoUrl} alt={item.petName} petType={item.petType} />
+                                <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
                                 <strong>{item.petName}</strong>
-                                <p>{item.description}</p>
+                                <p>{valueLabel(item.description)}</p>
                                 <div className="meta-line">
-                                  <span>{item.lastSeenPlace}</span>
+                                  <span>{locationLabel(item.lastSeenPlace)}</span>
                                   <span>{new Date(item.lastSeenDateUtc).toLocaleDateString()}</span>
                                 </div>
                                 <div className="meta-line">
-                                  <span>Reward: {item.rewardAmount ? `${item.rewardAmount} JOD` : "No reward listed"}</span>
+                                  <span>{t("lostfound.reward", "Reward")}: {lostFoundRewardLabel(item.rewardAmount)}</span>
                                   <span>{item.contactPhone}</span>
                                 </div>
                                 {item.reporterId ? (
@@ -2490,36 +3229,43 @@ function App() {
                                     onClick={() =>
                                       handleStartChatWithUser(
                                         item.reporterId,
-                                        `Message opened with ${item.contactName}.`,
-                                        `Hi ${item.contactName}, I saw your lost pet post for ${item.petName}. I may have information that can help.`
+                                        lostFoundMessageOpened(item.contactName),
+                                        lostFoundLostOpeningMessage(item.contactName, item.petName)
                                       )
                                     }
                                   >
-                                    Message Owner
+                                    {t("lostfound.messageOwner", "Message Owner")}
                                   </button>
                                 ) : null}
                               </article>
                             ))
                           ) : (
-                            <p className="empty-state">{communityLostPets.length > 0 ? "No lost pet posts match these filters." : "No approved lost pet posts from other accounts."}</p>
+                            <p className="empty-state">
+                              {communityLostPets.length > 0
+                                ? t("lostfound.noLostMatches", "No lost pet posts match these filters.")
+                                : t("lostfound.noLostPosts", "No approved lost pet posts from other accounts.")}
+                            </p>
                           )}
                         </div>
                       </SectionCard>
 
-                      <SectionCard title="Community Found Pets" subtitle="Approved found-pet posts from other accounts.">
+                      <SectionCard
+                        title={t("lostfound.communityFoundTitle", "Community Found Pets")}
+                        subtitle={t("lostfound.communityFoundSubtitle", "Approved found-pet posts from other accounts.")}
+                      >
                         <div className="list-stack">
                           {filteredCommunityFoundPets.length > 0 ? (
                             filteredCommunityFoundPets.map((item) => (
                               <article key={item.id} className="list-card">
-                                <PostPhoto src={item.photoUrl} alt={`Found ${item.petType}`} petType={item.petType} />
-                                <strong>{item.petType}</strong>
-                                <p>{item.description}</p>
+                                <PostPhoto src={item.photoUrl} alt="" petType={item.petType} />
+                                <strong>{petTypeLabel(item.petType)}</strong>
+                                <p>{valueLabel(item.description)}</p>
                                 <div className="meta-line">
-                                  <span>{item.foundPlace}</span>
+                                  <span>{locationLabel(item.foundPlace)}</span>
                                   <span>{new Date(item.foundDateUtc).toLocaleDateString()}</span>
                                 </div>
                                 <div className="meta-line">
-                                  <span>Contact: {item.contactName}</span>
+                                  <span>{t("lostfound.contact", "Contact")}: {valueLabel(item.contactName)}</span>
                                   <span>{item.contactPhone}</span>
                                 </div>
                                 {item.reporterId ? (
@@ -2529,195 +3275,212 @@ function App() {
                                     onClick={() =>
                                       handleStartChatWithUser(
                                         item.reporterId,
-                                        `Message opened with ${item.contactName}.`,
-                                        `Hi ${item.contactName}, I saw your found ${item.petType} report and want to check if it matches my pet.`
+                                        lostFoundMessageOpened(item.contactName),
+                                        lostFoundFoundOpeningMessage(item.contactName, item.petType)
                                       )
                                     }
                                   >
-                                    Message Finder
+                                    {t("lostfound.messageFinder", "Message Finder")}
                                   </button>
                                 ) : null}
                               </article>
                             ))
                           ) : (
-                            <p className="empty-state">{communityFoundPets.length > 0 ? "No found pet posts match these filters." : "No approved found pet posts from other accounts."}</p>
+                            <p className="empty-state">
+                              {communityFoundPets.length > 0
+                                ? t("lostfound.noFoundMatches", "No found pet posts match these filters.")
+                                : t("lostfound.noFoundPosts", "No approved found pet posts from other accounts.")}
+                            </p>
                           )}
                         </div>
                       </SectionCard>
                     </div>
 
-                    <SectionCard title="Publish Lost / Found Report" subtitle="Your post is saved as Pending and appears publicly only after admin approval.">
+                    <SectionCard
+                      title={t("lostfound.publishTitle", "Publish Lost / Found Report")}
+                      subtitle={t("lostfound.publishSubtitle", "Your post is saved as Pending and appears publicly only after admin approval.")}
+                    >
                       {canPublishCommunityPost ? (
                         <div className="post-forms">
-                      <form className="post-form" onSubmit={handleCreateLostReport}>
-                        <h4>Report Lost Pet</h4>
-                        <div className="form-grid-two">
-                          <input
-                            type="text"
-                            placeholder="Pet name"
-                            value={lostPostForm.petName}
-                            onChange={(event) => setLostPostForm((current) => ({ ...current, petName: event.target.value }))}
-                            required
-                          />
-                          <select
-                            value={lostPostForm.petType}
-                            onChange={(event) => setLostPostForm((current) => ({ ...current, petType: event.target.value }))}
-                          >
-                            {petTypeOptions.map((type) => (
-                              <option key={type} value={type}>
-                                {type}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                        <textarea
-                          placeholder="Description"
-                          value={lostPostForm.description}
-                          onChange={(event) => setLostPostForm((current) => ({ ...current, description: event.target.value }))}
-                          required
-                        />
-                        <div className="form-grid-two">
-                          <input
-                            type="number"
-                            min="0"
-                            placeholder="Approximate age (months)"
-                            value={lostPostForm.approximateAgeInMonths}
-                            onChange={(event) =>
-                              setLostPostForm((current) => ({ ...current, approximateAgeInMonths: event.target.value }))
-                            }
-                            required
-                          />
-                          <input
-                            type="number"
-                            min="0"
-                            step="0.5"
-                            placeholder="Reward amount (optional)"
-                            value={lostPostForm.rewardAmount}
-                            onChange={(event) => setLostPostForm((current) => ({ ...current, rewardAmount: event.target.value }))}
-                          />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="Last seen place"
-                          value={lostPostForm.lastSeenPlace}
-                          onChange={(event) => setLostPostForm((current) => ({ ...current, lastSeenPlace: event.target.value }))}
-                          required
-                        />
-                        <input
-                          type="datetime-local"
-                          value={lostPostForm.lastSeenDateUtc}
-                          onChange={(event) => setLostPostForm((current) => ({ ...current, lastSeenDateUtc: event.target.value }))}
-                          required
-                        />
-                        <input
-                          type="url"
-                          placeholder="Photo URL"
-                          value={lostPostForm.photoUrl}
-                          onChange={(event) => setLostPostForm((current) => ({ ...current, photoUrl: event.target.value }))}
-                          required
-                        />
-                        <input
-                          type="file"
-                          accept="image/png,image/jpeg,image/webp"
-                          onChange={(event) =>
-                            handleUploadCommunityPhoto(event.target.files?.[0], setLostPostForm, setLostPhotoUploading)
-                          }
-                        />
-                        <p className="upload-hint">
-                          {lostPhotoUploading
-                            ? "Uploading image..."
-                            : "You can paste a Photo URL or upload directly from your device."}
-                        </p>
-                        <div className="form-grid-two">
-                          <input
-                            type="text"
-                            placeholder="Contact name"
-                            value={lostPostForm.contactName}
-                            onChange={(event) => setLostPostForm((current) => ({ ...current, contactName: event.target.value }))}
-                            required
-                          />
-                          <input
-                            type="text"
-                            placeholder="Contact phone"
-                            value={lostPostForm.contactPhone}
-                            onChange={(event) => setLostPostForm((current) => ({ ...current, contactPhone: event.target.value }))}
-                            required
-                          />
-                        </div>
-                        <button type="submit">Submit Lost Report</button>
-                      </form>
+                          <form className="post-form" onSubmit={handleCreateLostReport}>
+                            <h4>{t("lostfound.reportLostTitle", "Report Lost Pet")}</h4>
+                            <div className="form-grid-two">
+                              <input
+                                type="text"
+                                placeholder={t("lostfound.petName", "Pet name")}
+                                value={lostPostForm.petName}
+                                onChange={(event) => setLostPostForm((current) => ({ ...current, petName: event.target.value }))}
+                                required
+                              />
+                              <select
+                                value={lostPostForm.petType}
+                                onChange={(event) => setLostPostForm((current) => ({ ...current, petType: event.target.value }))}
+                              >
+                                {petTypeOptions.map((type) => (
+                                  <option key={type} value={type}>
+                                    {petTypeLabel(type)}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                            <textarea
+                              placeholder={t("lostfound.description", "Description")}
+                              value={lostPostForm.description}
+                              onChange={(event) => setLostPostForm((current) => ({ ...current, description: event.target.value }))}
+                              required
+                            />
+                            <div className="form-grid-two">
+                              <input
+                                type="number"
+                                min="0"
+                                placeholder={t("lostfound.approximateAge", "Approximate age (months)")}
+                                value={lostPostForm.approximateAgeInMonths}
+                                onChange={(event) =>
+                                  setLostPostForm((current) => ({ ...current, approximateAgeInMonths: event.target.value }))
+                                }
+                                required
+                              />
+                              <input
+                                type="number"
+                                min="0"
+                                step="0.5"
+                                placeholder={t("lostfound.rewardAmount", "Reward amount (optional)")}
+                                value={lostPostForm.rewardAmount}
+                                onChange={(event) => setLostPostForm((current) => ({ ...current, rewardAmount: event.target.value }))}
+                              />
+                            </div>
+                            <input
+                              type="text"
+                              placeholder={t("lostfound.lastSeenPlace", "Last seen place")}
+                              value={lostPostForm.lastSeenPlace}
+                              onChange={(event) => setLostPostForm((current) => ({ ...current, lastSeenPlace: event.target.value }))}
+                              required
+                            />
+                            <label>
+                              {t("lostfound.lastSeenDate", "Last seen date")}
+                              <input
+                                type="datetime-local"
+                                value={lostPostForm.lastSeenDateUtc}
+                                onChange={(event) => setLostPostForm((current) => ({ ...current, lastSeenDateUtc: event.target.value }))}
+                                required
+                              />
+                            </label>
+                            <input
+                              type="url"
+                              placeholder={t("lostfound.photoUrl", "Photo URL")}
+                              value={lostPostForm.photoUrl}
+                              onChange={(event) => setLostPostForm((current) => ({ ...current, photoUrl: event.target.value }))}
+                              required
+                            />
+                            <input
+                              type="file"
+                              accept="image/png,image/jpeg,image/webp"
+                              onChange={(event) =>
+                                handleUploadCommunityPhoto(event.target.files?.[0], setLostPostForm, setLostPhotoUploading)
+                              }
+                            />
+                            <p className="upload-hint">
+                              {lostPhotoUploading
+                                ? t("lostfound.uploadingImage", "Uploading image...")
+                                : lostPostForm.photoUrl
+                                ? t("lostfound.imageReady", "Image is ready. You can submit your report.")
+                                : t("lostfound.chooseImage", "You can paste a Photo URL or upload directly from your device.")}
+                            </p>
+                            <div className="form-grid-two">
+                              <input
+                                type="text"
+                                placeholder={t("lostfound.contactName", "Contact name")}
+                                value={lostPostForm.contactName}
+                                onChange={(event) => setLostPostForm((current) => ({ ...current, contactName: event.target.value }))}
+                                required
+                              />
+                              <input
+                                type="text"
+                                placeholder={t("lostfound.contactPhone", "Contact phone")}
+                                value={lostPostForm.contactPhone}
+                                onChange={(event) => setLostPostForm((current) => ({ ...current, contactPhone: event.target.value }))}
+                                required
+                              />
+                            </div>
+                            <button type="submit">{t("lostfound.submitLost", "Submit Lost Report")}</button>
+                          </form>
 
-                      <form className="post-form" onSubmit={handleCreateFoundReport}>
-                        <h4>Report Found Pet</h4>
-                        <select
-                          value={foundPostForm.petType}
-                          onChange={(event) => setFoundPostForm((current) => ({ ...current, petType: event.target.value }))}
-                        >
-                          {petTypeOptions.map((type) => (
-                            <option key={type} value={type}>
-                              {type}
-                            </option>
-                          ))}
-                        </select>
-                        <textarea
-                          placeholder="Description"
-                          value={foundPostForm.description}
-                          onChange={(event) => setFoundPostForm((current) => ({ ...current, description: event.target.value }))}
-                          required
-                        />
-                        <input
-                          type="text"
-                          placeholder="Found place"
-                          value={foundPostForm.foundPlace}
-                          onChange={(event) => setFoundPostForm((current) => ({ ...current, foundPlace: event.target.value }))}
-                          required
-                        />
-                        <input
-                          type="datetime-local"
-                          value={foundPostForm.foundDateUtc}
-                          onChange={(event) => setFoundPostForm((current) => ({ ...current, foundDateUtc: event.target.value }))}
-                          required
-                        />
-                        <input
-                          type="url"
-                          placeholder="Photo URL"
-                          value={foundPostForm.photoUrl}
-                          onChange={(event) => setFoundPostForm((current) => ({ ...current, photoUrl: event.target.value }))}
-                          required
-                        />
-                        <input
-                          type="file"
-                          accept="image/png,image/jpeg,image/webp"
-                          onChange={(event) =>
-                            handleUploadCommunityPhoto(event.target.files?.[0], setFoundPostForm, setFoundPhotoUploading)
-                          }
-                        />
-                        <p className="upload-hint">
-                          {foundPhotoUploading
-                            ? "Uploading image..."
-                            : "You can paste a Photo URL or upload directly from your device."}
-                        </p>
-                        <div className="form-grid-two">
-                          <input
-                            type="text"
-                            placeholder="Contact name"
-                            value={foundPostForm.contactName}
-                            onChange={(event) => setFoundPostForm((current) => ({ ...current, contactName: event.target.value }))}
-                            required
-                          />
-                          <input
-                            type="text"
-                            placeholder="Contact phone"
-                            value={foundPostForm.contactPhone}
-                            onChange={(event) => setFoundPostForm((current) => ({ ...current, contactPhone: event.target.value }))}
-                            required
-                          />
-                        </div>
-                        <button type="submit">Submit Found Report</button>
-                      </form>
+                          <form className="post-form" onSubmit={handleCreateFoundReport}>
+                            <h4>{t("lostfound.reportFoundTitle", "Report Found Pet")}</h4>
+                            <select
+                              value={foundPostForm.petType}
+                              onChange={(event) => setFoundPostForm((current) => ({ ...current, petType: event.target.value }))}
+                            >
+                              {petTypeOptions.map((type) => (
+                                <option key={type} value={type}>
+                                  {petTypeLabel(type)}
+                                </option>
+                              ))}
+                            </select>
+                            <textarea
+                              placeholder={t("lostfound.description", "Description")}
+                              value={foundPostForm.description}
+                              onChange={(event) => setFoundPostForm((current) => ({ ...current, description: event.target.value }))}
+                              required
+                            />
+                            <input
+                              type="text"
+                              placeholder={t("lostfound.foundPlace", "Found place")}
+                              value={foundPostForm.foundPlace}
+                              onChange={(event) => setFoundPostForm((current) => ({ ...current, foundPlace: event.target.value }))}
+                              required
+                            />
+                            <label>
+                              {t("lostfound.foundDate", "Found date")}
+                              <input
+                                type="datetime-local"
+                                value={foundPostForm.foundDateUtc}
+                                onChange={(event) => setFoundPostForm((current) => ({ ...current, foundDateUtc: event.target.value }))}
+                                required
+                              />
+                            </label>
+                            <input
+                              type="url"
+                              placeholder={t("lostfound.photoUrl", "Photo URL")}
+                              value={foundPostForm.photoUrl}
+                              onChange={(event) => setFoundPostForm((current) => ({ ...current, photoUrl: event.target.value }))}
+                              required
+                            />
+                            <input
+                              type="file"
+                              accept="image/png,image/jpeg,image/webp"
+                              onChange={(event) =>
+                                handleUploadCommunityPhoto(event.target.files?.[0], setFoundPostForm, setFoundPhotoUploading)
+                              }
+                            />
+                            <p className="upload-hint">
+                              {foundPhotoUploading
+                                ? t("lostfound.uploadingImage", "Uploading image...")
+                                : foundPostForm.photoUrl
+                                ? t("lostfound.imageReady", "Image is ready. You can submit your report.")
+                                : t("lostfound.chooseImage", "You can paste a Photo URL or upload directly from your device.")}
+                            </p>
+                            <div className="form-grid-two">
+                              <input
+                                type="text"
+                                placeholder={t("lostfound.contactName", "Contact name")}
+                                value={foundPostForm.contactName}
+                                onChange={(event) => setFoundPostForm((current) => ({ ...current, contactName: event.target.value }))}
+                                required
+                              />
+                              <input
+                                type="text"
+                                placeholder={t("lostfound.contactPhone", "Contact phone")}
+                                value={foundPostForm.contactPhone}
+                                onChange={(event) => setFoundPostForm((current) => ({ ...current, contactPhone: event.target.value }))}
+                                required
+                              />
+                            </div>
+                            <button type="submit">{t("lostfound.submitFound", "Submit Found Report")}</button>
+                          </form>
                         </div>
                       ) : (
-                        <p className="empty-state">Only User and Vet accounts can publish lost or found reports.</p>
+                        <p className="empty-state">{t("lostfound.onlyUsersVets", "Only User and Vet accounts can publish lost or found reports.")}</p>
                       )}
                     </SectionCard>
                   </>
@@ -2729,32 +3492,32 @@ function App() {
 
             {activeTab === "chat" && currentUser && !privateLoading ? (
               <SectionCard
-                title="Vet Chat"
-                subtitle="Choose a vet and start a real conversation. Vets can reply from their own accounts."
+                title={t("chat.title", "Vet Chat")}
+                subtitle={t("chat.subtitle", "Choose a vet and start a real conversation. Vets can reply from their own accounts.")}
               >
                 {currentUser.role === "User" || currentUser.role === "Vet" ? (
                   <div className="chat-layout">
                     <aside className="chat-sidebar">
                       {currentUser.role === "User" ? (
                         <div className="chat-start-card">
-                          <strong>Start new chat</strong>
+                          <strong>{t("chat.startNew", "Start new chat")}</strong>
                           {vetsWithoutConversation.length > 0 ? (
                             <div className="chat-vet-list">
                               {vetsWithoutConversation.map((vet) => (
                                 <button key={vet.id} type="button" onClick={() => handleStartChatWithVet(vet.id)}>
                                   <span>{vet.fullName}</span>
-                                  <small>{vet.city}</small>
+                                  <small>{cityLabel(vet.city)}</small>
                                 </button>
                               ))}
                             </div>
                           ) : (
-                            <p className="empty-state">You already started chats with all available vets.</p>
+                            <p className="empty-state">{t("chat.allVetsStarted", "You already started chats with all available vets.")}</p>
                           )}
                         </div>
                       ) : null}
 
                       <div className="chat-start-card">
-                        <strong>{currentUser.role === "User" ? "My chats" : "User chats"}</strong>
+                        <strong>{currentUser.role === "User" ? t("chat.myChats", "My chats") : t("chat.userChats", "User chats")}</strong>
                         {chatConversations.length > 0 ? (
                           <div className="chat-vet-list">
                             {chatConversations.map((conversation) => (
@@ -2773,14 +3536,14 @@ function App() {
                                       <strong className="chat-unread-pill">{conversation.unreadIncomingCount}</strong>
                                     ) : null}
                                   </div>
-                                  <small>{conversation.lastMessage || "No messages yet."}</small>
+                                  <small>{conversation.lastMessage ? valueLabel(conversation.lastMessage) : t("chat.noMessagesYet", "No messages yet.")}</small>
                                 </button>
                                 <button
                                   type="button"
                                   className="icon-button danger"
                                   onClick={() => handleDeleteChatConversation(conversation.id)}
-                                  aria-label={`Delete chat with ${conversation.counterpartName}`}
-                                  title={`Delete chat with ${conversation.counterpartName}`}
+                                  aria-label={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", conversation.counterpartName)}
+                                  title={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", conversation.counterpartName)}
                                 >
                                   <TrashIcon />
                                 </button>
@@ -2788,7 +3551,7 @@ function App() {
                             ))}
                           </div>
                         ) : (
-                          <p className="empty-state">No chats yet.</p>
+                          <p className="empty-state">{t("chat.noChats", "No chats yet.")}</p>
                         )}
                       </div>
                     </aside>
@@ -2800,24 +3563,24 @@ function App() {
                             <div>
                               <strong>{selectedConversation.counterpartName}</strong>
                               <span>
-                                {selectedConversation.counterpartRole === "Vet" ? "Veterinarian" : "Pet Owner"}
+                                {selectedConversation.counterpartRole === "Vet" ? t("chat.veterinarian", "Veterinarian") : t("chat.petOwner", "Pet Owner")}
                               </span>
                             </div>
                             <button
                               type="button"
                               className="icon-button danger"
                               onClick={() => handleDeleteChatConversation(selectedConversation.id)}
-                              aria-label={`Delete chat with ${selectedConversation.counterpartName}`}
-                              title={`Delete chat with ${selectedConversation.counterpartName}`}
+                              aria-label={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", selectedConversation.counterpartName)}
+                              title={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", selectedConversation.counterpartName)}
                             >
                               <TrashIcon />
                             </button>
                           </div>
 
                           <div className="chat-messages-list">
-                            {chatLoading ? <p className="empty-state">Loading messages...</p> : null}
+                            {chatLoading ? <p className="empty-state">{t("chat.loadingMessages", "Loading messages...")}</p> : null}
                             {!chatLoading && chatMessages.length === 0 ? (
-                              <p className="empty-state">No messages yet. Start the conversation now.</p>
+                              <p className="empty-state">{t("chat.noThreadMessages", "No messages yet. Start the conversation now.")}</p>
                             ) : null}
                             {chatMessages.map((message) => (
                               <article
@@ -2828,27 +3591,27 @@ function App() {
                                   <strong>{message.senderName}</strong>
                                   <span>{formatJordanDateTime(message.sentAtUtc)}</span>
                                 </div>
-                                <p>{message.message}</p>
+                                <p>{valueLabel(message.message)}</p>
                               </article>
                             ))}
                           </div>
 
                           <form className="chat-compose" onSubmit={handleSendChatMessage}>
                             <textarea
-                              placeholder="اكتب رسالتك الخاصة"
+                              placeholder={t("chat.messagePlaceholder", "Write your private message")}
                               value={chatMessageDraft}
                               onChange={(event) => setChatMessageDraft(event.target.value)}
                             />
-                            <button type="submit">ارسل</button>
+                            <button type="submit">{t("chat.send", "Send")}</button>
                           </form>
                         </>
                       ) : (
-                        <p className="empty-state">Choose a chat from the left side to start messaging.</p>
+                        <p className="empty-state">{t("chat.chooseChat", "Choose a chat from the left side to start messaging.")}</p>
                       )}
                     </section>
                   </div>
                 ) : (
-                  <p className="empty-state">Chat is available for User and Vet accounts only.</p>
+                  <p className="empty-state">{t("chat.onlyUsersVets", "Chat is available for User and Vet accounts only.")}</p>
                 )}
 
                 {chatNotice ? <p className="form-success">{chatNotice}</p> : null}
@@ -2869,7 +3632,7 @@ function App() {
                             <div className="medical-pet-head">
                               <div>
                                 <h4>{pet.petName}</h4>
-                                <span>{pet.petType} | {pet.breed}</span>
+                                <span>{petTypeLabel(pet.petType)} | {petBreedLabel(pet.breed)}</span>
                               </div>
                               <span className={pet.isVaccinesUpToDate ? "pill success" : "pill warning"}>
                                 {pet.isVaccinesUpToDate ? t("medical.upToDate", "Vaccines Up To Date") : `${pet.pendingVaccinesCount} ${t("medical.vaccinesNeeded", "Vaccine(s) Needed")}`}
@@ -2878,7 +3641,7 @@ function App() {
                             <p className="pet-id-line">{t("medical.petId", "Pet ID")}: {pet.collarId}</p>
 
                             <p className={pet.isVaccinesUpToDate ? "health-summary-card stable" : "health-summary-card attention"}>
-                              {pet.healthSummary}
+                              {valueLabel(pet.healthSummary)}
                             </p>
 
                             <div className="medical-subsection">
@@ -2889,9 +3652,9 @@ function App() {
                                 <div className="list-stack">
                                   {pet.vaccinePlan.map((vaccine) => (
                                     <article key={vaccine.id} className={vaccine.isCompleted ? "list-card medical-mini-card done" : "list-card medical-mini-card due"}>
-                                      <strong>{vaccine.vaccineName}</strong>
+                                      <strong>{valueLabel(vaccine.vaccineName)}</strong>
                                       <div className="meta-line">
-                                        <span>{t("medical.status", "Status")}: {vaccine.status}</span>
+                                        <span>{t("medical.status", "Status")}: {valueLabel(vaccine.status)}</span>
                                         <span>{t("medical.due", "Due")}: {new Date(vaccine.dueDateUtc).toLocaleDateString()}</span>
                                       </div>
                                     </article>
@@ -2910,8 +3673,8 @@ function App() {
                                 <div className="list-stack">
                                   {pet.medicalHistory.slice(0, 3).map((record) => (
                                     <article key={record.id} className="list-card medical-mini-card visit">
-                                      <strong>{record.visitReason}</strong>
-                                      <p>{record.diagnosis}</p>
+                                      <strong>{valueLabel(record.visitReason)}</strong>
+                                      <p>{valueLabel(record.diagnosis)}</p>
                                       <div className="meta-line">
                                         <span>{record.vetName}</span>
                                         <span>{new Date(record.visitDateUtc).toLocaleDateString()}</span>
@@ -2936,8 +3699,8 @@ function App() {
                       <div className="list-stack">
                         {vaccineReminders.map((item) => (
                           <article key={item.id} className="list-card">
-                            <strong>{item.title}</strong>
-                            <p>{item.message}</p>
+                            <strong>{valueLabel(item.title)}</strong>
+                            <p>{valueLabel(item.message)}</p>
                             <div className="meta-line">
                               <span>{formatJordanDateTime(item.triggerDateUtc)}</span>
                             </div>
@@ -2972,7 +3735,7 @@ function App() {
                           <input
                             value={vaccineForm.vaccineName}
                             onChange={(event) => setVaccineForm((current) => ({ ...current, vaccineName: event.target.value }))}
-                            placeholder="Rabies vaccine"
+                            placeholder={t("medical.rabiesPlaceholder", "Rabies vaccine")}
                           />
                         </label>
                         <label>
@@ -3000,7 +3763,7 @@ function App() {
                               <div className="medical-pet-head">
                                 <div>
                                   <h4>{pet.name}</h4>
-                                  <span>{pet.type} | {pet.breed}</span>
+                                  <span>{petTypeLabel(pet.type)} | {petBreedLabel(pet.breed)}</span>
                                 </div>
                                 <span className={petVaccines.length > 0 ? "pill warning" : "pill success"}>
                                   {petVaccines.length > 0 ? `${petVaccines.length} ${t("medical.upcoming", "Upcoming")}` : t("medical.noActiveReminder", "No Active Reminder")}
@@ -3009,7 +3772,7 @@ function App() {
                               <p className="pet-id-line">{t("medical.petId", "Pet ID")}: {pet.collarId}</p>
                               <div className="meta-line">
                                 <span>{t("medical.owner", "Owner")}: {pet.ownerName}</span>
-                                <span>{pet.city}</span>
+                                <span>{cityLabel(pet.city)}</span>
                               </div>
 
                               <div className="medical-subsection">
@@ -3017,7 +3780,7 @@ function App() {
                                 <div className="list-stack">
                                   {petVaccines.map((vaccine) => (
                                     <article key={vaccine.id} className="list-card">
-                                      <strong>{vaccine.vaccineName}</strong>
+                                      <strong>{valueLabel(vaccine.vaccineName)}</strong>
                                       <div className="meta-line">
                                         <span>{t("medical.due", "Due")}: {new Date(vaccine.dueDateUtc).toLocaleDateString()}</span>
                                         <span>{vaccine.ownerPhone}</span>
@@ -3045,7 +3808,7 @@ function App() {
                         vaccines.map((item) => (
                           <article key={item.id} className="list-card">
                             <strong>{item.petName}</strong>
-                            <p>{item.vaccineName}</p>
+                            <p>{valueLabel(item.vaccineName)}</p>
                             <div className="meta-line">
                               <span>{t("medical.owner", "Owner")}: {item.ownerName}</span>
                               <span>{t("medical.due", "Due")}: {new Date(item.dueDateUtc).toLocaleDateString()}</span>
@@ -3069,23 +3832,23 @@ function App() {
                     </div>
                   </SectionCard>
 
-                  <SectionCard title="Vet Role Story" subtitle="How the medical workflow works in this project.">
+                  <SectionCard title={t("medical.roleStoryTitle", "Vet Role Story")} subtitle={t("medical.roleStorySubtitle", "How the medical workflow works in this project.")}>
                     <div className="feature-list">
                       <div>
-                        <strong>Create medical history</strong>
-                        <p>Veterinarians can create visit notes, diagnoses, and treatment records for each pet.</p>
+                        <strong>{t("medical.createHistoryTitle", "Create medical history")}</strong>
+                        <p>{t("medical.createHistoryText", "Veterinarians can create visit notes, diagnoses, and treatment records for each pet.")}</p>
                       </div>
                       <div>
-                        <strong>Update records</strong>
-                        <p>Vets can edit existing medical entries as treatment plans change over time.</p>
+                        <strong>{t("medical.updateRecordsTitle", "Update records")}</strong>
+                        <p>{t("medical.updateRecordsText", "Vets can edit existing medical entries as treatment plans change over time.")}</p>
                       </div>
                       <div>
-                        <strong>Track vaccines</strong>
-                        <p>The backend identifies vaccines due in the next 30 days and surfaces reminders for owners.</p>
+                        <strong>{t("medical.trackVaccinesTitle", "Track vaccines")}</strong>
+                        <p>{t("medical.trackVaccinesText", "The backend identifies vaccines due in the next 30 days and surfaces reminders for owners.")}</p>
                       </div>
                       <div>
-                        <strong>Search by collar ID</strong>
-                        <p>Each pet can be found quickly through its unique collar ID to access ownership and health information.</p>
+                        <strong>{t("medical.searchCollarTitle", "Search by collar ID")}</strong>
+                        <p>{t("medical.searchCollarText", "Each pet can be found quickly through its unique collar ID to access ownership and health information.")}</p>
                       </div>
                     </div>
                   </SectionCard>

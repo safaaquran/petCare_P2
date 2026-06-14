@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "./api";
 
 const tabs = [
@@ -1470,6 +1470,17 @@ function App() {
   const isArabic = language === "ar";
   const toggleLanguage = () => setLanguage((current) => current === "en" ? "ar" : "en");
 
+  function clearSessionAndReturnOverview() {
+    localStorage.removeItem("petcareCurrentUser");
+    setCurrentUser(null);
+    setSelectedConversationId(null);
+    setChatMessages([]);
+    setChatMessageDraft("");
+    setChatNotice("");
+    setActiveTab("overview");
+    window.history.replaceState({ tab: "overview", signedOut: true }, "", "#overview");
+  }
+
   useEffect(() => {
     localStorage.setItem("petcareLanguage", language);
     document.documentElement.lang = language;
@@ -1484,29 +1495,29 @@ function App() {
     }
   }, [activeTab]);
 
-  // ── Listen to browser back/forward — go to overview, and if already at
-  //    overview (meaning the user left the site), clear the session
+  // ── Browser back/forward protection:
+  //    If a logged-in user presses Back, clear the session and return to overview.
+  //    This prevents restoring protected UI from browser history.
   useEffect(() => {
-    function handlePopState(event) {
+    function handlePopState() {
       const hash = window.location.hash.replace("#", "");
       const validTabs = ["overview", "adoption", "lostfound", "chat", "medical"];
 
+      if (currentUser) {
+        clearSessionAndReturnOverview();
+        return;
+      }
+
       if (validTabs.includes(hash)) {
-        // Normal back inside the app → just switch tab
         setActiveTab(hash);
       } else {
-        // User went back past the first page → sign out & reset to overview
-        localStorage.removeItem("petcareCurrentUser");
-        setCurrentUser(null);
-        setActiveTab("overview");
-        // Replace current history entry so forward won't bring them back in
-        window.history.replaceState({ tab: "overview" }, "", "#overview");
+        clearSessionAndReturnOverview();
       }
     }
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     async function loadData() {
@@ -1791,6 +1802,10 @@ useEffect(() => {
 
   const visibleDemoRoles = isRoleLocked ? [selectedRole] : roleOrder;
   const selectedConversation = chatConversations.find((item) => item.id === selectedConversationId) ?? null;
+  const chatDisplayName = (name) => {
+    const displayName = String(name ?? "").trim();
+    return displayName.toLowerCase() === "postman vet" ? "Omar Qudah" : displayName;
+  };
   const vetsWithoutConversation = chatVets.filter(
     (vet) => !chatConversations.some((conversation) => conversation.counterpartId === vet.id)
   );
@@ -2449,10 +2464,7 @@ useEffect(() => {
   }
 
   function handleSignOut() {
-    localStorage.removeItem("petcareCurrentUser");
-    setCurrentUser(null);
-    setActiveTab("overview");
-    window.history.replaceState({ tab: "overview" }, "", "#overview");
+    clearSessionAndReturnOverview();
   }
 
   return (
@@ -3556,7 +3568,7 @@ useEffect(() => {
                             <div className="chat-vet-list">
                               {vetsWithoutConversation.map((vet) => (
                                 <button key={vet.id} type="button" onClick={() => handleStartChatWithVet(vet.id)}>
-                                  <span>{vet.fullName}</span>
+                                  <span>{chatDisplayName(vet.fullName)}</span>
                                   <small>{cityLabel(vet.city)}</small>
                                 </button>
                               ))}
@@ -3582,7 +3594,7 @@ useEffect(() => {
                                   onClick={() => setSelectedConversationId(conversation.id)}
                                 >
                                   <div className="chat-conversation-head">
-                                    <span>{conversation.counterpartName}</span>
+                                    <span>{chatDisplayName(conversation.counterpartName)}</span>
                                     {conversation.unreadIncomingCount > 0 ? (
                                       <strong className="chat-unread-pill">{conversation.unreadIncomingCount}</strong>
                                     ) : null}
@@ -3593,8 +3605,8 @@ useEffect(() => {
                                   type="button"
                                   className="icon-button danger"
                                   onClick={() => handleDeleteChatConversation(conversation.id)}
-                                  aria-label={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", conversation.counterpartName)}
-                                  title={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", conversation.counterpartName)}
+                                  aria-label={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", chatDisplayName(conversation.counterpartName))}
+                                  title={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", chatDisplayName(conversation.counterpartName))}
                                 >
                                   <TrashIcon />
                                 </button>
@@ -3612,7 +3624,7 @@ useEffect(() => {
                         <>
                           <div className="chat-thread-head">
                             <div>
-                              <strong>{selectedConversation.counterpartName}</strong>
+                              <strong>{chatDisplayName(selectedConversation.counterpartName)}</strong>
                               <span>
                                 {selectedConversation.counterpartRole === "Vet" ? t("chat.veterinarian", "Veterinarian") : t("chat.petOwner", "Pet Owner")}
                               </span>
@@ -3621,8 +3633,8 @@ useEffect(() => {
                               type="button"
                               className="icon-button danger"
                               onClick={() => handleDeleteChatConversation(selectedConversation.id)}
-                              aria-label={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", selectedConversation.counterpartName)}
-                              title={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", selectedConversation.counterpartName)}
+                              aria-label={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", chatDisplayName(selectedConversation.counterpartName))}
+                              title={t("chat.deleteWith", "Delete chat with {name}").replace("{name}", chatDisplayName(selectedConversation.counterpartName))}
                             >
                               <TrashIcon />
                             </button>
@@ -3639,7 +3651,7 @@ useEffect(() => {
                                 className={message.senderId === currentUser.id ? "chat-message own" : "chat-message"}
                               >
                                 <div className="chat-message-meta">
-                                  <strong>{message.senderName}</strong>
+                                  <strong>{chatDisplayName(message.senderName)}</strong>
                                   <span>{formatJordanDateTime(message.sentAtUtc)}</span>
                                 </div>
                                 <p>{message.message}</p>
@@ -3925,4 +3937,3 @@ useEffect(() => {
 }
 
 export default App;
-
